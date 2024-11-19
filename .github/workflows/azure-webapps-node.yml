@@ -1,9 +1,10 @@
 on:
   push:
     branches: [ "main" ]
+             # set this to the node version to use
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   build:
@@ -21,7 +22,34 @@ jobs:
         npm run docs:build
 
     - name: 部署
-      uses:	JamesIves/github-pages-deploy-action@v4
+      uses: JamesIves/github-pages-deploy-action@v4
       with:
-      	branch: results
-	folder: build
+        branch: results
+        folder: buildon:
+  push:
+    branches: [ "main" ]
+             # set this to the node version to use
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+ 
+    - name: npm install, build, and test
+      run: |
+        npm install
+        npm run docs:build
+
+    - name: 部署
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        branch: results
+        folder: build
