@@ -1,10 +1,9 @@
 on:
   push:
     branches: [ "main" ]
-             # set this to the node version to use
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -20,6 +19,15 @@ jobs:
       run: |
         npm install
         npm run docs:build
+
+    - name: 部署
+      uses:	JamesIves/github-pages-deploy-action@v4
+			with:
+	 			branch: results
+	 			folder: build
+				
+				
+      
 
 
 
