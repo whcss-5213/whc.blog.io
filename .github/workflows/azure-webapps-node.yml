@@ -22,12 +22,6 @@ jobs:
 
     - name: 部署
       uses:	JamesIves/github-pages-deploy-action@v4
-			with:
-	 			branch: results
-	 			folder: build
-				
-				
-      
-
-
-
+      with:
+      	branch: results
+				folder: build
