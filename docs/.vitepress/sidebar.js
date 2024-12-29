@@ -83,7 +83,7 @@ export default {
         collapsible: true,
         collapsed: true,
         items: [
-            {text: 'docker', link: '/docker/'},
+            {text: 'Docker', link: '/docker/'},
             {text: 'DockerFile', link: '/docker/docker-file'},
             {text: 'DockerCompose', link: '/docker/docker-compose'},
             {text: 'DockerDesktop', link: '/docker/docker-desktop'},

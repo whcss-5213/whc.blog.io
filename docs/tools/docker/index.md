@@ -1,8 +1,7 @@
-# docker
 
-## Docker
+# Docker
 
-### 安装
+## 安装
 
 ```shell
 sudo yum install docker-ce docker-ce-cli containerd.io
@@ -18,10 +17,10 @@ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce
 yum install -y docker-ce
 ```
 
-### 国内源
+## 国内源
+// /etc/docker/daemon.json
 
 ```json
-// /etc/docker/daemon.json
 {
   "registry-mirrors": [
     "https://docker.rainbond.cc",
@@ -39,7 +38,7 @@ systemctl restart docker
 
 ![a](../../public/docker.jpg)
 
-### 镜像
+## 镜像
 
 ```bash
 # 查看所有镜像
@@ -68,7 +67,7 @@ docker cp ./1a.js c78e4a387059:/app
 docker run -it --rm busybox		
 ```
 
-### 容器
+## 容器
 
 ```shell
 # Docker容器 或者 Docker镜像 的元数据
@@ -134,9 +133,9 @@ docker run -t -i ubuntu:14.04 /bin/bash
 
 服务器路径:容器路径
 
-### 容器网络
+## 容器网络
 
-#### 默认网络
+### 默认网络
 
 docker会自动创建三个网络，`bridge`,`host`,`none`
 
@@ -160,7 +159,7 @@ docker会自动创建三个网络，`bridge`,`host`,`none`
 
 禁用容器中所用网络，在启动容器时使用。
 
-#### 自定义网络
+### 自定义网络
 
 ```shell
 # 创建用户自定义网络
@@ -193,7 +192,7 @@ docker volume create my-data
 docker volume rm my-data
 ```
 
-#### **bind mount 绑定挂载**
+### **bind mount 绑定挂载**
 
 *绑定挂载**可以将主机文件系统上目录或文件*装载到容器中*，但是主机上的非 Docker 进程可以修改它们，同时在**容器**中也可以更改
 **主机**文件系统，包括创建、修改或删除文件或目录，使用不当，可能会带来安全隐患。
@@ -205,7 +204,7 @@ docker run -e MYSQL_ROOT_PASSWORD=123456 \
            -d mysql:5.7 
 ```
 
-#### **tmpfs** **临时挂载**
+### **tmpfs** **临时挂载**
 
 **tmpfs挂载**仅存储在主机系统的内存中，从不写入主机系统的文件系统。当容器停止时，数据将被删除。
 
