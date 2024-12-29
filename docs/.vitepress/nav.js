@@ -47,7 +47,6 @@ export default [
         items: [
             {text: 'File', link: '/linux/file'},
             {text: 'Network', link: '/linux/Network'},
-            {text: 'mongoDB', link: '/DB/mongo'},
         ]
     },
     {
@@ -56,6 +55,7 @@ export default [
             {text: 'Git', link: '/git/'},
             {text: 'Nginx', link: '/nginx/'},
             {text: 'Docker', link: '/docker/'},
+            {text: 'Mongo', link: '/DB/mongo'},
         ],
     },
     {text: 'baidu', link: 'https://www.baidu.com'},
