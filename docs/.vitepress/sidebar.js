@@ -7,6 +7,8 @@ export default {
             {text: 'String', link: '/JS/String'},
             {text: 'Array', link: '/JS/Array'},
             {text: 'RegExp', link: '/JS/RegExp'},
+            {text: 'DOM', link: '/JS/DOM'},
+            {text: 'BOM', link: '/JS/BOM'},
         ],
     },
     '/TS/': {

@@ -3,7 +3,7 @@
 layout: home
 
 hero:
-  name: 'whc Note'
+  name: 'WHC Note'
   text: 'Study SS+'
   tagline: 记录学习点滴
   # 按钮
