@@ -21,7 +21,7 @@ export default defineConfig({
         "JS/ts/:page": "TS/:page",
         "JS/vue/:page": "vue/:page",
         "JS/react/:page": "react/:page",
-        "linux/DB/:page": "DB/:page",
+        "tools/DB/:page": "DB/:page",
         "node/node/:page": "node/:page",
         "node/express/:page": "express/:page",
         "node/nestjs/:page": "nestjs/:page",
