@@ -1,3 +1,6 @@
+---
+titleTemplate: Miscellaneous
+---
 # New Year
 
 ## 2025 New Year
