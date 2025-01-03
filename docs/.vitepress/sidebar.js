@@ -101,6 +101,14 @@ export default {
             {text: 'mongoose', link: '/DB/mongoose'},
         ]
     },
+    "/miscellaneous/": {
+      text: 'miscellaneous',
+      collapsible: true,
+      collapsed: true,
+      items: [
+          {text: 'New Year', link: '/miscellaneous/New_Year.md'},
+      ]
+  },
     Examples: {
         text: 'Examples',
         collapsible: true,

@@ -1,5 +1,5 @@
 ---
-# https://vitepress.dev/reference/default-theme-home-page
+# https://vitepress.dev/zh/reference/default-theme-home-page
 layout: home
 
 hero:
@@ -8,7 +8,12 @@ hero:
   tagline: 记录学习点滴
   # 按钮
   actions:
-
+    - theme: brand
+      text: Get Started
+      link: /linux/
+    - theme: alt
+      text: Miscellaneous
+      link: /miscellaneous
   image:
     src: /logo.svg
     alt: Hello world
@@ -32,7 +37,7 @@ features:
     link: /docker/
   - title: Linux
     icon: {
-        src: "/linux-icon.svg"
+      src: "/linux-icon.svg"
     }
     link: /linux
 #    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
