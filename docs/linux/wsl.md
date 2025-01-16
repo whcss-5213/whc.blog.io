@@ -1,6 +1,8 @@
-#### 修改密码
+# WSL
 
-方法一：
+## 修改密码
+
+### 方法一
 
 1. 请打开 PowerShell，并使用以下命令进入默认 WSL 分发版的根目录：`wsl -u root`
 
@@ -10,6 +12,26 @@
 
 3. 系统将提示你输入新的 UNIX 密码，然后确认该密码。 在被告知密码已成功更新后，请使用以下命令在 PowerShell 内关闭 WSL：`exit`。
 
-方法二：
+### 方法二
 
 打开CMD或PowerShell，输入`ubuntu config --default-user root`，修改ubuntu系统默认用户为root，再打开bash输入`passwd root`，修改用户密码。
+
+
+## 备份
+
+```shell
+wsl -l -v
+wsl --shutdown
+````
+
+### 导出
+```shell
+wsl --export <虚拟机名称> <保存路径>
+wsl --export Ubuntu-20.04 D:\Ubuntu2004.tar
+```
+
+### 导入
+```shell
+wsl --import <虚拟机名称> <目标路径> <保存路径>
+wsl --import Ubuntu-20.04 E:\Ubuntu D:\Ubuntu.tar
+```
