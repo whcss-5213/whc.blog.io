@@ -17,6 +17,7 @@ export default defineConfig({
         "tools/git/:page": "git/:page",
         "tools/nginx/:page": "nginx/:page",
         "tools/docker/:page": "docker/:page",
+        "tools/browser/:page": "browser/:page",
         "JS/js/:page": "JS/:page",
         "JS/ts/:page": "TS/:page",
         "JS/vue/:page": "vue/:page",

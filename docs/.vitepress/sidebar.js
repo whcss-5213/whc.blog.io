@@ -103,6 +103,14 @@ export default {
             {text: 'mongoose', link: '/DB/mongoose'},
         ]
     },
+    "/browser/": {
+        text: 'browser',
+        collapsible: true,
+        collapsed: true,
+        items: [
+            {text: 'Network', link: '/browser/Network'},
+        ]
+    },
     "/miscellaneous/": {
       text: 'miscellaneous',
       collapsible: true,

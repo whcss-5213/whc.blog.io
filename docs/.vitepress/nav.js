@@ -55,6 +55,7 @@ export default [
     {
         text: 'Tools',
         items: [
+            {text: 'Browser', link: '/browser/Network'},
             {text: 'Git', link: '/git/'},
             {text: 'Nginx', link: '/nginx/'},
             {text: 'Docker', link: '/docker/'},
