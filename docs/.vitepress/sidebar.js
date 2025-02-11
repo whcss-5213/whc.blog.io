@@ -50,8 +50,8 @@ export default {
         collapsible: true,
         collapsed: true,
         items: [
-            {text: 'SSH', link: '/linux/ssh'},
             {text: 'Vim', link: '/linux/Vim'},
+            {text: 'SSH', link: '/linux/ssh'},
             {text: 'File', link: '/linux/file'},
             {text: 'User', link: '/linux/user'},
             {text: 'WSL', link: '/linux/wsl'},

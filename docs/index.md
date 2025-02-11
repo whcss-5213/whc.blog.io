@@ -24,12 +24,12 @@ features:
   }
     title: Vue
     link: /vue/
-  - icon: {
-    src: "/vim/Vim.png",
-    alt: "Hello Vue"
-  }
-    title: Vim
-    link: /linux/Vim/
+#  - icon: {
+#    src: "/vim/Vim.png",
+#    alt: "Hello Vue"
+#  }
+#    title: Vim
+#    link: /linux/Vim/
   - title: Docker
     icon: {
       src: "/docker-icon.svg"
@@ -38,6 +38,12 @@ features:
   - title: Linux
     icon: {
       src: "/linux-icon.svg"
+    }
+    link: /linux
+    
+  - title: uni-app
+    icon: {
+      src: "/uniapp/uniapp.svg"
     }
     link: /linux
 #    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit

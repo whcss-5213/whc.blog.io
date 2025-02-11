@@ -45,6 +45,7 @@ export default [
     {
         text: 'Linux',
         items: [
+            {text: 'Vim', link: '/linux/vim'},
             {text: 'File', link: '/linux/file'},
             {text: 'Network', link: '/linux/Network'},
         ]
