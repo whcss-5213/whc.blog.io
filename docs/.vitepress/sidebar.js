@@ -17,6 +17,8 @@ export default {
         collapsed: true,
         items: [
             {text: 'Typescript', link: '/TS/'},
+            {text: 'Type', link: '/TS/type'},
+            {text: 'type-challenges', link: '/TS/type-challenges'},
         ],
     },
     '/vue/': {

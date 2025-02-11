@@ -23,7 +23,9 @@ export default [
 
             {
                 items: [
-                    {text: 'TypeScript', link: '/TS/'}
+                    {text: 'TypeScript', link: '/TS/'},
+                    {text: 'TypeScript', link: '/TS/type'},
+                    {text: 'TypeScript', link: '/TS/challenges'}
                 ]
             },
             {
