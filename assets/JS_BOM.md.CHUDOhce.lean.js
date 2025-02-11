@@ -1,0 +1,1 @@
+import{_ as i,c as a,o as n,ag as t}from"./chunks/framework.BPw0-pHp.js";const g=JSON.parse('{"title":"BOM","description":"","frontmatter":{},"headers":[],"relativePath":"JS/BOM.md","filePath":"JS/js/BOM.md"}'),l={name:"JS/BOM.md"};function e(h,s,p,k,r,d){return n(),a("div",null,s[0]||(s[0]=[t("",23)]))}const y=i(l,[["render",e]]);export{g as __pageData,y as default};

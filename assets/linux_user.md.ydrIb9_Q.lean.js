@@ -1,0 +1,1 @@
+import{_ as o,c as d,o as r,ag as a}from"./chunks/framework.BPw0-pHp.js";const _=JSON.parse('{"title":"user","description":"","frontmatter":{},"headers":[],"relativePath":"linux/user.md","filePath":"linux/user.md"}'),s={name:"linux/user.md"};function u(c,e,l,n,i,t){return r(),d("div",null,e[0]||(e[0]=[a("",13)]))}const m=o(s,[["render",u]]);export{_ as __pageData,m as default};

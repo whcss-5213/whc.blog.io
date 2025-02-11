@@ -1,0 +1,1 @@
+import{_ as i,c as a,o as e,ag as l}from"./chunks/framework.BPw0-pHp.js";const c=JSON.parse('{"title":"WSL","description":"","frontmatter":{},"headers":[],"relativePath":"linux/wsl.md","filePath":"linux/wsl.md"}'),t={name:"linux/wsl.md"};function n(h,s,p,r,k,d){return e(),a("div",null,s[0]||(s[0]=[l("",12)]))}const F=i(t,[["render",n]]);export{c as __pageData,F as default};
