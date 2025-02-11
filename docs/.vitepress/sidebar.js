@@ -6,6 +6,9 @@ export default {
         items: [
             {text: 'String', link: '/JS/String'},
             {text: 'Array', link: '/JS/Array'},
+            {text: 'Function', link: '/JS/Function'},
+            {text: 'Object', link: '/JS/Object'},
+            {text: 'Promise', link: '/JS/Promise'},
             {text: 'RegExp', link: '/JS/RegExp'},
             {text: 'DOM', link: '/JS/DOM'},
             {text: 'BOM', link: '/JS/BOM'},
