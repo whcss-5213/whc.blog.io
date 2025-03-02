@@ -1,1 +1,0 @@
-import{_ as l,c as e,o as t,ag as a}from"./chunks/framework.BPw0-pHp.js";const g=JSON.parse('{"title":"Git","description":"","frontmatter":{},"headers":[],"relativePath":"git/index.md","filePath":"tools/git/index.md"}'),s={name:"git/index.md"};function p(o,i,h,d,n,c){return t(),e("div",null,i[0]||(i[0]=[a("",58)]))}const k=l(s,[["render",p]]);export{g as __pageData,k as default};

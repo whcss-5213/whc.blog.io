@@ -1,1 +1,0 @@
-import{_ as i,c as a,o as n,ag as h}from"./chunks/framework.BPw0-pHp.js";const g=JSON.parse('{"title":"RegExp","description":"","frontmatter":{},"headers":[],"relativePath":"JS/RegExp.md","filePath":"JS/js/RegExp.md"}'),l={name:"JS/RegExp.md"};function k(t,s,p,e,r,d){return n(),a("div",null,s[0]||(s[0]=[h("",20)]))}const y=i(l,[["render",k]]);export{g as __pageData,y as default};
