@@ -94,6 +94,4 @@ services:
       timeout: 10s
       retries: 5
       start_period: 40s
-
-
 ```
