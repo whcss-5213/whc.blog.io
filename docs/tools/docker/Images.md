@@ -14,12 +14,17 @@ docker run -itd \
 mongo:latest
 
 # 进入容器  
-docker exec -it mongo sh
+docker exec -it mongo bash
 docker exec -it mongo /bin/mongosh -u user -p password
 
-mongod --version
 # 备份数据库
-mongodump -h 127.0.0.1:27017 -u root -p admin --authenticationDatabase admin -d ssss -o /db
+mongodump -h 127.0.0.1:27017 -u root -p admin --authenticationDatabase admin -d dbname -o /db
+#恢复所有数据库
+mongorestore -h 127.0.0.1:27017 --dir /data/mongodb_backup
+#恢复制定数据库
+mongorestore -h 127.0.0.1:27017 -d news --dir /data/db/news -u root  -p admin --authenticationDatabase admin
+
+
 ```
 ### 配置文件
 > /etc/mongod.conf.orig
