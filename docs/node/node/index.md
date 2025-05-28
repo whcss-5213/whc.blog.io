@@ -2,22 +2,30 @@
 
 ## npm
 
-### 源
 
-```text
+```shell
+npm config set prefix "D:\nodejs\node_global"
+npm config set cache "D:\nodejs\node_cache"
 // npm设置新淘宝源
 npm config set registry https://registry.npmmirror.com
-// npm设置回本源
+// npm 重置默认
 npm config set registry https://registry.npmjs.org
 ```
 
-### pnpm
+## pnpm
+window
+```shell
+Invoke-WebRequest https://get.pnpm.io/install.ps1 -UseBasicParsing | Invoke-Expression
+```
+linux
+```shell
+curl -fsSL https://get.pnpm.io/install.sh | sh -
+```
 
-> Nothing to stop. No server is running for the store at
-
-```powershell
-pnpm install -g
-pnpm install -g pnpm
+```shell
+pnpm config set registry https://registry.npmmirror.com/
+pnpm config set store-dir <new path> 
+pnpm store path
 ```
 
 ## 全局变量
