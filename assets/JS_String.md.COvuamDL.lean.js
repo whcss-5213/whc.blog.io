@@ -1,0 +1,1 @@
+import{_ as i,c as a,o as l,ag as t}from"./chunks/framework.D0acG751.js";const g=JSON.parse('{"title":"Sting","description":"","frontmatter":{},"headers":[],"relativePath":"JS/String.md","filePath":"JS/js/String.md"}'),n={name:"JS/String.md"};function e(h,s,p,k,r,d){return l(),a("div",null,s[0]||(s[0]=[t("",71)]))}const o=i(n,[["render",e]]);export{g as __pageData,o as default};

@@ -1,0 +1,1 @@
+import{_ as i,c as a,o as e,ag as l}from"./chunks/framework.D0acG751.js";const c=JSON.parse('{"title":"WSL","description":"","frontmatter":{},"headers":[],"relativePath":"linux/wsl.md","filePath":"linux/wsl.md"}'),t={name:"linux/wsl.md"};function n(h,s,p,r,k,d){return e(),a("div",null,s[0]||(s[0]=[l("",13)]))}const u=i(t,[["render",n]]);export{c as __pageData,u as default};

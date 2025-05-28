@@ -1,0 +1,1 @@
+import{_ as a,c as n,o as i,ag as e}from"./chunks/framework.D0acG751.js";const c=JSON.parse('{"title":"mongo","description":"","frontmatter":{},"headers":[],"relativePath":"DB/mongo.md","filePath":"tools/DB/mongo.md"}'),l={name:"DB/mongo.md"};function p(t,s,h,r,k,d){return i(),n("div",null,s[0]||(s[0]=[e("",37)]))}const b=a(l,[["render",p]]);export{c as __pageData,b as default};
