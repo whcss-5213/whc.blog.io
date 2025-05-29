@@ -14,11 +14,15 @@ jobs:
 
     - name: Set up Node.js
       uses: actions/setup-node@v4
- 
-    - name: npm install, build, and test
-      run: |
-        npm install
-        npm run build
+
+    - name: Install pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        version: latest
+
+      # 打包成静态文件
+    - name: Build
+      run: pnpm install && pnpm build
 
     - name: 部署
       uses: JamesIves/github-pages-deploy-action@v4
