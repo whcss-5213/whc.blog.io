@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full w flex flex-wrap gap-4 mt-[20px]">
+  <div class="w-full  flex flex-wrap gap-4 mt-[20px]">
     <el-card
         @click="clipboard(i)"
         shadow="hover"

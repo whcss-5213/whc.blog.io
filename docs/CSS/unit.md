@@ -37,10 +37,10 @@ div {
 
 ​ 相对单位,根据html的font-size计算自己的大小
 
-```php+HTML
+```html
 <body>
     <div>
-        第一层    // font-size = 10 * 2 px 
+        第一层    // font-size = 10 * 2 px
      </div>
       <p>
           第二层  // font-size = 10 * 3
