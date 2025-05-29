@@ -1,0 +1,1 @@
+import{_ as a,c as i,o as n,b0 as e}from"./chunks/framework.BmIX_FSl.js";const c=JSON.parse('{"title":"BOM","description":"","frontmatter":{},"headers":[],"relativePath":"JS/BOM.md","filePath":"JS/js/BOM.md"}'),t={name:"JS/BOM.md"};function l(p,s,h,r,k,d){return n(),i("div",null,s[0]||(s[0]=[e("",26)]))}const o=a(t,[["render",l]]);export{c as __pageData,o as default};

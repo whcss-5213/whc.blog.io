@@ -1,1 +1,0 @@
-import{_ as i,c as a,o as n,ag as l}from"./chunks/framework.D0acG751.js";const g=JSON.parse('{"title":"Array","description":"","frontmatter":{},"headers":[],"relativePath":"JS/Array.md","filePath":"JS/js/Array.md"}'),h={name:"JS/Array.md"};function e(k,s,p,t,r,d){return n(),a("div",null,s[0]||(s[0]=[l("",110)]))}const y=i(h,[["render",e]]);export{g as __pageData,y as default};

@@ -1,0 +1,1 @@
+import{_ as a,c as i,o as n,b0 as l}from"./chunks/framework.BmIX_FSl.js";const d=JSON.parse('{"title":"ssl","description":"","frontmatter":{},"headers":[],"relativePath":"nginx/ssl.md","filePath":"tools/nginx/ssl.md"}'),e={name:"nginx/ssl.md"};function p(r,s,t,h,k,c){return n(),i("div",null,s[0]||(s[0]=[l("",5)]))}const b=a(e,[["render",p]]);export{d as __pageData,b as default};

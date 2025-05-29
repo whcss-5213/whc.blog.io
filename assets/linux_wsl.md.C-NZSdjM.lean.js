@@ -1,0 +1,1 @@
+import{_ as i,c as a,o as e,b0 as l}from"./chunks/framework.BmIX_FSl.js";const c=JSON.parse('{"title":"WSL","description":"","frontmatter":{},"headers":[],"relativePath":"linux/wsl.md","filePath":"linux/wsl.md"}'),n={name:"linux/wsl.md"};function t(h,s,p,r,k,d){return e(),a("div",null,s[0]||(s[0]=[l("",17)]))}const u=i(n,[["render",t]]);export{c as __pageData,u as default};

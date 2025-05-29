@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as r,b0 as o}from"./chunks/framework.BmIX_FSl.js";const f=JSON.parse('{"title":"布局","description":"","frontmatter":{},"headers":[],"relativePath":"CSS/layout.md","filePath":"CSS/layout.md"}'),l={name:"CSS/layout.md"};function i(n,a,d,s,_,c){return r(),t("div",null,a[0]||(a[0]=[o("",3)]))}const u=e(l,[["render",i]]);export{f as __pageData,u as default};
