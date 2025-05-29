@@ -1,11 +1,13 @@
+// tailwind.config.js
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-      "./docs/**.md"
+    "./docs/**/*.js",
+    "./docs/**/*.ts",
+    "./docs/**/*.vue",
+    "./docs/**/*.md",
   ],
-  theme: {
-    extend: {},
+  options: {
+    safelist: ["html", "body"],
   },
-  plugins: [],
-}
-
+};
