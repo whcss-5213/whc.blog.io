@@ -3,4 +3,5 @@
 import Cursor from './Component/cursor.vue'
 </script>
 
-<Cursor/>
+## cursor
+<Cursor></Cursor>

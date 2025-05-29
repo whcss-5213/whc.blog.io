@@ -1,22 +1,32 @@
 <template>
-  <div class="w-full flex flex-wrap top-20">
-    <div :style="{cursor:i}" class="cursor" v-for="i in table">{{ i }}</div>
+  <div class="w-full w flex flex-wrap gap-4 mt-[20px]">
+    <el-card
+        @click="clipboard(i)"
+        shadow="hover"
+        :style="{cursor:i}"
+        class=" flex items-center justify-center"
+        v-for="i in table"
+    >
+      {{ i }}
+    </el-card>
   </div>
 </template>
 
-<style>
-.cursor {
-  width: 100px;
-  height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #ccc;
-}
-</style>
-
 <script setup>
 import {ref} from "vue";
+import {ElCard, ElMessage} from "element-plus"
+
+const clipboard = i => {
+  navigator.clipboard.writeText(i).then(() => {
+        ElMessage({
+          message: "复制成功",
+          type: "success",
+        })
+      }
+  ).catch(() => {
+    ElMessage.error('复制失败')
+  })
+}
 
 let table = ref([
   "auto",
