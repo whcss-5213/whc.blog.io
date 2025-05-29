@@ -1,10 +1,10 @@
 # WSL
 > Windows Subsystem for Linux
-> 
+>
 
 ## /etc/wsl.conf
 
-```conf
+```shell
 [user]
 # 首次运行时创建的初始用户名
 default=root

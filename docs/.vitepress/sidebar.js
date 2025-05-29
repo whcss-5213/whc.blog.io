@@ -62,7 +62,21 @@ export default {
             {text: 'WSL', link: '/linux/wsl'},
         ],
     },
-
+    'CSS': {
+        text: 'CSS',
+        collapsible: true,
+        collapsed: true,
+        items: [
+            {text: 'CSS', link: '/CSS/'},
+            { text: 'animate', link: '/CSS/animate' },
+            { text: 'background', link: '/CSS/background' },
+            { text: 'box', link: '/CSS/box' },
+            { text: 'layout', link: '/CSS/layout' },
+            { text: 'text', link: '/CSS/text' },
+            { text: 'unit', link: '/CSS/unit' },
+            { text: 'cursor', link: '/CSS/cursor' }
+        ],
+    },
     '/git/': {
         text: 'git',
         collapsible: true,
@@ -115,13 +129,13 @@ export default {
         ]
     },
     "/miscellaneous/": {
-      text: 'miscellaneous',
-      collapsible: true,
-      collapsed: true,
-      items: [
-          {text: 'New Year', link: '/miscellaneous/New_Year.md'},
-      ]
-  },
+        text: 'miscellaneous',
+        collapsible: true,
+        collapsed: true,
+        items: [
+            {text: 'New Year', link: '/miscellaneous/New_Year.md'},
+        ]
+    },
     Examples: {
         text: 'Examples',
         collapsible: true,

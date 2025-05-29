@@ -1,5 +1,4 @@
 ---
-# https://vitepress.dev/zh/reference/default-theme-home-page
 layout: home
 
 hero:
@@ -41,10 +40,9 @@ features:
     }
     link: /linux
     
-  - title: uni-app
+  - title: CSS
     icon: {
-      src: "/uniapp/uniapp.svg"
+      src: "/CSS.svg"
     }
-    link: /linux
-#    details: Lorem ipsum dolor sit amet, consectetur adipiscing elit
+    link: /CSS
 ---
