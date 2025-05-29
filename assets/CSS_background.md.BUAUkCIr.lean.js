@@ -1,1 +1,0 @@
-import{_ as e,c as t,o as a}from"./chunks/framework.BmIX_FSl.js";const m=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"CSS/background.md","filePath":"CSS/background.md"}'),r={name:"CSS/background.md"};function o(c,n,s,d,p,_){return a(),t("div")}const f=e(r,[["render",o]]);export{m as __pageData,f as default};

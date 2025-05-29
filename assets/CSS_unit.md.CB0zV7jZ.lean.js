@@ -1,0 +1,1 @@
+import{_ as i,c as a,o as n,b0 as l}from"./chunks/framework.BmIX_FSl.js";const c=JSON.parse('{"title":"单位","description":"","frontmatter":{},"headers":[],"relativePath":"CSS/unit.md","filePath":"CSS/unit.md"}'),p={name:"CSS/unit.md"};function e(h,s,t,k,r,E){return n(),a("div",null,s[0]||(s[0]=[l("",21)]))}const g=i(p,[["render",e]]);export{c as __pageData,g as default};
