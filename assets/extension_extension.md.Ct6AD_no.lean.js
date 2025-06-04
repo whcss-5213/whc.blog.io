@@ -1,1 +1,0 @@
-import{_ as e,c as t,o as n}from"./chunks/framework.BmIX_FSl.js";const x=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"extension/extension.md","filePath":"extension/extension.md"}'),o={name:"extension/extension.md"};function s(a,r,i,c,p,_){return n(),t("div")}const m=e(o,[["render",s]]);export{x as __pageData,m as default};
