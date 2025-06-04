@@ -12,6 +12,7 @@ export default {
             {text: 'RegExp', link: '/JS/RegExp'},
             {text: 'DOM', link: '/JS/DOM'},
             {text: 'BOM', link: '/JS/BOM'},
+            {text: 'Collections', link: '/JS/Collections'},
         ],
     },
     '/TS/': {
