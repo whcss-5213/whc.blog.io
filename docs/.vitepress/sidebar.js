@@ -75,7 +75,8 @@ export default {
             { text: 'layout', link: '/CSS/layout' },
             { text: 'text', link: '/CSS/text' },
             { text: 'unit', link: '/CSS/unit' },
-            { text: 'cursor', link: '/CSS/cursor' }
+            { text: 'cursor', link: '/CSS/cursor' },
+            { text: 'Color', link: '/CSS/color' },
         ],
     },
     '/git/': {
