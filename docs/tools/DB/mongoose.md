@@ -288,3 +288,70 @@ upsertedId: null,
 upsertedCount: 0,
 
 matchedCount: 1
+
+
+
+
+
+### 添加字段
+
+
+
+1. 修改 schema 
+
+```ts
+async addNewFieldsToExistingDocs() {
+    // 方法 1：使用 Schema 默认值（推荐）
+    await this.userModel.updateMany(
+      {}, // 匹配所有文档
+      {} // 空更新，依赖 Schema 中的 default 自动填充
+    );
+
+    // 方法 2：显式设置字段值（覆盖 Schema 默认值）
+    await this.userModel.updateMany(
+      {},
+      { 
+        $set: { 
+          email: 'default@example.com', // 强制设置为指定值
+          age: 20 // 覆盖 Schema 中的默认值 18
+        } 
+      }
+    );
+  }
+
+
+
+async updateSpecificDocs() {
+  await this.userModel.updateMany(
+    { email: { $exists: false } }, // 条件：email 字段不存在
+    { $set: { email: 'unknown@example.com' } } // 新增 email 字段并设置值
+  );
+}
+
+
+
+async updateAndGetResult() {
+  const result = await this.userModel.updateMany({}, { $set: { isVerified: false } });
+  console.log(`更新文档数量：${result.modifiedCount}`); // 输出更新的文档数
+}
+
+
+
+
+async updateInBatches() {
+  const batchSize = 1000; // 每批更新 1000 条
+  let offset = 0;
+  let updated = 0;
+
+  do {
+    const result = await this.userModel.updateMany(
+      { _id: { $gt: offset } }, // 假设 _id 自增，根据实际条件调整
+      { $set: { newField: 'value' } },
+      { limit: batchSize }
+    );
+    updated += result.modifiedCount;
+    offset = result.upsertedCount > 0 ? result.upsertedId : offset + batchSize;
+  } while (updated < result.total);
+}
+```
+
