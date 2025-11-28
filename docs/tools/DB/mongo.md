@@ -12,7 +12,7 @@ docker run -it -d \
 -e MONGO_INITDB_ROOT_PASSWORD=admin \
 -v /root/mongodb/data:/data/db \
 -p 27017:27017 \
---network mongo-network \  
+--network mongo-network \
 --name mongo \
 --restart always mongo:latest \
 -v root/mongodb/conf:/etc/mongo
@@ -27,7 +27,7 @@ docker run -d \
 
 docker run -itd \
 --name mongo \
--p 27017:27017 \ 
+-p 27017:27017 \
 -e MONGO_INITDB_ROOT_USERNAME=root \
 -e MONGO_INITDB_ROOT_PASSWORD=admin \
 -v /root/mongodb/db:/data/db \
@@ -52,7 +52,7 @@ v
 # 备份
 mongodump -h 127.0.0.1:27017 -u root -p admin --authenticationDatabase admin -d ssss -o /db
 
-``` 
+```
 
 ## 连接数据库
 
@@ -116,20 +116,20 @@ update
 ```
 db.collection.updateOne({}, {$set:{}}) 符合条件的第一条
 db.collection.updateMany({}, {$set:{}})  更新所有符合条件
-不加 $set 会直接替换查找到的内容 
+不加 $set 会直接替换查找到的内容
 ```
 
-- **$inc**  : 引用增加
+- **$inc** : 引用增加
 
-    - db.table.updateMany({}, {$inc:{"score": 1}})   # 在原基础上给所有score +1
+  - db.table.updateMany({}, {$inc:{"score": 1}}) # 在原基础上给所有 score +1
 
-- **$set** :  修改数据 (key不存在就添加)
+- **$set** : 修改数据 (key 不存在就添加)
 
-    - db.table.update({"score": 65}, {$set: {"score": 80}})
+  - db.table.update({"score": 65}, {$set: {"score": 80}})
 
-- **$unset**: 强制删除Field
+- **$unset**: 强制删除 Field
 
-    - db.table.update({}, {$unset:{"age": 15}})    # 删除所有 age 字段
+  - db.table.update({}, {$unset:{"age": 15}}) # 删除所有 age 字段
 
 #### 查
 
@@ -143,18 +143,22 @@ db.collection.find(query, projection)
 
 - **projection** ：可选，使用投影操作符指定返回的键。查询时返回文档中所有键值， 只需省略该参数即可（默认省略）。
 
-    - ```
-  {"_id":0,title:1} 0 不返回 1 返回
+  - ```
+    {"_id":0,title:1} 0 不返回 1 返回
     ```
+
+  ```
+
+  ```
 
 ##### 条件查询
 
 - **$gt**： (>) 大于
-- **$lt**：  (<) 小于
-- **$gte**：(>=)  大于等于
+- **$lt**： (<) 小于
+- **$gte**：(>=) 大于等于
 - **$lte**： (<= ) 小于等于
-- **$ne**： ( != )  不等于
-- **$eq**： ( = )    等于
+- **$ne**： ( != ) 不等于
+- **$eq**： ( = ) 等于
 
 ```
 db.collection.find({age:{$gte:50}})
@@ -194,31 +198,3 @@ $eq  --------  equal  =
   ```
 
 #### 排序
-
-docker run -d \
--e MONGO_INITDB_ROOT_USERNAME=root \
--e MONGO_INITDB_ROOT_PASSWORD=admin \
--v /root/mongodb/data:/data/db \
--p 27017:27017 \
---name mongo \
---restart always mongo:latest \
--v root/mongodb/conf:/etc/mongo --config /etc/mongo/mongo.conf
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

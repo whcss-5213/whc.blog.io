@@ -39,10 +39,16 @@ features:
       src: "/linux-icon.svg"
     }
     link: /linux
-    
+
   - title: CSS
     icon: {
       src: "/CSS.svg"
     }
     link: /CSS
+
+  - title: Code Snippet
+    icon: {
+      src: "/code-snippet.svg"
+    }
+    link: /snippet
 ---
