@@ -7,3 +7,9 @@
 ## Cheerio
 
 <<<@/code/js/cheerio.js
+
+## mongoose
+
+### aggregate
+
+<<<@/code/js/mongoose/aggregate.js
