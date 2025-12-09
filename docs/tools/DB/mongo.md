@@ -1,60 +1,97 @@
 # mongo
 
-## docker
+## mongosh
+
+### user
 
 ```shell
-port=27017
-dbpath=/data/mongo_data
-logpath=/data/mongo_log
-
-docker run -it -d \
--e MONGO_INITDB_ROOT_USERNAME=root \
--e MONGO_INITDB_ROOT_PASSWORD=admin \
--v /root/mongodb/data:/data/db \
--p 27017:27017 \
---network mongo-network \
---name mongo \
---restart always mongo:latest \
--v root/mongodb/conf:/etc/mongo
---config /etc/mongo/mongo.conf
-
-docker run -d \
--e MONGO_INITDB_ROOT_USERNAME=root \
--e MONGO_INITDB_ROOT_PASSWORD=admin \
--v /root/mongodb/data:/data/db -p 27017:27017 \
---name mongo \
---restart always mongo
-
-docker run -itd \
---name mongo \
--p 27017:27017 \
--e MONGO_INITDB_ROOT_USERNAME=root \
--e MONGO_INITDB_ROOT_PASSWORD=admin \
--v /root/mongodb/db:/data/db \
---restart always \
-mongo:latest
+show users
 
 
-docker run -itd \
--p 27017:27017 \
--e MONGO_INITDB_ROOT_USERNAME=root \
--e MONGO_INITDB_ROOT_PASSWORD=admin \
--v /root/mongodb/data1/db:/data/db \
---restart always \
---name mongo \
-mongo:latest
+db.updateUser("<原根用户名>", {
+  pwd: "<新密码>"
+});
 
-docker exec -it mongo /bin/base
-docker exec -it mongo sh
-// 5.0以后
-docker exec -it mongo /bin/mongosh -u user -p password
-v
-# 备份
-mongodump -h 127.0.0.1:27017 -u root -p admin --authenticationDatabase admin -d ssss -o /db
+db.changeUserPassword("<原根用户名>", "<新密码>");
 
+db.createUser({
+    user : "bigcat",
+    pwd : "bigcat",
+    roles : [{role : "read", db : "db_01"}, {role : "readWrite", db : "db_02"}]
+})
+
+db.dropUser("test_user");
+
+db.getUsers().forEach(user => {
+  if (user.user !== "root") { // 排除保留用户
+    db.dropUser(user.user);
+    print("已删除用户：", user.user);
+  }
+});
 ```
 
-## 连接数据库
+## 副本集
+
+```bash
+# 创建密钥文件
+openssl rand -base64 756 > /path/to/mongo.keyfile
+# 修改密钥文件权限
+# 安全的权限设置是 400（仅所有者可读）或 600（所有者可读可写）
+chmod 400 /path/to/mongo.keyfile
+```
+
+```yaml
+# 配置文件
+security:
+  authorization: enabled
+  keyFile: /path/to/mongo.keyfile
+replication:
+  replSetName: 'rs0'
+```
+
+```bash
+# 启动副本集
+mongod --config /path/to/mongo.conf --replSet rs0
+# 连接副本集
+mongo --host <host> --port <port> --username <username> --password <password> --authenticationDatabase admin
+# 初始化副本集
+rs.initiate()
+
+# 查看副本集状态
+rs.status()
+
+# 添加副本集节点
+rs.add("<host>:<port>")
+# 查看副本集成员
+rs.status()
+# 删除副本集成员
+rs.remove("<host>:<port>")
+# 重新配置副本集
+rs.reconfig()
+```
+
+```bash
+# docker 启动副本集
+docker run -d --name mongo
+-p 27017:27017 \
+-v /data/db:/data/db \
+-v /path/to/mongo.keyfile:/data/config/mongo.keyfile \
+-e MONGO_INITDB_ROOT_USERNAME=root \
+-e MONGO_INITDB_ROOT_PASSWORD=root \
+-e MONGO_INITDB_DATABASE=admin  \
+mongo:latest \
+mongod --replSet rs0 --keyFile /data/keyfile --bind_ip_all
+```
+
+```bash
+rs.initiate({
+  _id: "rs0",
+  members: [
+    { _id: 0, host: "192.168.1.100:27017" },
+    { _id: 1, host: "192.168.1.101:27017" }
+  ]
+})
+```
 
 ## mongod
 
@@ -62,15 +99,15 @@ https://www.jianshu.com/p/35135e913f8d
 
 https://developer.aliyun.com/article/673956
 
-### mongodb
+## mongodb
 
-#### 创建数据库
+### 创建数据库
 
 use 数据库名称 创建/打开数据库
 
 show dbs 查看所有数据库
 
-#### 删除数据库
+### 删除数据库
 
 use 数据库名称
 db.dropDatabase()
