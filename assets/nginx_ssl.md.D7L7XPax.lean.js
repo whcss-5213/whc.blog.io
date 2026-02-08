@@ -1,0 +1,1 @@
+import{_ as a,c as i,o as n,b0 as e}from"./chunks/framework.CagjxOLi.js";const k=JSON.parse('{"title":"ssl","description":"","frontmatter":{},"headers":[],"relativePath":"nginx/ssl.md","filePath":"tools/nginx/ssl.md"}'),l={name:"nginx/ssl.md"};function t(p,s,r,h,c,d){return n(),i("div",null,s[0]||(s[0]=[e("",27)]))}const g=a(l,[["render",t]]);export{k as __pageData,g as default};
