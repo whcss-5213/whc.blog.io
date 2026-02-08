@@ -11,12 +11,12 @@
 ## **命令模式（Command mode）**
 
 - **i** 切换到输入模式，以输入字符。
-  ![](../public/vim/vim-2.png)
+  ![](../../public/vim/vim-2.png)
 - **yy** 复制当前行
 - **p** 粘贴
 - **dd** 删除
 - **x** 删除当前光标所在处的字符。
-- 
+-
 - **:** 切换到底线命令模式，以在最底一行输入命令。
 
 ## **输入模式（Insert mode）**
@@ -56,7 +56,7 @@
 :set nowrap		" 禁止折行
 
 " 切换文件格式，ff是 fileformat 的缩写
-:set ff=unix			" 将文件切换为 unix 格式，每行以 "\n" 结尾 
+:set ff=unix			" 将文件切换为 unix 格式，每行以 "\n" 结尾
 :set ff=dos				" 切换为 Windows 格式，每行以 "\r\n" 结尾
 
 " 设置编码格式
@@ -72,4 +72,3 @@
 
 :set [keyword]? " 查询当前状态的命令
 ```
-

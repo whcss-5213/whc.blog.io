@@ -31,6 +31,26 @@ export default defineConfig({
     'node/express/:page': 'express/:page',
     'node/nestjs/:page': 'nestjs/:page',
   },
+  vite: {
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              if (id.includes('vue')) {
+                return 'vue-vendor';
+              }
+              if (id.includes('vitepress')) {
+                return 'vitepress';
+              }
+              return 'vendor';
+            }
+          },
+        },
+      },
+      chunkSizeWarningLimit: 1000,
+    },
+  },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: '/logo.svg',
