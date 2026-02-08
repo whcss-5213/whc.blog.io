@@ -2,9 +2,9 @@
 layout: home
 
 hero:
-  name: 'WHC Note'
-  text: 'Study SS+'
-  tagline: 记录学习点滴
+  name: "WHC's Site"
+  text: 'Note · Code · Think'
+  tagline: WHC的技术栈与工具箱
   # 按钮
   actions:
     - theme: brand
