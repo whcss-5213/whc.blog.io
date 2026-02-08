@@ -1,1 +1,0 @@
-import{_ as o,c as d,o as r,b0 as a}from"./chunks/framework.CagjxOLi.js";const _=JSON.parse('{"title":"User","description":"","frontmatter":{},"headers":[],"relativePath":"linux/user.md","filePath":"linux/user.md"}'),s={name:"linux/user.md"};function u(c,e,l,n,i,t){return r(),d("div",null,e[0]||(e[0]=[a("",13)]))}const m=o(s,[["render",u]]);export{_ as __pageData,m as default};

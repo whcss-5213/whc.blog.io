@@ -1,1 +1,0 @@
-import{_ as i,c as t,o as e,b0 as a}from"./chunks/framework.CagjxOLi.js";const g=JSON.parse('{"title":"vue","description":"","frontmatter":{},"headers":[],"relativePath":"vue/index.md","filePath":"JS/vue/index.md"}'),r={name:"vue/index.md"};function o(n,l,s,u,h,d){return e(),t("div",null,l[0]||(l[0]=[a("",61)]))}const b=i(r,[["render",o]]);export{g as __pageData,b as default};

@@ -1,1 +1,0 @@
-import{_ as t,c as o,o as l,b0 as n}from"./chunks/framework.CagjxOLi.js";const m=JSON.parse('{"title":"DOM","description":"","frontmatter":{},"headers":[],"relativePath":"JS/DOM.md","filePath":"JS/js/DOM.md"}'),r={name:"JS/DOM.md"};function a(d,e,s,i,g,p){return l(),o("div",null,e[0]||(e[0]=[n("",32)]))}const u=t(r,[["render",a]]);export{m as __pageData,u as default};

@@ -1,1 +1,0 @@
-import{_ as i,c as a,o as n,b0 as l}from"./chunks/framework.CagjxOLi.js";const g=JSON.parse('{"title":"CSS","description":"","frontmatter":{},"headers":[],"relativePath":"CSS/index.md","filePath":"CSS/index.md"}'),t={name:"CSS/index.md"};function p(h,s,e,k,r,d){return n(),a("div",null,s[0]||(s[0]=[l("",61)]))}const c=i(t,[["render",p]]);export{g as __pageData,c as default};

@@ -1,1 +1,0 @@
-import{_ as i,c as a,o as t,b0 as n}from"./chunks/framework.CagjxOLi.js";const F=JSON.parse('{"title":"RegExp","description":"","frontmatter":{},"headers":[],"relativePath":"JS/RegExp.md","filePath":"JS/js/RegExp.md"}'),l={name:"JS/RegExp.md"};function e(h,s,k,p,r,d){return t(),a("div",null,s[0]||(s[0]=[n("",20)]))}const y=i(l,[["render",e]]);export{F as __pageData,y as default};

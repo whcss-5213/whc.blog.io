@@ -1,1 +1,0 @@
-import{_ as i,c as a,o as n,b0 as l}from"./chunks/framework.CagjxOLi.js";const c=JSON.parse('{"title":"布局","description":"","frontmatter":{},"headers":[],"relativePath":"CSS/layout.md","filePath":"CSS/layout.md"}'),e={name:"CSS/layout.md"};function p(t,s,h,r,k,d){return n(),a("div",null,s[0]||(s[0]=[l("",84)]))}const o=i(e,[["render",p]]);export{c as __pageData,o as default};
