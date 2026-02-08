@@ -43,7 +43,6 @@ export default [
   {
     text: 'Linux',
     items: [
-      { text: 'Vim', link: '/linux/Vim' },
       { text: 'File', link: '/linux/file' },
       { text: 'Network', link: '/linux/Network' },
       { text: 'Ubuntu', link: '/linux/Ubuntu' },
@@ -52,6 +51,7 @@ export default [
   {
     text: 'Tools',
     items: [
+      { text: 'Vim', link: '/vim' },
       { text: 'Browser', link: '/browser/Network' },
       { text: 'Git', link: '/git/' },
       { text: 'Nginx', link: '/nginx/' },

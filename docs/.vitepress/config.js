@@ -18,6 +18,7 @@ export default defineConfig({
   },
   rewrites: {
     'tools/git/:page': 'git/:page',
+    'tools/vim/:page': 'vim/:page',
     'tools/nginx/:page': 'nginx/:page',
     'tools/docker/:page': 'docker/:page',
     'tools/browser/:page': 'browser/:page',

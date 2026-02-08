@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: Get Started
-      link: /linux/
+      link: /home
     - theme: alt
       text: Miscellaneous
       link: /miscellaneous
