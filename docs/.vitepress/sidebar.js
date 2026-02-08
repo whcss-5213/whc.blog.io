@@ -137,6 +137,7 @@ export default {
     collapsed: true,
     items: [
       { text: 'JS', link: '/snippet/' },
+      { text: 'mongoose', link: '/snippet/mongoose' },
       { text: 'vue', link: '/snippet/vue' },
     ],
   },
