@@ -115,6 +115,7 @@ export default {
     collapsed: true,
     items: [
       { text: 'mongo', link: '/DB/mongo' },
+      { text: 'mongosh', link: '/DB/mongosh' },
       { text: 'mongoose', link: '/DB/mongoose' },
     ],
   },
