@@ -142,13 +142,4 @@ export default {
       { text: 'vue', link: '/snippet/vue' },
     ],
   },
-  Examples: {
-    text: 'Examples',
-    collapsible: true,
-    collapsed: true,
-    items: [
-      { text: 'Markdown Examples', link: '/markdown-examples' },
-      { text: 'Runtime API Examples', link: '/api-examples' },
-    ],
-  },
 };
