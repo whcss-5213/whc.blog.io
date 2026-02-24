@@ -86,11 +86,117 @@ window.addEventListener('popstate', () => {});
 
 ## navigator
 
+> navigator 是一个只读的全局对象，提供当前浏览器的运行环境信息
+
 ```js
 navigator.userAgent;
 navigator.language;
 navigator.onLine;
 navigator.cookieEnabled;
+```
+
+### userAgent
+
+> 浏览器用户代理字符串
+
+```js
+navigator.userAgent;
+```
+
+### online
+
+> 监听在线/离线事件
+
+```js
+window.addEventListener('online', () => {});
+window.addEventListener('offline', () => {});
+```
+
+### permissions
+
+> 权限管理 API
+
+- name：权限名称
+  - geolocation：地理位置
+  - notifications：通知
+  - microphone：麦克风
+  - camera：相机
+  - background-sync：后台同步
+  - ambient-light-sensor：环境光传感器
+  - gyroscope：陀螺仪
+  - magnetometer：磁力计
+  - payment：支付
+  - usb：USB 设备
+- 状态：granted（已授权）、denied（已拒绝）、prompt（未知状态）
+
+```js
+navigator.permissions.query({ name: 'geolocation' }).then(result => {
+  if (result.state === 'granted') {
+    // 位置信息已授权
+  } else if (result.state === 'denied') {
+    // 位置信息已拒绝
+  } else {
+    // 位置信息状态未知
+  }
+});
+```
+
+### geolocation
+
+> 地理位置 API
+
+```js
+navigator.geolocation.getCurrentPosition(position => {
+  console.log('纬度：', position.coords.latitude);
+  console.log('经度：', position.coords.longitude);
+});
+```
+
+### mediaDevices
+
+> 媒体设备 API
+
+```js
+// 视频输入设备：videoinput
+// 音频输入设备：audioinput
+// 音频输出设备：audiooutput
+const devices = await navigator.mediaDevices.enumerateDevices();
+```
+
+#### audio
+
+```js
+const audioDevices = devices.filter(device => device.kind === 'audioinput');
+```
+
+#### video
+
+```html
+<video id="video" playsinline autoplay></video>
+```
+
+```js
+const videoDevices = devices.filter(device => device.kind === 'videoinput');
+const constraints = {
+  video: {
+    width: { min: 640, ideal: 1280, max: 1920 },
+    height: { min: 480, ideal: 720, max: 1080 },
+    frameRate: { ideal: 30, max: 60 },
+    facingMode: 'user', // 'user' 前置，'environment' 后置
+  },
+};
+const stream = await navigator.mediaDevices
+  .getUserMedia({ video: constraints.video || true, audio: false })
+  .then(stream => {
+    // 成功获取视频流
+    const video = document.getElementById('video');
+    video.srcObject = stream;
+  })
+  .catch(err => {
+    // 处理错误
+  });
+// 停止视频流
+stream.getTracks().forEach(track => track.stop());
 ```
 
 ## screen
