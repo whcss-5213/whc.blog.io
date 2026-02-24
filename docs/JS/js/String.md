@@ -1,13 +1,118 @@
 # Sting
 
-### length
+> String 以 UTF-16 编码存储
+>
+> - 基本多语言平面（BMP）字符：Unicode 码点范围 U+0000 到 U+FFFF，用一个代码单元表示。
+> - 辅助平面字符：码点范围 U+10000 到 U+10FFFF，用两个代码单元（称为代理对）表示。
+> - 例如，表情符号 😊 的 Unicode 码点是 U+1F60A，在 UTF-16 中被编码为两个代码单元：0xD83D 和 0xDE0A。
 
-charCodeAt()
+## 字符串字符访问与编码方法
+
+### 1. `charAt(index)`
+
+- **定义**：返回字符串中指定位置的字符（一个字符串）。
+- **语法**：`str.charAt(index)`
+- **参数**：`index` —— 一个整数，表示字符的位置（从 0 开始）。如果省略，默认为 0。
+- **返回值**：
+  - 返回指定位置的字符（长度为 1 的字符串）。
+  - 如果 `index` 超出范围（小于 0 或大于等于字符串长度），返回空字符串 `''`。
+- **示例**：
+  ```javascript
+  const str = 'Hello 世界';
+  console.log(str.charAt(0)); // "H"
+  console.log(str.charAt(6)); // "世"
+  console.log(str.charAt(20)); // ""
+  ```
+- **注意**：
+  - 与方括号 `str[index]` 类似，但越界时返回 `''` 而不是 `undefined`。
+  - 对于辅助平面字符（如表情符号），`charAt` 返回的是半个代码单元，可能不完整。
+
+### 2. `charCodeAt(index)`
+
+- **定义**：返回字符串中指定位置的字符的 UTF-16 代码单元值（一个 16 位整数）。
+- **语法**：`str.charCodeAt(index)`
+- **参数**：`index` —— 字符位置，默认 0。
+- **返回值**：
+  - 返回 0 到 65535 之间的整数，表示该字符的 UTF-16 代码单元值。
+  - 如果 `index` 超出范围，返回 `NaN`。
+- **示例**：
+  ```javascript
+  const str = 'Hello 世界';
+  console.log(str.charCodeAt(0)); // 72
+  console.log(str.charCodeAt(6)); // 19990
+  console.log(str.charCodeAt(20)); // NaN
+  ```
+- **注意**：
+  - 对于辅助平面字符（Unicode 码点 > 0xFFFF），它只能返回高代理项或低代理项，不能表示完整字符。
+  - 与 `String.fromCharCode()` 配合可反向转换。
+
+### 3. `codePointAt(index)`
+
+- **定义**：返回字符串中指定位置的字符的完整 Unicode 码点（一个非负整数）。
+- **语法**：`str.codePointAt(index)`
+- **参数**：`index` —— 字符位置，默认 0。
+- **返回值**：
+  - 返回一个整数，表示该字符的 Unicode 码点（0 到 0x10FFFF）。
+  - 如果 `index` 超出范围，返回 `undefined`。
+  - 如果指定位置是代理对的高代理项，则返回完整的码点；如果是低代理项，则返回低代理项的数值（但通常不应这样用）。
+- **示例**：
+  ```javascript
+  const emoji = '😊';
+  console.log(emoji.charCodeAt(0)); // 55357 (高代理项)
+  console.log(emoji.charCodeAt(1)); // 56842 (低代理项)
+  console.log(emoji.codePointAt(0)); // 128522 (完整码点)
+  console.log(emoji.codePointAt(1)); // 56842 (低代理项本身)
+  ```
+- **注意**：
+  - 正确处理代理对，返回完整的 Unicode 码点，适合处理所有 Unicode 字符。
+  - 与 `String.fromCodePoint()` 配合使用。
+
+---
+
+### 对比总结
+
+| 方法                 | 返回值类型 | 范围                   | 处理代理对          | 越界行为    |
+| -------------------- | ---------- | ---------------------- | ------------------- | ----------- |
+| `charAt(index)`      | 字符串     | 单个字符（可能不完整） | ❌ 返回半个字符     | `''`        |
+| `charCodeAt(index)`  | 数字       | 0–65535（代码单元）    | ❌ 返回单个代码单元 | `NaN`       |
+| `codePointAt(index)` | 数字       | 0–0x10FFFF（完整码点） | ✅ 返回完整码点     | `undefined` |
+
+### 补充说明
+
+- 若要安全遍历所有字符（包括辅助平面），使用 `for...of` 或扩展运算符：
+  ```javascript
+  const text = 'Hello 😊';
+  for (const ch of text) {
+    console.log(ch); // 依次输出每个完整字符
+  }
+  ```
+- 若需从码点创建字符串，使用 `String.fromCodePoint()`，而不是 `String.fromCharCode()`。
+
+## length
 
 ```js
-'🎇🎍🎁'.length; // 6
-'🎇🎍🎁'.split('').length;
+const str = '🎇🎍🎁';
+str.length; // 6
+str.split('');
 //  ['\uD83C', '\uDF87', '\uD83C', '\uDF8D', '\uD83C', '\uDF81']
+```
+
+### [...str]
+
+- 可以将字符串转换为数组
+- 每个字符作为数组的一个元素
+
+```js
+[...str].length; // 3
+```
+
+### Intl.Segmenter
+
+- 用于将字符串按照 Unicode 标准的规则进行分段
+- 可以处理辅助平面字符（如表情符号）
+
+```js
+Array.from(new Intl.Segmenter('en-US').segment(str)).length; // 3
 ```
 
 ## 常用方法
@@ -135,8 +240,8 @@ let Includes = str1.includes('b', 1);
 
 - 在字符串内找到相应的值并返回这些值(不是索引)
 - 返回值
-    - 如果使用 g 标志，则将返回与完整正则表达式匹配的所有结果
-    - 如果没有使用 g 标志，则只返回第一个完整匹配及其相关捕获组
+  - 如果使用 g 标志，则将返回与完整正则表达式匹配的所有结果
+  - 如果没有使用 g 标志，则只返回第一个完整匹配及其相关捕获组
 
 ```js
 let Match = str1.match('b');
@@ -153,33 +258,33 @@ let Search = str1.search('c');
 
 #### 3.replace
 
-> [js replace方法第二个参数，远不止你想的那么强大](https:www.cnblogs.com/garfieldzhong/p/11654630.html)
+> [js replace 方法第二个参数，远不止你想的那么强大](https:www.cnblogs.com/garfieldzhong/p/11654630.html)
 
 - 接受两个参数，把参数 1 替换成参数 2
 - 返回一个新字符串
-- 参数1可以为正则表达式。参数 2 可以为函数
+- 参数 1 可以为正则表达式。参数 2 可以为函数
 
 ```js
-let Replace = str1.replace('d', 'hjjkl');   
+let Replace = str1.replace('d', 'hjjkl');
 ```
 
-| 模式 |                   插入值                   |
-|:--:|:---------------------------------------:|
-| $$ |               	插入一个 "$"。                |
-| $& |               	插入匹配的子字符串。               |
-| $` |           	插入匹配子字符串之前的字符串片段。            |
-| $' |           	插入匹配子字符串之后的字符串片段。            |
-| $n | 	插入第 n（索引从 1 开始）个捕获组，其中 n 是小于 100 的正整数。 |
-| $  |           插入名称为 Name 的命名捕获组。            |
+| 模式 |                             插入值                              |
+| :--: | :-------------------------------------------------------------: |
+|  $$  |                         插入一个 "$"。                          |
+|  $&  |                      插入匹配的子字符串。                       |
+|  $`  |               插入匹配子字符串之前的字符串片段。                |
+|  $'  |               插入匹配子字符串之后的字符串片段。                |
+|  $n  | 插入第 n（索引从 1 开始）个捕获组，其中 n 是小于 100 的正整数。 |
+|  $   |                 插入名称为 Name 的命名捕获组。                  |
 
 ```js
-"foo".replace(/(f)/, "$2");
+'foo'.replace(/(f)/, '$2');
 // "$2oo"；正则表达式没有第二个组
 
-"foo".replace("f", "$1");
+'foo'.replace('f', '$1');
 // "$1oo"；pattern 是一个字符串，所以它没有任何组
 
-"foo".replace(/(f)|(g)/, "$2");
+'foo'.replace(/(f)|(g)/, '$2');
 // "oo"；第二个组存在但未匹配
 ```
 
@@ -188,11 +293,10 @@ let Replace = str1.replace('d', 'hjjkl');
 - 返回一个新字符串,匹配部分都被替换
 
 ```js
-// 正则必须设置全局（g）标志 
-'23asd'.replaceAll(/a/g,)
+// 正则必须设置全局（g）标志
+'23asd'.replaceAll(/a/g);
 // 如果 pattern 是一个空字符串，则替换内容将插入到每个 UTF-16 码元之间
-"xxx".replaceAll("", "_"); // "_x_x_x_"
-
+'xxx'.replaceAll('', '_'); // "_x_x_x_"
 ```
 
 #### 5.split
