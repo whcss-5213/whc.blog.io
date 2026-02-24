@@ -26,7 +26,6 @@ nodeValue 属性返回或设置当前节点的值，格式为字符串
 | DocumentFragment      | null                                |
 | DocumentType          | null                                |
 | Element               | null                                |
-| NamedNodeMap          | null                                |
 | EntityReference       | null                                |
 | Notation              | null                                |
 | ProcessingInstruction | entire content excluding the target |
@@ -163,7 +162,7 @@ p.className = 'boxw';
 > 虚拟节点：通过`document.createDocumentFragment()`创建的节点，它是一个存在于内存中的 DOM 节点，并没有添加到文档树中，所以不会影响页面的布局，因此可以用来临时存放节点，在需要的时候一次性添加到文档中，从而提高性能。
 
 ```js
-document.createDocumentFragment('ul');
+document.createDocumentFragment();
 ```
 
 #### 3. **插入节点**
@@ -364,7 +363,11 @@ element.classList.remove('class1', 'class2');
 element.classList.replace('oldClass', 'newClass');
 ```
 
-#### 7. **setProperty**
+##### style 操作
+
+###### **setProperty**
+
+> 设置 CSS 样式属性
 
 ```css
 :root {
@@ -379,15 +382,32 @@ element.style.setProperty('color', 'red');
 element.style.setProperty('font-size', '16px');
 element.style.setProperty('--primary-color', 'blue');
 element.style.setProperty('--font-size', '20px');
+```
 
-// 2. 移除 CSS 样式属性
-element.style.removeProperty('font-size');
+###### **getPropertyValue**
 
-// 3. 获取 CSS 样式属性值
+> 获取 CSS 样式属性值
+
+```js
+// 1. getPropertyValue() - 获取 CSS 样式属性值
 let color = element.style.getPropertyValue('color');
 let fontSize = element.style.getPropertyValue('font-size');
+```
 
-// 4. 检查 CSS 样式属性是否存在
+###### **removeProperty**
+
+> 移除 CSS 样式属性
+
+```js
+// 1. removeProperty() - 移除 CSS 样式属性
+element.style.removeProperty('font-size');
+```
+
+###### **getPropertyValue**
+
+> 返回的是属性的优先级字符串 `important!` 或空字符串 `''`。
+
+```js
 let hasColor = element.style.getPropertyPriority('color');
 let hasFontSize = element.style.getPropertyPriority('font-size');
 ```
@@ -514,18 +534,18 @@ document.getElementById('myButton').addEventListener('click', function (e) {
 | mouseout    | 鼠标移出 | 鼠标指针离开被选元素 或其子元素 时触发           | 会冒泡                     |
 | mouseleave  | 鼠标离开 | 鼠标指针仅离开被选元素本身时触发（子元素无影响） | 不冒泡                     |
 
-| 属性    | 说明                                                                                | 兼容性                     |
-| ------- | ----------------------------------------------------------------------------------- | -------------------------- |
-| clientX | 以浏览器窗口左上顶角为原点，定位 x 轴坐标                                           | 所有浏览器，不兼容 Safari  |
-| clientY | 以浏览器窗口左上顶角为原点，定位 y 轴坐标                                           | 所有浏览器，不兼容 Safari  |
-| offsetX | 以当前事件的目标对象左上顶角为原点，定位 x 轴坐标                                   | 所有浏览器，不兼容 Mozilla |
-| offsetY | 以当前事件的目标对象左上顶角为原点，定位 y 轴坐标                                   | 所有浏览器，不兼容 Mozilla |
-| pageX   | 以 document 对象（即文档窗口）左上顶角为原点，定位 x 轴坐标                         | 所有浏览器，不兼容 IE      |
-| pageY   | 以 document 对象（即文档窗口）左上顶角为原点，定位 y 轴坐标                         | 所有浏览器，不兼容 IE      |
-| screenX | 计算机屏幕左上顶角为原点，定位 x 轴坐标                                             | 所有浏览器                 |
-| screenY | 计算机屏幕左上顶角为原点，定位 y 轴坐标                                             | 所有浏览器                 |
-| layerX  | 最近的绝对定位的父元素（如果没有，则为 document 对象）左上顶角为元素，定位 x 轴坐标 | Mozilla 和 Safari          |
-| layerY  | 最近的绝对定位的父元素（如果没有，则为 document 对象）左上顶角为元素，定位 y 轴坐标 | Mozilla 和 Safari          |
+| 属性    | 说明                                                                                |
+| ------- | ----------------------------------------------------------------------------------- |
+| clientX | 以浏览器窗口左上顶角为原点，定位 x 轴坐标                                           |
+| clientY | 以浏览器窗口左上顶角为原点，定位 y 轴坐标                                           |
+| offsetX | 以当前事件的目标对象左上顶角为原点，定位 x 轴坐标                                   |
+| offsetY | 以当前事件的目标对象左上顶角为原点，定位 y 轴坐标                                   |
+| pageX   | 以 document 对象（即文档窗口）左上顶角为原点，定位 x 轴坐标                         |
+| pageY   | 以 document 对象（即文档窗口）左上顶角为原点，定位 y 轴坐标                         |
+| screenX | 计算机屏幕左上顶角为原点，定位 x 轴坐标                                             |
+| screenY | 计算机屏幕左上顶角为原点，定位 y 轴坐标                                             |
+| layerX  | 最近的绝对定位的父元素（如果没有，则为 document 对象）左上顶角为元素，定位 x 轴坐标 |
+| layerY  | 最近的绝对定位的父元素（如果没有，则为 document 对象）左上顶角为元素，定位 y 轴坐标 |
 
 ### 4. touch 事件
 
@@ -534,6 +554,12 @@ document.getElementById('myButton').addEventListener('click', function (e) {
 > 触摸事件对象（`TouchEvent`）包含了触摸相关的信息，例如触摸点的坐标、触摸时间等。
 
 ### 5. 键盘事件
+
+| 事件名   | 中文释义 | 触发时机                                       | 核心特点       |
+| -------- | -------- | ---------------------------------------------- | -------------- |
+| keydown  | 按键按下 | 任意按键按下瞬间触发                           | 只按不松就触发 |
+| keypress | 按键按下 | 字母、数字、符号键按下瞬间触发（不包括功能键） | 只按不松就触发 |
+| keyup    | 按键松开 | 任意按键松开瞬间触发                           | 松键时触发     |
 
 | 属性名     | 含义                                            | 示例（按下回车键） | 核心特点                                      |
 | ---------- | ----------------------------------------------- | ------------------ | --------------------------------------------- |
@@ -551,7 +577,7 @@ document.getElementById('myButton').addEventListener('click', function (e) {
 | ------------------- | ---------- | ------------- | --------------------- |
 | 回车键              | Enter      | Enter         | 13                    |
 | ESC 键              | Escape     | Escape        | 27                    |
-| 空格键              | （空格）   | Space         | 32                    |
+| 空格键              | " "        | Space         | 32                    |
 | Backspace（退格键） | Backspace  | Backspace     | 8                     |
 | Tab（制表键）       | Tab        | Tab           | 9                     |
 | 左方向键            | ArrowLeft  | ArrowLeft     | 37                    |
@@ -585,3 +611,51 @@ document.getElementById('myButton').addEventListener('click', function (e) {
 > 当元素的可见性发生变化时触发。
 > 可见性变化包括元素被显示或隐藏，例如用户切换到其他标签页、最小化浏览器窗口等。
 > 当元素的可见性发生变化时，浏览器会触发 `visibilitychange` 事件。
+
+## 5. 表单操作
+
+### 1. value / valueAs\*
+
+#### 1. 普通 input（text/password/textarea）
+
+- `value` → **字符串**
+- `valueAsDate` → `null`
+- `valueAsNumber` → `NaN`
+
+#### 2. type="number"
+
+- `value` → 字符串
+- `valueAsNumber` → **数字**（推荐）
+- `valueAsDate` → null
+
+#### 3. 日期时间 input（date/time/datetime-local）
+
+- `value` → **字符串**（`yyyy-mm-dd`）
+- `valueAsDate` → **Date 对象**
+- `valueAsNumber` → **毫秒时间戳**
+
+---
+
+### 2.常用工具方法
+
+#### 1. 清空表单
+
+```js
+form.reset();
+```
+
+#### 2. 判断输入框是否为空
+
+```js
+function isEmpty(val) {
+  return val === undefined || val === null || val.trim() === '';
+}
+```
+
+#### 3. 获取数字（自动转数字）
+
+```js
+function getNum(el) {
+  return el.valueAsNumber || Number(el.value) || 0;
+}
+```
