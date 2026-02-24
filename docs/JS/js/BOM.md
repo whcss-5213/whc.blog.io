@@ -110,6 +110,16 @@ screen.pixelDepth;
 document.cookie = 'name=value; expires=date; path=path; domain=domain; secure';
 ```
 
+- domain：指定 Cookie 生效的域名。默认当前域名，设为 .example.com 可在子域名下共享。
+- expires：指定 Cookie 过期时间。默认会话结束，设为具体日期可持久化存储。
+- name：Cookie 名称，不能包含空格或特殊字符。
+- value：Cookie 值，不能包含空格或特殊字符。
+- partitioned：是否为分区 Cookie，默认 false。
+- path：指定 Cookie 生效的路径。默认当前路径，设为 / 可在所有路径下共享。
+- secure：仅在 HTTPS 下传输 Cookie，防止中间人攻击。
+- httpOnly：防止 JavaScript 访问 Cookie，增加安全性。
+- sameSite：防止 CSRF 攻击，可选 Strict/Lax/None。
+
 ### cookieStore
 
 ```js
