@@ -21,6 +21,7 @@ export default {
     collapsed: true,
     items: [
       { text: 'Typescript', link: '/TS/' },
+      { text: 'Descriptor', link: '/TS/descriptor' },
       { text: 'Type', link: '/TS/type' },
       { text: 'type-challenges', link: '/TS/type-challenges' },
     ],
