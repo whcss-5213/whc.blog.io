@@ -474,8 +474,8 @@ console.log(rect.y); // 元素上边界距离视口上边界的距离
 
 > 元素的滚动大小，包含滚动条（scrollbar）。
 >
-> 1. `scrollWidth`：元素的宽度，包含内容区域（content）、内边距（padding）、边框（border）和滚动条（scrollbar）。
-> 2. `scrollHeight`：元素的高度，包含内容区域（content）、内边距（padding）、边框（border）和滚动条（scrollbar）。
+> 1. `scrollWidth`：元素的宽度，包含内容区域（content）、内边距（padding）、因溢出而隐藏的部分
+> 2. `scrollHeight`：元素的高度，包含内容区域（content）、内边距（padding）因溢出而隐藏的部分
 > 3. `scrollLeft`：元素的水平滚动位置，即元素内容区域左侧隐藏部分的宽度。
 > 4. `scrollTop`：元素的垂直滚动位置，即元素内容区域顶部隐藏部分的高度。
 
@@ -608,9 +608,7 @@ document.getElementById('myButton').addEventListener('click', function (e) {
 
 ### visibilitychange
 
-> 当元素的可见性发生变化时触发。
-> 可见性变化包括元素被显示或隐藏，例如用户切换到其他标签页、最小化浏览器窗口等。
-> 当元素的可见性发生变化时，浏览器会触发 `visibilitychange` 事件。
+> 当文档的可见性状态发生变化时触发（例如用户切换到其他标签页）元素的可见性发生变化时，浏览器会触发 `visibilitychange` 事件。
 
 ## 5. 表单操作
 
@@ -659,3 +657,218 @@ function getNum(el) {
   return el.valueAsNumber || Number(el.value) || 0;
 }
 ```
+
+## 6. Observer
+
+### 1. IntersectionObserver
+
+> 当元素进入视口（或其他指定元素）时触发回调函数。
+> 可以用于实现懒加载、无限滚动等功能。
+
+#### 1.1 构造函数
+
+```javascript
+const observer = new IntersectionObserver(callback, options);
+```
+
+- callback：当观察到交叉状态变化时调用的函数，接收两个参数：
+
+- entries：一个 IntersectionObserverEntry 对象数组，每个对象描述一个目标元素的变化。
+
+- observer：调用该回调的观察器实例。
+
+- options（可选）：配置对象，包含以下属性：
+
+- root：指定目标元素的祖先容器（必须是目标元素的父级或更高层），默认为 null，即使用视口作为容器。
+
+- rootMargin：一个字符串，用于扩展或缩小 root 的判定区域，格式类似 CSS 的 margin（例如 "10px 20px 30px 40px"）。默认 "0px"。
+
+- threshold：一个数值或数值数组，表示目标元素可见比例达到多少时触发回调。取值范围 0~1，例如 0.5 表示元素有一半进入视口时触发。默认 0（只要有一个像素进入就触发）。
+
+#### 1.2 常用方法
+
+- observe(target)：开始观察指定的 target 元素。
+
+- unobserve(target)：停止观察指定的 target 元素。
+
+- disconnect()：停止观察所有目标元素。
+
+#### 1.3 IntersectionObserverEntry 对象
+
+在回调函数的 entries 数组中，每个条目包含以下常用属性：
+
+- target：被观察的目标元素。
+
+- isIntersecting：布尔值，表示目标元素是否与 root 相交（即当前是否可见）。
+
+- intersectionRatio：目标元素的可见比例（0~1）。
+
+- intersectionRect：目标元素与 root 相交区域的矩形信息（DOMRectReadOnly）。
+
+- boundingClientRect：目标元素的边界矩形。
+
+- rootBounds：root 元素的边界矩形。
+
+- time：发生交叉时的时间戳。
+
+#### 1.4 示例：图片懒加载
+
+```html
+<img data-src="real-image.jpg" class="lazy" />
+```
+
+```javascript
+const lazyImages = document.querySelectorAll('img.lazy');
+
+const observer = new IntersectionObserver(
+  (entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const img = entry.target;
+        img.src = img.dataset.src; // 替换真实地址
+        img.classList.remove('lazy');
+        observer.unobserve(img); // 加载后停止观察
+      }
+    });
+  },
+  {
+    rootMargin: '50px', // 提前 50px 进入视口时加载
+    threshold: 0.01, // 只要有 1% 进入就触发
+  }
+);
+
+lazyImages.forEach(img => observer.observe(img));
+```
+
+#### 1.5 注意事项
+
+回调默认在微任务中执行（类似于 Promise），但在浏览器内部实现中可能是异步的。
+
+rootMargin 会影响交叉区域的判定，可用于提前加载。
+
+兼容性：所有现代浏览器均支持，IE 不支持，可引入 polyfill。
+
+### 2. MutationObserver
+
+> 用途：监听 DOM 树的变化，包括子节点的添加/删除、属性的修改、文本内容的变更等。
+
+> 常见应用：监听 DOM 动态插入的内容、实现撤销/重做功能、监控第三方脚本对页面的修改。
+
+#### 2.1 构造函数
+
+```javascript
+const observer = new MutationObserver(callback);
+```
+
+- callback：当 DOM 变化发生时调用的函数，接收两个参数：
+
+- mutations：一个 MutationRecord 对象数组，每个对象描述一个具体的变化。
+
+- observer：调用该回调的观察器实例。
+
+#### 2.2 常用方法
+
+```javascript
+observe(target, options);
+```
+
+- observe(target, options)：开始观察指定的 target 元素，根据 options 配置需要监听的变化类型。
+
+- disconnect()：停止观察所有目标元素，并清除记录队列。
+
+- takeRecords()：清空记录队列并返回未处理的 MutationRecord 列表。
+
+#### 2.3 配置选项（options）
+
+- observe 方法的第二个参数是一个对象，必须至少指定以下子项之一：
+
+- childList：布尔值，监听目标元素的子节点（包括文本节点）的添加或移除。
+
+- attributes：布尔值，监听目标元素的属性变化。
+
+- characterData：布尔值，监听目标元素的文本内容变化（通过 data 属性）。
+
+此外，还可以设置：
+
+- subtree：布尔值，如果为 true，则监听目标元素的整个子树（后代节点）的变化。
+
+- attributeOldValue：布尔值，记录变化前的属性值（需要 attributes: true）。
+
+- characterDataOldValue：布尔值，记录变化前的文本内容（需要 characterData: true）。
+
+- attributeFilter：数组，指定要监听的属性名列表（例如 ['class', 'style']），不设置则监听所有属性。
+
+#### 2.4 MutationRecord 对象
+
+在回调函数的 mutations 数组中，每个记录包含以下常用属性：
+
+- type：变化类型，值为 'attributes'、'childList' 或 'characterData'。
+
+- target：发生变化的节点。
+
+- addedNodes：添加的节点列表（NodeList）。
+
+- removedNodes：移除的节点列表（NodeList）。
+
+- previousSibling / nextSibling：被添加/移除节点的前后兄弟节点。
+
+- attributeName：被修改的属性名。
+
+- oldValue：变化前的旧值（如果启用了 attributeOldValue 或 characterDataOldValue）。
+
+#### 2.5 示例：监听属性变化
+
+```javascript
+const target = document.getElementById('myDiv');
+
+const observer = new MutationObserver((mutations) => {
+mutations.forEach((mutation) => {
+if (mutation.type === 'attributes') {
+console.log(`属性 ${mutation.attributeName} 发生变化`);
+console.log(`旧值：${mutation.oldValue}`);
+console.log(`新值：${mutation.target.getAttribute(mutation.attributeName)}`);
+}
+});
+});
+
+observer.observe(target, {
+attributes: true,
+attributeOldValue: true,
+attributeFilter: ['class', 'style'] // 只监听 class 和 style 属性
+});
+
+// 之后修改属性会触发回调
+target.classList.add('active');
+2.6 示例：监听子节点变化
+javascript
+const list = document.getElementById('list');
+
+const observer = new MutationObserver((mutations) => {
+mutations.forEach((mutation) => {
+if (mutation.type === 'childList') {
+mutation.addedNodes.forEach(node => console.log('添加了节点：', node));
+mutation.removedNodes.forEach(node => console.log('移除了节点：', node));
+}
+});
+});
+
+observer.observe(list, {
+childList: true,
+subtree: true // 同时监听后代节点的子节点变化
+});
+
+// 添加新元素
+const newItem = document.createElement('li');
+newItem.textContent = '新项目';
+list.appendChild(newItem);
+```
+
+#### 2.7 性能与注意事项
+
+MutationObserver 的回调是异步触发的，会在所有 DOM 变化完成后批量执行，避免同步回调带来的性能问题。
+
+尽量精确配置 options，避免监听不必要的变化，以减少性能开销。
+
+在回调中修改 DOM 可能会导致无限循环，除非使用 disconnect() 暂时断开或条件判断。
+
+兼容性：所有现代浏览器均支持，IE 11 部分支持（需注意 subtree 等选项表现一致）。
