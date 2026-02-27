@@ -83,7 +83,6 @@ export default {
     items: [
       { text: 'git', link: '/git/' },
       { text: '.gitignore', link: '/git/gitignore' },
-      { text: 'www', link: '/git/www' },
     ],
   },
 
