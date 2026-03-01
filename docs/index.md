@@ -18,11 +18,11 @@ hero:
     alt: Hello world
 features:
   - icon: {
-    src: "/Vue.svg",
-    alt: "Hello Vue"
+    src: "/hot.svg",
+    alt: "hot Vue"
   }
-    title: Vue
-    link: /vue/
+    title: 热知识
+    link: /hot-knowledge/
 #  - icon: {
 #    src: "/vim/Vim.png",
 #    alt: "Hello Vue"

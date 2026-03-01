@@ -43,7 +43,6 @@ export default [
     text: 'Linux',
     items: [
       { text: 'File', link: '/linux/file' },
-      { text: 'Network', link: '/linux/Network' },
       { text: 'Ubuntu', link: '/linux/Ubuntu' },
     ],
   },
