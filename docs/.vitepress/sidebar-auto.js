@@ -6,79 +6,106 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const docsPath = path.resolve(__dirname, '..');
 
-function getSidebarItems(dirPath, prefix = '') {
-  const items = [];
+function getFiles(dirPath, basePath = '', dirName = '') {
+  const files = [];
 
   if (!fs.existsSync(dirPath)) {
-    return items;
+    return files;
   }
 
-  const files = fs.readdirSync(dirPath);
+  const entries = fs.readdirSync(dirPath);
+  const sortFilePath = path.join(dirPath, '.sort.txt');
+  let sortList = null;
 
-  files.forEach(file => {
-    const fullPath = path.join(dirPath, file);
+  if (fs.existsSync(sortFilePath)) {
+    const sortContent = fs.readFileSync(sortFilePath, 'utf-8');
+    sortList = sortContent
+      .split('\n')
+      .map(line => line.trim())
+      .filter(line => line.length > 0);
+  }
+
+  entries.forEach(entry => {
+    const fullPath = path.join(dirPath, entry);
     const stat = fs.statSync(fullPath);
 
     if (stat.isDirectory()) {
-      const subItems = getSidebarItems(fullPath, `${prefix}${file}/`);
-      if (subItems.length > 0) {
-        items.push({
-          text: file,
-          collapsible: true,
-          collapsed: true,
-          items: subItems,
-        });
-      }
-    } else if (file.endsWith('.md') && file !== 'index.md') {
-      const name = file.replace('.md', '');
-      items.push({
-        text: name,
-        link: `/${prefix}${name}`,
-      });
-    } else if (file === 'index.md') {
-      items.unshift({
-        text: '概述',
-        link: `/${prefix.replace(/\/$/, '')}`,
+      const subFiles = getFiles(fullPath, `${basePath}${entry}/`, entry);
+      files.push(...subFiles);
+    } else if (entry.endsWith('.md')) {
+      const name = entry.replace('.md', '');
+      files.push({
+        text: name === 'index' ? dirName : name,
+        link: `/${basePath}${name}`,
+        name: name,
       });
     }
   });
 
-  return items;
+  files.sort((a, b) => {
+    if (a.name === 'index') return -1;
+    if (b.name === 'index') return 1;
+
+    if (sortList) {
+      const aIndex = sortList.indexOf(a.name);
+      const bIndex = sortList.indexOf(b.name);
+      if (aIndex !== -1 && bIndex !== -1) return aIndex - bIndex;
+      if (aIndex !== -1) return -1;
+      if (bIndex !== -1) return 1;
+    }
+
+    return a.text.localeCompare(b.text);
+  });
+
+  files.forEach(item => delete item.name);
+
+  return files;
 }
 
 function generateSidebar() {
   const sidebar = {};
 
-  const directories = [
-    'JS',
-    'TS',
-    'vue',
-    'react',
-    'extension',
-    'linux',
-    'CSS',
-    'git',
-    'nginx',
-    'docker',
-    'DB',
-    'browser',
-    'miscellaneous',
-    'snippet',
-    'node',
-    'uni-app',
-    'tools',
-  ];
+  const excludeDirs = ['.vitepress', 'public', '.obsidian'];
+  const directories = fs.readdirSync(docsPath).filter(file => {
+    const fullPath = path.join(docsPath, file);
+    return (
+      fs.statSync(fullPath).isDirectory() &&
+      !excludeDirs.includes(file) &&
+      !file.startsWith('.')
+    );
+  });
 
   directories.forEach(dir => {
     const dirPath = path.join(docsPath, dir);
-    if (fs.existsSync(dirPath)) {
-      const items = getSidebarItems(dirPath, `${dir}/`);
-      if (items.length > 0) {
+    if (!fs.existsSync(dirPath)) return;
+
+    const entries = fs.readdirSync(dirPath);
+    const subDirs = entries.filter(entry => {
+      const fullPath = path.join(dirPath, entry);
+      return fs.statSync(fullPath).isDirectory();
+    });
+
+    if (subDirs.length > 0) {
+      subDirs.forEach(subDir => {
+        const subDirPath = path.join(dirPath, subDir);
+        const files = getFiles(subDirPath, `${subDir}/`, subDir);
+        if (files.length > 0) {
+          sidebar[`/${subDir}/`] = {
+            text: subDir,
+            collapsible: true,
+            collapsed: true,
+            items: files,
+          };
+        }
+      });
+    } else {
+      const files = getFiles(dirPath, `${dir}/`, dir);
+      if (files.length > 0) {
         sidebar[`/${dir}/`] = {
           text: dir,
           collapsible: true,
           collapsed: true,
-          items,
+          items: files,
         };
       }
     }

@@ -4,8 +4,8 @@ export default [
     items: [
       {
         items: [
-          { text: 'Array', link: '/JS/Array' },
-          { text: 'RegExp', link: '/JS/RegExp' },
+          { text: 'Array', link: '/JavaScript/Array' },
+          { text: 'RegExp', link: '/JavaScript/RegExp' },
         ],
       },
       {
@@ -21,9 +21,9 @@ export default [
 
       {
         items: [
-          { text: 'TypeScript', link: '/TS/' },
-          { text: 'TypeScript', link: '/TS/type' },
-          { text: 'TypeScript', link: '/TS/challenges' },
+          { text: 'TypeScript', link: '/TypeScript' },
+          { text: 'TypeScript', link: '/TypeScript/type' },
+          { text: 'TypeScript', link: '/TypeScript/challenges' },
         ],
       },
       {

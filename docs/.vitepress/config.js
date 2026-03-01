@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress';
 import nav from './nav.js';
-// import sidebar from './sidebar-auto.js';
-import sidebar from './sidebar.js';
+
+import sidebar from './sidebar-auto.js';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -18,19 +18,9 @@ export default defineConfig({
     },
   },
   rewrites: {
-    'tools/git/:page': 'git/:page',
-    'tools/vim/:page': 'vim/:page',
-    'tools/nginx/:page': 'nginx/:page',
-    'tools/docker/:page': 'docker/:page',
-    'tools/browser/:page': 'browser/:page',
-    'JS/js/:page': 'JS/:page',
-    'JS/ts/:page': 'TS/:page',
-    'JS/vue/:page': 'vue/:page',
-    'JS/react/:page': 'react/:page',
-    'tools/DB/:page': 'DB/:page',
-    'node/node/:page': 'node/:page',
-    'node/express/:page': 'express/:page',
-    'node/nestjs/:page': 'nestjs/:page',
+    'tools/:tool/:page': ':tool/:page',
+    'JS/:js/:page': ':js/:page',
+    'node/:node/:page': ':node/:page',
   },
   vite: {
     build: {
