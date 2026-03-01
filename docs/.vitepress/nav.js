@@ -22,8 +22,7 @@ export default [
       {
         items: [
           { text: 'TypeScript', link: '/TypeScript' },
-          { text: 'TypeScript', link: '/TypeScript/type' },
-          { text: 'TypeScript', link: '/TypeScript/challenges' },
+          { text: '类型体操', link: '/TypeScript/type-challenges' },
         ],
       },
       {
