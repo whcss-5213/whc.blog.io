@@ -3,6 +3,9 @@ import nav from './nav.js';
 
 import sidebar from './sidebar-auto.js';
 
+// import fs from 'fs';
+// fs.writeFileSync('./sidebar.json', JSON.stringify(sidebar));
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   base: '/blog/',

@@ -1,6 +1,6 @@
 # 中国色
 
 <script setup>
-import Color from './Component/color.vue'
+import Color from '../.vitepress/component/color.vue'
 </script>
 <Color />
