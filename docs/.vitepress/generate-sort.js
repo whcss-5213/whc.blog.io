@@ -8,6 +8,8 @@ const __dirname = path.dirname(__filename);
 const docsPath = path.join(__dirname, 'docs');
 const excludeDirs = ['.vitepress', 'public', '.obsidian', 'code'];
 
+const sortFile = '.sort.txt';
+
 /**
  * 获取目录下所有 .md 文件名（不含后缀）
  * @param {string} dirPath - 目录路径
@@ -104,7 +106,7 @@ export function processSortFile(dirPath) {
   const mdFiles = getMdFiles(dirPath);
   if (mdFiles.length === 0) return;
 
-  const sortPath = path.join(dirPath, '.sort.txt');
+  const sortPath = path.join(dirPath, sortFile);
 
   if (!checkSortFileExists(sortPath, mdFiles)) return;
 
