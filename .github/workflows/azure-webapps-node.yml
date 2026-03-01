@@ -1,8 +1,10 @@
 on:
   push:
-    branches: [ "main" ]
+    branches: ['main']
     paths:
-      - "docs/**"
+      - 'docs/**'
+      - 'generate-sort.js'
+      - 'package.json'
 
 permissions:
   contents: write
@@ -10,24 +12,24 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
 
-    - name: Install pnpm
-      uses: pnpm/action-setup@v4
-      with:
-        version: latest
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
 
-      # 打包成静态文件
-    - name: Build
-      run: pnpm install && pnpm build
+        # 打包成静态文件
+      - name: Build
+        run: pnpm install && pnpm build
 
-    - name: 部署
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        branch: results
-        folder: dist
+      - name: 部署
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: results
+          folder: dist
