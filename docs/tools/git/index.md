@@ -51,6 +51,21 @@ git config --global core.autocrlf false # 结束符CRLF和LF 之间转换
 
 - git add --interactive `文件路径`
 
+## git clone
+
+- 从远程仓库克隆项目到本地目录
+
+- git clone `远程仓库URL` `本地目录路径`
+
+- git clone --depth=1 `远程仓库URL` `本地目录路径`
+
+- git clone -b `分支名` `远程仓库URL` `本地目录路径`
+
+- git clone --depth=1 -b `分支名` `远程仓库URL` `本地目录路径`
+
+- 只克隆一个裸仓库
+  git clone --bare \*\*.git
+
 ## git commit
 
 | 命令格式                          | 核心含义                                                             | 补充说明（适用场景 / 注意点）                                                                                                                                                      |
@@ -724,17 +739,6 @@ git merge --continue  # 完成合并
 - git push `远程仓库的别名` :`远程分支名`
 
 - git push `远程仓库的别名` --delete `远程分支名`
-
-## git clone
-
-- 只拉取最近的一个 revision
-  git clone --depth=1
-
-- 拉取指定分支
-  git clone -b dev
-
-- 只克隆一个裸仓库
-  git clone --bare \*\*.git
 
 ## git branch
 
