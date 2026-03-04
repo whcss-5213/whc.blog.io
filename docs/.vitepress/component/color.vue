@@ -1,19 +1,16 @@
 <template>
-  <div class="w-full flex flex-col  gap-4 mt-[20px]">
+  <div class="w-full flex flex-col gap-4 mt-[20px]">
     <div class="flex flex-col items-start" v-for="i in colors">
       <h2 :id="i.type" tabindex="-1">{{ i.type }}</h2>
-      <div class="flex flex-wrap gap-2">
+      <div class="flex  flex-wrap gap-2">
         <el-tooltip effect="light" v-for="color in i.colors" :key="color.name" :content="color.name" placement="top">
           <template #content>
-
             {{ color.name }}<br />{{ color.rgb }}
           </template>
           <el-card :style="{ background: color.rgb }"
-            class="w-[100px] h-[100px] flex items-center justify-center cursor-pointer"
-            @click="ElMessage.success(color.name)">
+            class="w-[100px] h-[100px] flex items-center justify-center cursor-pointer" @click="handleClick(color)">
             <span class="text-white">{{ color.name }}</span>
           </el-card>
-
         </el-tooltip>
       </div>
     </div>
@@ -24,8 +21,20 @@
 import { ref } from 'vue';
 import { ElCard, ElMessage } from 'element-plus';
 // import Color from '../public/color.js';
+const handleClick = (color) => {
 
+  navigator.clipboard.writeText(color.rgb).then(() => {
+    ElMessage({
+      message: `复制成功: ${color.name}`,
+      type: "success",
+    })
+  }
+  ).catch(() => {
+    ElMessage.error('复制失败')
+  })
+};
 const Color = [
+
   {
     type: '红',
     colors: [
@@ -2256,7 +2265,5 @@ const Color = [
     ],
   },
 ];
-
-
 const colors = ref(Color);
 </script>

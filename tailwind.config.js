@@ -6,6 +6,7 @@ export default {
     "./docs/**/*.ts",
     "./docs/**/*.vue",
     "./docs/**/*.md",
+    "./docs/.vitepress/component/**/*.vue",
   ],
   options: {
     safelist: ["html", "body"],
