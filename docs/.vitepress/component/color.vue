@@ -20,7 +20,6 @@
 <script setup>
 import { ref } from 'vue';
 import { ElCard, ElMessage } from 'element-plus';
-// import Color from '../public/color.js';
 const handleClick = (color) => {
 
   navigator.clipboard.writeText(color.rgb).then(() => {

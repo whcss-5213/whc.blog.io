@@ -6,8 +6,7 @@
 >
 > [Linux 命令搜索](https://wangchujiang.com/linux-command/list.html)
 
-![file](../public/file-1.jpg)
-![file](/blog/file-1.jpg)
+![file](/file-1.jpg)
 
 ### ls
 

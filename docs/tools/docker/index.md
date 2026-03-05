@@ -1,4 +1,3 @@
-
 # Docker
 
 ## 安装
@@ -6,6 +5,7 @@
 ```shell
 sudo yum install docker-ce docker-ce-cli containerd.io
 ```
+
 docker container update --restart=always 容器名称[]
 
 cenos 8
@@ -18,25 +18,23 @@ yum install -y docker-ce
 ```
 
 ## 国内源
+
 // /etc/docker/daemon.json
 
 ```json
 {
-  "registry-mirrors": [
-    "https://docker.rainbond.cc",
-    "https://jockerhub.com"
-  ]
+  "registry-mirrors": ["https://docker.rainbond.cc", "https://jockerhub.com"]
 }
 ```
 
 ```shell
-# 重启docker 
+# 重启docker
 systemctl daemon-reload
 systemctl restart docker.service
 systemctl restart docker
 ```
 
-![a](../../public/docker.jpg)
+![a](/docker.jpg)
 
 ## 镜像
 
@@ -52,7 +50,7 @@ docker rmi 镜像名称/ID
 
 # 导出镜像 会包含所有层，以及所有标签 + 版本信息
 docker save 镜像名称/ID > 镜像名称.tar
- 
+
 # 导入镜像
 docker load < 镜像名称.tar
 
@@ -64,7 +62,7 @@ docker cp ./1a.js c78e4a387059:/app
 ```
 
 ```shell
-docker run -it --rm busybox		
+docker run -it --rm busybox
 ```
 
 ## 容器
@@ -104,10 +102,10 @@ docker import my_ubuntu_v3.tar runoob/ubuntu:v4
 
 ```shell
 docker run -it -d \
---name admin 
---privileged 
--p 8080:8080 
--v ${PWD}/:/admin node:16.14.2 /bin/bash 
+--name admin
+--privileged
+-p 8080:8080
+-v ${PWD}/:/admin node:16.14.2 /bin/bash
 -c "cd /admin && npm install -g pnpm && pnpm install && pnpm run start"
 ```
 
@@ -137,21 +135,21 @@ docker run -t -i ubuntu:14.04 /bin/bash
 
 ### 默认网络
 
-docker会自动创建三个网络，`bridge`,`host`,`none`
+docker 会自动创建三个网络，`bridge`,`host`,`none`
 
-- bridge桥接网络
+- bridge 桥接网络
 
-如果不指定，新创建的容器默认将连接到bridge网络。
+如果不指定，新创建的容器默认将连接到 bridge 网络。
 
-默认情况下，使用bridge网络，宿主机可以ping通容器ip，容器中也能ping通宿主机。
+默认情况下，使用 bridge 网络，宿主机可以 ping 通容器 ip，容器中也能 ping 通宿主机。
 
-容器之间只能通过 IP 地址相互访问，由于容器的ip会随着启动顺序发生变化，因此不推荐使用ip访问。
+容器之间只能通过 IP 地址相互访问，由于容器的 ip 会随着启动顺序发生变化，因此不推荐使用 ip 访问。
 
 - host
 
 慎用，可能会有安全问题。
 
-容器与宿主机共享网络，不需要映射端口即可通过宿主机IP访问。（-p选项会被忽略）
+容器与宿主机共享网络，不需要映射端口即可通过宿主机 IP 访问。（-p 选项会被忽略）
 
 主机模式网络可用于优化性能，在容器需要处理大量端口的情况下，它不需要网络地址转换 （NAT），并且不会为每个端口创建“用户空间代理”。
 
@@ -184,7 +182,7 @@ docker run -it --rm --network my-net mysql:5.7 mysql -h db-mysql -uroot -p
 
 #### **volume 卷**
 
-**卷**存储在主机文件系统分配一块专有存储区域，*由 Docker*（在 Linux 上）管理，并且与主机的核心功能隔离。非 Docker
+**卷**存储在主机文件系统分配一块专有存储区域，_由 Docker_（在 Linux 上）管理，并且与主机的核心功能隔离。非 Docker
 进程不能修改文件系统的这一部分。卷是在 Docker 中持久保存数据的最佳方式。
 
 ```bash
@@ -194,23 +192,16 @@ docker volume rm my-data
 
 ### **bind mount 绑定挂载**
 
-*绑定挂载**可以将主机文件系统上目录或文件*装载到容器中*，但是主机上的非 Docker 进程可以修改它们，同时在**容器**中也可以更改
+*绑定挂载\*\*可以将主机文件系统上目录或文件*装载到容器中\*，但是主机上的非 Docker 进程可以修改它们，同时在**容器**中也可以更改
 **主机**文件系统，包括创建、修改或删除文件或目录，使用不当，可能会带来安全隐患。
 
 ```bash
 docker run -e MYSQL_ROOT_PASSWORD=123456 \
            -v /home/mysql/conf.d/my.cnf:/etc/mysql/conf.d/my.cnf:ro  \ # :ro只读
            -v my-data:/var/lib/mysql  \
-           -d mysql:5.7 
+           -d mysql:5.7
 ```
 
 ### **tmpfs** **临时挂载**
 
-**tmpfs挂载**仅存储在主机系统的内存中，从不写入主机系统的文件系统。当容器停止时，数据将被删除。
-
-
-
-
-
-
-
+**tmpfs 挂载**仅存储在主机系统的内存中，从不写入主机系统的文件系统。当容器停止时，数据将被删除。
