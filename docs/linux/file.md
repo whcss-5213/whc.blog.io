@@ -1,11 +1,13 @@
 # File
 
 **一切皆文件 Everything is a file**
-> [Linux命令大全](https://www.linuxcool.com/)
-> 
+
+> [Linux 命令大全](https://www.linuxcool.com/)
+>
 > [Linux 命令搜索](https://wangchujiang.com/linux-command/list.html)
 
-![2](../public/file-1.jpg)
+![file](../public/file-1.jpg)
+![file](/blog/file-1.jpg)
 
 ### ls
 
@@ -49,7 +51,7 @@ rmdir -p /a/b/c/d # 删除 a b c d
 复制文件或目录
 
 - -r：若给出的源文件是一个目录文件，此时将复制该目录下所有的子目录和文件。
-- -a：此选项通常在复制目录时使用，它保留链接、文件属性，并复制目录下的所有内容。其作用等于dpR参数组合。
+- -a：此选项通常在复制目录时使用，它保留链接、文件属性，并复制目录下的所有内容。其作用等于 dpR 参数组合。
 - -d：复制时保留链接。这里所说的链接相当于 Windows 系统中的快捷方式。
 - -f：覆盖已经存在的目标文件而不给出提示。
 - -i：与 **-f** 选项相反，在覆盖目标文件之前给出提示，要求用户确认是否覆盖，回答 **y** 时目标文件将被覆盖。
@@ -68,11 +70,11 @@ rm file
 # -i ：互动模式，主动询问，避免你删除到错误的档名！
 
 # 删除当前目录下的所有文件及目录
-rm -r  * 
+rm -r  *
 
 # 跑路
 rm -rf /*
- ```
+```
 
 ### mv
 
@@ -85,7 +87,7 @@ rm -rf /*
 ```shell
 # 文件改名
 mv index.html index2.html
-# 隐藏文件，文件名上加上 . 
+# 隐藏文件，文件名上加上 .
 mv index.html .index.html
 
 # 仅仅移动
@@ -129,7 +131,7 @@ cat /dev/null > /etc/test.txt
 ### less 按页显示
 
 与 more 类似，但是比 more 更好的是，可以往前翻页！
-less运行时可以输入的命令有：
+less 运行时可以输入的命令有：
 
 - 空白键 ：向下翻动一页；
 - [pagedown]：向下翻动一页；
@@ -148,11 +150,11 @@ less运行时可以输入的命令有：
 
 ### touch 创建文件
 
-  ```shell
-  # 文件存在，修改时间属性
-  # 不存在，创建文件
-  touch new_file
-  ```
+```shell
+# 文件存在，修改时间属性
+# 不存在，创建文件
+touch new_file
+```
 
 ### echo 打印输出
 
@@ -194,29 +196,29 @@ chmod a-w .filename
 
 #### 打包
 
-- `-c`：表示创建一个新的tar文件。
-- `-z`：表示使用gzip进行压缩。
+- `-c`：表示创建一个新的 tar 文件。
+- `-z`：表示使用 gzip 进行压缩。
 - `-f`：表示指定输出的文件名，后面紧跟要打包的文件和目录。
 
 ```shell
 # 打包一个tar
-tar cvf etcbak.tar etc/ 
+tar cvf etcbak.tar etc/
 
 # 打包压缩一个 gz
-tar cvzf etcbak.tar.gz etc/ 
+tar cvzf etcbak.tar.gz etc/
 ```
 
 #### 解压
 
-- `-x`：表示解压缩一个已经存在的tar文件。
-- `-z`：表示使用gzip进行解压缩。
+- `-x`：表示解压缩一个已经存在的 tar 文件。
+- `-z`：表示使用 gzip 进行解压缩。
 - `-v`：表示输出详细信息，可以看到解压缩过程中的每个文件。
-- `-f`：表示指定要解压的tar文件名，后面紧跟要解压缩到的目录。
+- `-f`：表示指定要解压的 tar 文件名，后面紧跟要解压缩到的目录。
 - `-C`：表示指定解压缩到的目录
 
 ```sh
 # 解开一个tar
-tar xvf etcbak.tar  
+tar xvf etcbak.tar
 #  解压一个 gz
 tar xzvf etcbak.tar.gz  -C /etc/bin
 ```
@@ -226,31 +228,35 @@ tar xzvf etcbak.tar.gz  -C /etc/bin
 - name：根据文件名查找。区分大小写。
 - iname：根据文件名查找，不区分大小写。
 - type：根据文件类型查找
-    - f：普通文件
 
-    - d：目录
+  - f：普通文件
 
-    - l：符号链接
+  - d：目录
 
-    - b：块设备文件
+  - l：符号链接
 
-    - c：字符设备文件
+  - b：块设备文件
 
-    - p：管道文件
+  - c：字符设备文件
 
-    - s：套接字文件
+  - p：管道文件
+
+  - s：套接字文件
+
 - size
   +n：查找大于 n 单位的文件
   -n：查找小于 n 单位的文件
   n：查找恰好为 n 单位的文件
+
   ```shell
-  # 大于 100M 
+  # 大于 100M
   find . -type f -iname "*l" -size +100M
   ```
 
 - mtime
 
   按文件最后修改时间查找。时间以天为单位。例如：
+
 - -n
   查找在 n 天内修改的文件
   +n：查找在 n 天前修改的文件
@@ -269,7 +275,7 @@ tar xzvf etcbak.tar.gz  -C /etc/bin
 - -empty：查找空文件或空目录。
 - -maxdepth：限制搜索的最大深度。例如，find /path -maxdepth 2 查找路径 /path 下深度不超过 2 的文件和目录。
 - -mindepth：限制搜索的最小深度。
-- -exec：对找到的每个文件执行指定的命令。例如，find /path -name "*.txt" -exec rm {} \; 删除路径 /path 下所有 .txt 文件。
+- -exec：对找到的每个文件执行指定的命令。例如，find /path -name "\*.txt" -exec rm {} \; 删除路径 /path 下所有 .txt 文件。
 - -ok：与 -exec 类似，但在执行命令前会提示用户确认。
 - -delete：直接删除找到的文件或目录。使用时要小心。
 - -print：打印找到的文件名（默认操作）。
