@@ -115,5 +115,4 @@ export default defineConfig({
       copyright: 'Copyright © 2024-WHC',
     },
   },
-  lastUpdated: false,
 });

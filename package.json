@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "vitepress dev docs --port 3000",
     "build": "vitepress build docs --outDir ./dist",
+    "build:local": "vitepress build docs --outDir /root/www/html/blog",
     "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
