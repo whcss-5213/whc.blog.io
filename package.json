@@ -1,19 +1,20 @@
 {
   "type": "module",
   "devDependencies": {
-    "autoprefixer": "^10.4.21",
-    "postcss": "^8.5.4",
-    "tailwindcss": "^3.4.17",
+    "autoprefixer": "^10.4.27",
+    "postcss": "^8.5.8",
+    "tailwindcss": "^3.4.19",
+    "vite": "^8.0.0",
     "vitepress": "2.0.0-alpha.16",
-    "vue": "^3.5.16"
+    "vue": "^3.5.30"
   },
   "scripts": {
     "dev": "vitepress dev docs --port 3000",
-    "build": "vitepress build docs --outDir ./dist",
+    "build": "vitepress build docs --outDir ../dist",
     "build:local": "vitepress build docs --outDir /root/www/html/blog",
     "docs:preview": "vitepress preview docs"
   },
   "dependencies": {
-    "element-plus": "^2.9.11"
+    "element-plus": "^2.13.5"
   }
 }
