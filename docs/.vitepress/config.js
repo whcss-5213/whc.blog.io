@@ -43,6 +43,8 @@ export default defineConfig({
         },
       },
       chunkSizeWarningLimit: 1000,
+      sourcemap: false,
+      minify: 'esbuild',
     },
   },
   themeConfig: {
@@ -113,4 +115,5 @@ export default defineConfig({
       copyright: 'Copyright © 2024-WHC',
     },
   },
+  lastUpdated: false,
 });
