@@ -25,28 +25,6 @@ export default defineConfig({
     'JS/:js/:page': ':js/:page',
     'node/:node/:page': ':node/:page',
   },
-  vite: {
-    build: {
-      rollupOptions: {
-        output: {
-          manualChunks(id) {
-            if (id.includes('node_modules')) {
-              if (id.includes('vue')) {
-                return 'vue-vendor';
-              }
-              if (id.includes('vitepress')) {
-                return 'vitepress';
-              }
-              return 'vendor';
-            }
-          },
-        },
-      },
-      chunkSizeWarningLimit: 1000,
-      sourcemap: false,
-      minify: 'esbuild',
-    },
-  },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     logo: '/logo.svg',
