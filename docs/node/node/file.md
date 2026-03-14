@@ -24,12 +24,9 @@ console.log(cleanPath);
 // 输出： /root/react/index.js (Mac/Linux)
 ```
 
-**一句话：把脏路径变干净。**
-
 #### 2. `path.join()`
 
 **作用：拼接路径片段，自动处理分隔符**
-最常用！**千万不要用字符串 + 拼接路径**！
 
 ```js
 const path = require('path');
@@ -119,3 +116,88 @@ console.log(dir);
 **一句话：获取文件所在的目录路径。**
 
 ## url
+
+```javascript
+const url = require('url');
+import url from 'url';
+```
+
+---
+
+### 1. `url.parse()` → 解析 URL（拆分成对象）
+把一长串网址拆成 **协议、域名、路径、参数** 等。
+
+```js
+const myUrl = 'https://www.baidu.com:8080/user?id=123&name=jack#top';
+
+const result = url.parse(myUrl, true); // 第二个参数 true = 自动解析 query
+console.log(result);
+```
+
+**解析后得到：**
+```js
+{
+  protocol: 'https:',     // 协议
+  host: 'www.baidu.com:8080', // 域名 + 端口
+  hostname: 'www.baidu.com', // 域名
+  port: '8080',           // 端口
+  pathname: '/user',      // 路径
+  query: { id: '123', name: 'jack' }, // 参数对象
+  hash: '#top',           // 锚点
+  href: 'https://www.baidu.com:8080/user?id=123&name=jack#top'
+}
+```
+
+---
+
+### 2. `url.format()` → 把对象拼成 URL
+和 `parse` 相反，**对象 → 完整 URL**。
+
+```js
+const obj = {
+  protocol: 'https',
+  hostname: 'baidu.com',
+  pathname: '/user',
+  query: { id: 1 }
+};
+
+const fullUrl = url.format(obj);
+// https://baidu.com/user?id=1
+```
+
+
+### 3. `url.resolve()` → 拼接 URL（超级常用）
+**自动拼接基础 URL + 相对路径**，自动处理 `/`。
+
+```js
+const base = 'https://baidu.com/user/';
+const path = 'profile';
+
+const result = url.resolve(base, path);
+// https://baidu.com/user/profile
+```
+
+```js
+url.resolve('https://a.com/b/c', '../d');
+// https://a.com/d
+```
+
+
+### 4. `new URL()`
+Node.js 推荐使用 **WHATWG URL API**（浏览器也通用）：
+
+```js
+const myUrl = new URL('https://baidu.com/user?id=1');
+
+console.log(myUrl.hostname); // baidu.com
+console.log(myUrl.pathname); // /user
+console.log(myUrl.searchParams.get('id')); // 1
+```
+
+- 🔥 终极总结
+1. **`url.parse()`**：把 URL 拆成对象（拿参数、域名）
+2. **`url.format()`**：把对象拼成 URL
+3. **`url.resolve()`**：安全拼接 URL 路径
+4. **`new URL()`**：现代标准用法（推荐）
+
+
