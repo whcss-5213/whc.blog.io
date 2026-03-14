@@ -94,4 +94,9 @@ export default defineConfig({
       copyright: 'Copyright © 2024-WHC',
     },
   },
+  vite: {
+    ssr: {
+      noExternal: ['naive-ui', 'vueuc', '@css-render/vue3-ssr'],
+    },
+  },
 });
