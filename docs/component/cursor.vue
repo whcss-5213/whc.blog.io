@@ -1,34 +1,28 @@
 <template>
-  <div class="w-full  flex flex-wrap gap-4 mt-[20px]">
-    <el-card
-        @click="clipboard(i)"
-        shadow="hover"
-        :style="{cursor:i}"
-        class=" flex items-center justify-center"
-        v-for="i in table"
-    >
+  <div class="w-full flex flex-wrap gap-4 mt-[20px]">
+    <!-- 替换为 Naive UI Card -->
+    <n-card @click="clipboard(i)" hoverable :style="{ cursor: i }"
+      class="flex items-center justify-center min-w-[120px]" v-for="i in table" :key="i" :bordered="false">
       {{ i }}
-    </el-card>
+    </n-card>
   </div>
 </template>
 
 <script setup>
-import {ref} from "vue";
-import {ElCard, ElMessage} from "element-plus"
+import { ref } from "vue"
+import { useMessage, NCard } from "naive-ui"
+
+const message = useMessage()
 
 const clipboard = i => {
   navigator.clipboard.writeText(i).then(() => {
-        ElMessage({
-          message: "复制成功",
-          type: "success",
-        })
-      }
-  ).catch(() => {
-    ElMessage.error('复制失败')
+    message.success("复制成功")
+  }).catch(() => {
+    message.error("复制失败")
   })
 }
 
-let table = ref([
+const table = ref([
   "auto",
   "default",
   "pointer",

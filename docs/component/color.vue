@@ -2,36 +2,39 @@
   <div class="w-full flex flex-col gap-4 mt-[20px]">
     <div class="flex flex-col items-start" v-for="i in colors">
       <h2 :id="i.type" tabindex="-1">{{ i.type }}</h2>
-      <div class="flex  flex-wrap gap-2">
-        <el-tooltip effect="light" v-for="color in i.colors" :key="color.name" :content="color.name" placement="top">
-          <template #content>
-            {{ color.name }}<br />{{ color.rgb }}
+      <div class="flex flex-wrap gap-2">
+        <!-- Naive UI Tooltip -->
+        <n-tooltip v-for="color in i.colors" :key="color.name" placement="top" style="display: block">
+          <template #trigger>
+            <!-- Naive UI Card -->
+            <n-card :style="{ background: color.rgb, color: '#fff' }"
+              class="w-[100px] h-[100px] flex items-center justify-center cursor-pointer" @click="handleClick(color)"
+              :bordered="false">
+              {{ color.name }}
+            </n-card>
           </template>
-          <el-card :style="{ background: color.rgb }"
-            class="w-[100px] h-[100px] flex items-center justify-center cursor-pointer" @click="handleClick(color)">
-            <span class="text-white">{{ color.name }}</span>
-          </el-card>
-        </el-tooltip>
+          <!-- Tooltip 内容 -->
+          {{ color.name }}<br />{{ color.rgb }}
+        </n-tooltip>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { ElCard, ElMessage } from 'element-plus';
-const handleClick = (color) => {
+import { ref } from 'vue'
+import { useMessage, NCard, NTooltip } from 'naive-ui'
 
+const message = useMessage()
+
+const handleClick = (color) => {
   navigator.clipboard.writeText(color.rgb).then(() => {
-    ElMessage({
-      message: `复制成功: ${color.name}`,
-      type: "success",
-    })
-  }
-  ).catch(() => {
-    ElMessage.error('复制失败')
+    message.success(`复制成功: ${color.name}`)
+  }).catch(() => {
+    message.error('复制失败')
   })
-};
+}
+
 const Color = [
 
   {
@@ -2264,5 +2267,5 @@ const Color = [
     ],
   },
 ];
-const colors = ref(Color);
+const colors = ref(Color)
 </script>

@@ -1,13 +1,18 @@
-// .vitepress/theme/index.js
-import DefaultTheme from 'vitepress/theme'
-import './custom.css'
-import ElementPlus from "element-plus";
-import "element-plus/dist/index.css";
-
+import DefaultTheme from 'vitepress/theme';
+import { h } from 'vue';
+import { NMessageProvider } from 'naive-ui';
+import './custom.css';
 
 export default {
-  extends: DefaultTheme,
-  enhanceApp({ app }) {
-    app.use(ElementPlus);
-  }
-}
+  ...DefaultTheme,
+  Layout() {
+    return h(
+      NMessageProvider,
+      { duration: 2000 },
+      {
+        default: () => h(DefaultTheme.Layout),
+      }
+    );
+  },
+  enhanceApp({ app }) {},
+};
