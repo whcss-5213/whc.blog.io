@@ -43,7 +43,7 @@ console.log(fullPath2);
 
 **一句话：安全拼接路径，自动适配系统分隔符。**
 
-##### 3. `path.resolve()`
+#### 3. `path.resolve()`
 
 **作用：把相对路径 → 解析成【绝对路径】**
 从**右往左**拼接，遇到**根路径 /** 就停止
@@ -73,7 +73,7 @@ path.resolve('/JS', 'react');
 
 ### name
 
-#### 1. path.basename() → 获取文件名（含后缀）
+#### 1. path.basename() 
 
 ```js
 const path = require('path');
@@ -87,7 +87,7 @@ console.log(fileName);
 
 **一句话：获取路径中的文件名（包含后缀）。**
 
-#### 2. path.extname() → 获取文件后缀
+#### 2. path.extname() 
 
 ```js
 const path = require('path');
@@ -101,7 +101,7 @@ console.log(ext);
 
 **一句话：获取文件的后缀名（包含 `.`）。**
 
-#### 3. path.dirname() → 获取文件所在目录
+#### 3. path.dirname() 
 
 ```js
 const path = require('path');
@@ -124,7 +124,8 @@ import url from 'url';
 
 ---
 
-### 1. `url.parse()` → 解析 URL（拆分成对象）
+### 1. `url.parse()` 
+
 把一长串网址拆成 **协议、域名、路径、参数** 等。
 
 ```js
@@ -135,6 +136,7 @@ console.log(result);
 ```
 
 **解析后得到：**
+
 ```js
 {
   protocol: 'https:',     // 协议
@@ -150,7 +152,8 @@ console.log(result);
 
 ---
 
-### 2. `url.format()` → 把对象拼成 URL
+### 2. `url.format()`
+
 和 `parse` 相反，**对象 → 完整 URL**。
 
 ```js
@@ -158,15 +161,15 @@ const obj = {
   protocol: 'https',
   hostname: 'baidu.com',
   pathname: '/user',
-  query: { id: 1 }
+  query: { id: 1 },
 };
 
 const fullUrl = url.format(obj);
 // https://baidu.com/user?id=1
 ```
 
+### 3. `url.resolve()` 
 
-### 3. `url.resolve()` → 拼接 URL（超级常用）
 **自动拼接基础 URL + 相对路径**，自动处理 `/`。
 
 ```js
@@ -182,9 +185,9 @@ url.resolve('https://a.com/b/c', '../d');
 // https://a.com/d
 ```
 
-
 ### 4. `new URL()`
-Node.js 推荐使用 **WHATWG URL API**（浏览器也通用）：
+
+Node.js 推荐使用 **WHATWG URL API**（浏览器也通用）
 
 ```js
 const myUrl = new URL('https://baidu.com/user?id=1');
@@ -195,9 +198,8 @@ console.log(myUrl.searchParams.get('id')); // 1
 ```
 
 - 🔥 终极总结
+
 1. **`url.parse()`**：把 URL 拆成对象（拿参数、域名）
 2. **`url.format()`**：把对象拼成 URL
 3. **`url.resolve()`**：安全拼接 URL 路径
 4. **`new URL()`**：现代标准用法（推荐）
-
-
