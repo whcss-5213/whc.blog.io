@@ -1,0 +1,1 @@
+import{_ as i,o as a,c as n,b4 as l}from"./chunks/framework.tGVskLkL.js";const c=JSON.parse('{"title":"布局","description":"","frontmatter":{},"headers":[],"relativePath":"CSS/layout.md","filePath":"CSS/layout.md"}'),e={name:"CSS/layout.md"};function p(h,s,t,k,r,d){return a(),n("div",null,s[0]||(s[0]=[l("",84)]))}const g=i(e,[["render",p]]);export{c as __pageData,g as default};

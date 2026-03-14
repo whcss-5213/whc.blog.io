@@ -1,0 +1,1 @@
+import{_ as o,o as d,c as r,b4 as a}from"./chunks/framework.tGVskLkL.js";const _=JSON.parse('{"title":"User","description":"","frontmatter":{},"headers":[],"relativePath":"linux/user.md","filePath":"linux/user.md"}'),s={name:"linux/user.md"};function c(l,e,n,u,i,t){return d(),r("div",null,e[0]||(e[0]=[a("",13)]))}const m=o(s,[["render",c]]);export{_ as __pageData,m as default};

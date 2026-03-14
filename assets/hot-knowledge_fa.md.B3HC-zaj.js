@@ -1,0 +1,1 @@
+import{_ as e,o as t,c as a}from"./chunks/framework.tGVskLkL.js";const i=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"hot-knowledge/fa.md","filePath":"hot-knowledge/fa.md"}'),o={name:"hot-knowledge/fa.md"};function n(r,s,c,d,f,p){return t(),a("div")}const l=e(o,[["render",n]]);export{i as __pageData,l as default};

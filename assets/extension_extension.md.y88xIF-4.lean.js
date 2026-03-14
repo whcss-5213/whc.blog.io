@@ -1,0 +1,1 @@
+import{_ as e,o as t,c as n}from"./chunks/framework.tGVskLkL.js";const x=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"extension/extension.md","filePath":"extension/extension.md"}'),o={name:"extension/extension.md"};function s(a,r,i,c,p,_){return t(),n("div")}const m=e(o,[["render",s]]);export{x as __pageData,m as default};
