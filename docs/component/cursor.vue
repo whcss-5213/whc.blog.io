@@ -10,7 +10,9 @@
 
 <script setup>
 import { ref } from "vue"
-import { useMessage, NCard } from "naive-ui"
+import naive from "naive-ui"
+const { useMessage, NCard } = naive
+
 
 const message = useMessage()
 

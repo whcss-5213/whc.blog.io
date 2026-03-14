@@ -23,8 +23,8 @@
 
 <script setup>
 import { ref } from 'vue'
-import { useMessage, NCard, NTooltip } from 'naive-ui'
-
+import naive from 'naive-ui'
+const { useMessage, NCard, NTooltip } = naive
 const message = useMessage()
 
 const handleClick = (color) => {

@@ -1,6 +1,7 @@
 import DefaultTheme from 'vitepress/theme';
 import { h } from 'vue';
-import { NMessageProvider } from 'naive-ui';
+import naive from 'naive-ui';
+const { NMessageProvider } = naive;
 import './custom.css';
 
 export default {
