@@ -1,1 +1,0 @@
-import{_ as i,o as e,c as a,b4 as r}from"./chunks/framework.tGVskLkL.js";const g=JSON.parse('{"title":"vue","description":"","frontmatter":{},"headers":[],"relativePath":"vue/index.md","filePath":"JS/vue/index.md"}'),t={name:"vue/index.md"};function o(n,l,s,h,d,u){return e(),a("div",null,l[0]||(l[0]=[r("",61)]))}const b=i(t,[["render",o]]);export{g as __pageData,b as default};

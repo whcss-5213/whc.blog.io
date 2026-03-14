@@ -1,1 +1,0 @@
-import{_ as i,o as a,c as n,b4 as e}from"./chunks/framework.tGVskLkL.js";const o=JSON.parse('{"title":"ssl","description":"","frontmatter":{},"headers":[],"relativePath":"nginx/ssl.md","filePath":"tools/nginx/ssl.md"}'),l={name:"nginx/ssl.md"};function t(r,s,p,h,d,k){return a(),n("div",null,s[0]||(s[0]=[e("",27)]))}const g=i(l,[["render",t]]);export{o as __pageData,g as default};

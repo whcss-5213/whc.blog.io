@@ -1,0 +1,1 @@
+import{_ as i,o as a,c as n,aF as l}from"./chunks/framework.Gvl5FD5L.js";const g=JSON.parse('{"title":"CSS","description":"","frontmatter":{},"headers":[],"relativePath":"CSS/index.md","filePath":"CSS/index.md"}'),h={name:"CSS/index.md"};function t(e,s,p,k,r,d){return a(),n("div",null,[...s[0]||(s[0]=[l("",61)])])}const c=i(h,[["render",t]]);export{g as __pageData,c as default};

@@ -1,1 +1,0 @@
-import{_ as e,o as t,c as a}from"./chunks/framework.tGVskLkL.js";const _=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"extension/plasmo.md","filePath":"extension/plasmo.md"}'),o={name:"extension/plasmo.md"};function s(n,r,c,p,i,m){return t(),a("div")}const d=e(o,[["render",s]]);export{_ as __pageData,d as default};

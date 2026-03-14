@@ -1,0 +1,1 @@
+import{_ as s,o as i,c as e,aF as l}from"./chunks/framework.Gvl5FD5L.js";const c=JSON.parse('{"title":"Text","description":"","frontmatter":{},"headers":[],"relativePath":"CSS/text.md","filePath":"CSS/text.md"}'),a={name:"CSS/text.md"};function n(p,t,d,r,h,k){return i(),e("div",null,[...t[0]||(t[0]=[l("",11)])])}const o=s(a,[["render",n]]);export{c as __pageData,o as default};

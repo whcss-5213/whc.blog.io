@@ -1,1 +1,0 @@
-import{_ as e,o as t,c as o}from"./chunks/framework.tGVskLkL.js";const m=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"CSS/box.md","filePath":"CSS/box.md"}'),a={name:"CSS/box.md"};function r(s,c,n,p,_,d){return t(),o("div")}const f=e(a,[["render",r]]);export{m as __pageData,f as default};
