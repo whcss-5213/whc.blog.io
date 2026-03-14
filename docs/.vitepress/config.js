@@ -8,6 +8,7 @@ import sidebar from './sidebar-auto.js';
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  ssr: false,
   base: '/blog/',
   title: 'Note',
   description: 'Study Node',
