@@ -23,15 +23,15 @@
 
 <script setup>
 import { ref } from 'vue'
-import naive from 'naive-ui'
-const { useMessage, NCard, NTooltip } = naive
-const message = useMessage()
+import { useMessage, NCard, NTooltip } from 'naive-ui'
+// const { useMessage, NCard, NTooltip } = naive
+// const message = useMessage()
 
 const handleClick = (color) => {
   navigator.clipboard.writeText(color.rgb).then(() => {
-    message.success(`复制成功: ${color.name}`)
+    // message.success(`复制成功: ${color.name}`)
   }).catch(() => {
-    message.error('复制失败')
+    // message.error('复制失败')
   })
 }
 

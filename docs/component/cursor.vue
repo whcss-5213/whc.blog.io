@@ -2,7 +2,7 @@
   <div class="w-full flex flex-wrap gap-4 mt-[20px]">
     <!-- 替换为 Naive UI Card -->
     <n-card @click="clipboard(i)" hoverable :style="{ cursor: i }"
-      class="flex items-center justify-center min-w-[120px]" v-for="i in table" :key="i" :bordered="false">
+      class="flex items-center justify-center w-[100px] h-[100px]" v-for="i in table" :key="i" :bordered="false">
       {{ i }}
     </n-card>
   </div>
@@ -10,17 +10,17 @@
 
 <script setup>
 import { ref } from "vue"
-import naive from "naive-ui"
-const { useMessage, NCard } = naive
+import { useMessage, NCard } from "naive-ui"
+// const { useMessage, NCard } = naive
 
 
-const message = useMessage()
+// const message = useMessage()
 
 const clipboard = i => {
   navigator.clipboard.writeText(i).then(() => {
-    message.success("复制成功")
+    // message.success("复制成功")
   }).catch(() => {
-    message.error("复制失败")
+    // message.error("复制失败")
   })
 }
 

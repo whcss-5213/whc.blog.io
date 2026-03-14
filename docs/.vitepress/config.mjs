@@ -3,13 +3,12 @@ import nav from './nav.js';
 
 import sidebar from './sidebar-auto.js';
 
-const fileAndStyles = {};
-
 // import fs from 'fs';
 // fs.writeFileSync('./sidebar.json', JSON.stringify(sidebar));
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  ssr: false,
   base: '/blog/',
   title: 'Note',
   description: 'Study Node',
@@ -26,30 +25,6 @@ export default defineConfig({
     'tools/:tool/:page': ':tool/:page',
     'JS/:js/:page': ':js/:page',
     'node/:node/:page': ':node/:page',
-  },
-  vite: {
-    logLevel: 'error',
-    build: {
-      rollupOptions: {
-        output: {
-          manualChunks(id) {
-            if (id.includes('node_modules')) {
-              if (id.includes('vue')) {
-                return 'vue-vendor';
-              }
-              if (id.includes('vitepress')) {
-                return 'vitepress';
-              }
-              return 'vendor';
-            }
-          },
-        },
-      },
-      chunkSizeWarningLimit: 1000,
-    },
-    ssr: {
-      noExternal: ['naive-ui', 'date-fns', 'vueuc'],
-    },
   },
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
@@ -117,6 +92,11 @@ export default defineConfig({
       message:
         '<a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">皖ICP备20002163号-1</a>',
       copyright: 'Copyright © 2024-WHC',
+    },
+  },
+  vite: {
+    ssr: {
+      noExternal: ['naive-ui', 'date-fns', 'vueuc'],
     },
   },
   postRender(context) {
