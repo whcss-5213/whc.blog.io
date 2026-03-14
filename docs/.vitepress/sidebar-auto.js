@@ -6,6 +6,9 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const docsPath = path.resolve(__dirname, '..');
 
+const excludeDirs = ['.vitepress', 'public', '.obsidian', 'component'];
+const sortFile = '.sort';
+
 function getFiles(dirPath, basePath = '', dirName = '') {
   const files = [];
 
@@ -14,7 +17,7 @@ function getFiles(dirPath, basePath = '', dirName = '') {
   }
 
   const entries = fs.readdirSync(dirPath);
-  const sortFilePath = path.join(dirPath, '.sort.txt');
+  const sortFilePath = path.join(dirPath, sortFile);
   let sortList = null;
 
   if (fs.existsSync(sortFilePath)) {
@@ -65,7 +68,6 @@ function getFiles(dirPath, basePath = '', dirName = '') {
 function generateSidebar() {
   const sidebar = {};
 
-  const excludeDirs = ['.vitepress', 'public', '.obsidian'];
   const directories = fs.readdirSync(docsPath).filter(file => {
     const fullPath = path.join(docsPath, file);
     return (

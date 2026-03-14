@@ -1,7 +1,7 @@
 # cursor
 
 <script setup>
-import Cursor from '../.vitepress/component/cursor.vue'
+import Cursor from '../component/cursor.vue'
 </script>
 
 ## cursor
