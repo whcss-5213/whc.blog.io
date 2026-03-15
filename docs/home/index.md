@@ -12,34 +12,34 @@
 
 从基础命令到系统管理，从网络配置到容器化部署。
 
-- **🐧 Linux**：常用命令、文件系统、权限管理 [📖 开始学习 ](/blog/linux/)
-- **🐳 容器篇**：Docker 基础、编排、CI/CD [📖 开始学习 ](/blog/docker/)
-- **📡 nginx**：反向代理、负载均衡、缓存 [📖 开始学习 ](/blog/nginx/)
+- **🐧 Linux**：常用命令、文件系统、权限管理 [📖 开始学习 ](/linux/)
+- **🐳 容器篇**：Docker 基础、编排、CI/CD [📖 开始学习 ](/docker/)
+- **📡 nginx**：反向代理、负载均衡、缓存 [📖 开始学习 ](/nginx/)
 
 ### 🎨 **前端开发**
 
 现代前端技术栈，从基础到架构。
 
 - **🟢 Vue.js**：响应式原理、组件化、状态管理
-[📖 开始学习](/blog/vue/)
+[📖 开始学习](/vue/)
 <!-- - **🔵 React**：Hooks、状态管理、性能优化
-  [📖 开始学习](/blog/vue/) -->
+  [📖 开始学习](/vue/) -->
 - **🟡 JS/TS**：ES6+、类型系统、设计模式
-  - JS[📖 开始学习](/blog/JavaScript/String)
-  - TS[📖 开始学习](/blog/TypeScript/)
+  - JS[📖 开始学习](/JavaScript/String)
+  - TS[📖 开始学习](/TypeScript/)
 - **🎯 工程化**：构建工具、测试、部署
-  [📖 开始学习](/blog/vue/)
+  [📖 开始学习](/vue/)
 - **📱 移动端**：小程序
-  [📖 开始学习](/blog/vue/)
+  [📖 开始学习](/vue/)
 
 ### ⚙️ **后端开发**
 
 服务器端技术栈与架构设计。
 
 - **🚀 Node.js**：Express、NestJS、性能优化
-  [📖 开始学习](/blog/node/)
+  [📖 开始学习](/node/)
 - **🗄️ 数据库**：MongoDB
-  [📖 开始学习](/blog/tools/DB/mongo.md)
+  [📖 开始学习](/tools/DB/mongo.md)
 
 ### 🔐 **计算机基础**
 
@@ -53,8 +53,8 @@
 工欲善其事，必先利其器。
 
 - **⌨️ 编辑器**：VS Code、Vim、IDE 技巧
-  - vim [📖 开始学习](/blog/vim/)
-- **📦 版本控制**：Git 工作流、GitHub Actions [📖 开始学习](/blog/git/)
+  - vim [📖 开始学习](/vim/)
+- **📦 版本控制**：Git 工作流、GitHub Actions [📖 开始学习](/git/)
 
 ---
 
@@ -71,8 +71,7 @@
 
 **联系方式**：
 
-- 🌐 博客：[https://whcss.xyz/blog/](https://whcss.xyz/blog/)
-
+- 🌐 博客：[https://whcss.xyz/](https://whcss.xyz/)
 
 ## ✨ 写在最后
 
