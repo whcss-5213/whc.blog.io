@@ -7,10 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      fast-glob:
-        specifier: ^3.3.3
-        version: 3.3.3
     devDependencies:
       '@css-render/vue3-ssr':
         specifier: ^0.15.14
@@ -18,6 +14,9 @@ importers:
       autoprefixer:
         specifier: ^10.4.27
         version: 10.4.27(postcss@8.5.8)
+      fast-glob:
+        specifier: ^3.3.3
+        version: 3.3.3
       naive-ui:
         specifier: ^2.44.1
         version: 2.44.1(vue@3.5.30)
