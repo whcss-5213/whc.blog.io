@@ -16,6 +16,4 @@ node_modules
 pnpm-global
 TODOs.md
 *.timestamp-*.mjs
-.sort.txt
-.sort
 blog
