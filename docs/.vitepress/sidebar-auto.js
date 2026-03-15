@@ -6,7 +6,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const docsPath = path.resolve(__dirname, '..');
 
-const excludeDirs = ['.vitepress', 'public', '.obsidian', 'component'];
+const excludeDirs = ['.vitepress', 'public', '.obsidian', 'home', 'component'];
 const sortFile = '.sort';
 
 function getFiles(dirPath, basePath = '', dirName = '') {
