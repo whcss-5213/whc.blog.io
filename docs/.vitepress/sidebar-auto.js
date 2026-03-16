@@ -95,8 +95,7 @@ function generateSidebar() {
           sidebar[`/${subDir}/`] = [
             {
               text: subDir,
-              collapsible: true,
-              collapsed: true,
+              collapsed: false,
               items: files,
             },
           ];
@@ -108,8 +107,7 @@ function generateSidebar() {
         sidebar[`/${dir}/`] = [
           {
             text: dir,
-            collapsible: true,
-            collapsed: true,
+            collapsed: false,
             items: files,
           },
         ];
