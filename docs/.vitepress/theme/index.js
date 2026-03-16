@@ -7,8 +7,7 @@ import './style/custom.css';
 import './style/home.css';
 import './style/code.css';
 import './style/page.css';
-
-const components = import.meta.glob('../components/*.vue');
+const components = import.meta.glob('../components/**/*.vue');
 
 const { Layout } = DefaultTheme;
 
@@ -55,16 +54,20 @@ const NaiveUIProvider = defineComponent({
     );
   },
 });
-
+console.log(components);
 export default {
   extends: DefaultTheme,
   Layout: NaiveUIProvider,
   enhanceApp: ({ app }) => {
     for (const path in components) {
-      const name = path.match(/\.\/components\/(.*)\.vue/)[1];
-      components[path]().then(mod => {
-        app.component(name, mod.default);
-      });
+      const name = path
+        .match(/\.\/components\/(.*)\.vue/)?.[1]
+        ?.replace(/\//g, '-');
+      if (name) {
+        components[path]().then(mod => {
+          app.component(name, mod.default);
+        });
+      }
     }
     if (import.meta.env.SSR) {
       const { collect } = setup(app);
