@@ -54,8 +54,6 @@ const NaiveUIProvider = defineComponent({
     );
   },
 });
-console.log(components);
-console.log(1111111111111);
 export default {
   extends: DefaultTheme,
   Layout: NaiveUIProvider,
