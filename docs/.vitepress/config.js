@@ -1,8 +1,7 @@
 import { defineConfig } from 'vitepress';
 import nav from './nav.js';
-import { postcssIsolateStyles } from 'vitepress';
-
 import sidebar from './sidebar-auto.js';
+import { SearchPlugin } from 'vitepress-plugin-search';
 
 const fileAndStyles = {};
 // https://vitepress.dev/reference/site-config
@@ -25,6 +24,20 @@ export default defineConfig({
     'node/:node/:page': ':node/:page',
   },
   vite: {
+    plugins: [
+      SearchPlugin({
+        // 搜索框提示文字
+        placeholder: '搜索文档',
+        // 最大显示结果数
+        maxResults: 10,
+        // 是否区分大小写
+        ignoreCase: true,
+        // 中文搜索必须开启！
+        encode: false,
+        // 同时搜索标题 + 内容
+        previewLength: 80,
+      }),
+    ],
     logLevel: 'error',
     build: {
       rollupOptions: {
@@ -50,31 +63,32 @@ export default defineConfig({
   },
   themeConfig: {
     logo: '/logo.svg',
-    search: {
-      provider: 'local',
-      options: {
-        locales: {
-          root: {
-            translations: {
-              button: {
-                buttonText: '搜索文档',
-                buttonAriaLabel: '搜索文档',
-              },
-              modal: {
-                noResultsText: '无法找到相关结果',
-                resetButtonTitle: '清除查询条件',
-                displayDetails: '显示详细信息',
-                footer: {
-                  selectText: '选择',
-                  navigateText: '切换',
-                  closeText: '关闭',
-                },
-              },
-            },
-          },
-        },
-      },
-    },
+    search: false,
+    // search: {
+    //   provider: 'local',
+    //   options: {
+    //     locales: {
+    //       root: {
+    //         translations: {
+    //           button: {
+    //             buttonText: '搜索文档',
+    //             buttonAriaLabel: '搜索文档',
+    //           },
+    //           modal: {
+    //             noResultsText: '无法找到相关结果',
+    //             resetButtonTitle: '清除查询条件',
+    //             displayDetails: '显示详细信息',
+    //             footer: {
+    //               selectText: '选择',
+    //               navigateText: '切换',
+    //               closeText: '关闭',
+    //             },
+    //           },
+    //         },
+    //       },
+    //     },
+    //   },
+    // },
     outline: {
       level: 'deep',
       label: '页面导航',
@@ -104,7 +118,7 @@ export default defineConfig({
       copyright: 'Copyright © 2024-WHC',
     },
   },
-  plugins: [postcssIsolateStyles()],
+  plugins: [],
   postRender(context) {
     const styleRegex = /<css-render-style>((.|\s)+)<\/css-render-style>/;
     const vitepressPathRegex = /<vitepress-path>(.+)<\/vitepress-path>/;

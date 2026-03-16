@@ -58,5 +58,4 @@ export default [
     ],
   },
   { text: 'Code Snippet', link: '/snippet' },
-  { text: 'baidu', link: 'https://www.baidu.com' },
 ];
