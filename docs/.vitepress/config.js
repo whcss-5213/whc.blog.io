@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitepress';
 import nav from './nav.js';
 import sidebar from './sidebar-auto.js';
-import { SearchPlugin } from 'vitepress-plugin-search';
+// import { SearchPlugin } from 'vitepress-plugin-search';
 // import { postcssIsolateStyles } from 'vitepress';
 const fileAndStyles = {};
 // https://vitepress.dev/reference/site-config
