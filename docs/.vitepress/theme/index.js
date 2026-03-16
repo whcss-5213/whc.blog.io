@@ -1,10 +1,14 @@
 import DefaultTheme from 'vitepress/theme';
 import { useRoute } from 'vitepress';
 import { setup } from '@css-render/vue3-ssr';
-import { NConfigProvider } from 'naive-ui';
+import { NConfigProvider, NMessageProvider } from 'naive-ui';
 import { defineComponent, h, inject } from 'vue';
+import './style/custom.css';
+import './style/home.css';
+import './style/code.css';
+import './style/page.css';
 
-import './custom.css';
+const components = import.meta.glob('../components/*.vue');
 
 const { Layout } = DefaultTheme;
 
@@ -38,8 +42,14 @@ const NaiveUIProvider = defineComponent({
       { abstract: true, inlineThemeDisabled: true },
       {
         default: () => [
-          h(Layout, null, { default: this.$slots.default?.() }),
-          import.meta.env.SSR ? [h(CssRenderStyle), h(VitepressPath)] : null,
+          h(NMessageProvider, null, {
+            default: () => [
+              h(Layout, null, { default: this.$slots.default?.() }),
+              import.meta.env.SSR
+                ? [h(CssRenderStyle), h(VitepressPath)]
+                : null,
+            ],
+          }),
         ],
       }
     );
@@ -50,6 +60,12 @@ export default {
   extends: DefaultTheme,
   Layout: NaiveUIProvider,
   enhanceApp: ({ app }) => {
+    for (const path in components) {
+      const name = path.match(/\.\/components\/(.*)\.vue/)[1];
+      components[path]().then(mod => {
+        app.component(name, mod.default);
+      });
+    }
     if (import.meta.env.SSR) {
       const { collect } = setup(app);
       app.provide('css-render-collect', collect);

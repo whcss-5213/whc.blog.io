@@ -11,16 +11,14 @@
 <script setup>
 import { ref } from "vue"
 import { useMessage, NCard } from "naive-ui"
-// const { useMessage, NCard } = naive
 
-
-// const message = useMessage()
+const message = useMessage()
 
 const clipboard = i => {
   navigator.clipboard.writeText(i).then(() => {
-    // message.success("复制成功")
+    message.success("复制成功")
   }).catch(() => {
-    // message.error("复制失败")
+    message.error("复制失败")
   })
 }
 

@@ -23,17 +23,13 @@ features:
   }
     title: 热知识
     link: /hot-knowledge/
-#  - icon: {
-#    src: "/vim/Vim.png",
-#    alt: "Hello Vue"
-#  }
-#    title: Vim
-#    link: /linux/Vim/
+
   - title: Docker
     icon: {
       src: "/docker-icon.svg"
     }
     link: /docker/
+
   - title: Linux
     icon: {
       src: "/linux-icon.svg"
@@ -52,3 +48,5 @@ features:
     }
     link: /snippet
 ---
+
+   <Petals/>

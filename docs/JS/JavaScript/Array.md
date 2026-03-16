@@ -3,8 +3,8 @@
 ## 创建数组
 
 ```js
-Array(3).fill(0)// [0,0,0]
-Array({}, [], 1) // [{},[],1]
+Array(3).fill(0); // [0,0,0]
+Array({}, [], 1); // [{},[],1]
 ```
 
 ### from/of
@@ -13,22 +13,21 @@ Array({}, [], 1) // [{},[],1]
 // from()  把类数组对象或可迭代对象转化为真正的数组，
 // 类数组：可迭代的结构，或者有一个 length 属性和可索引元素的结构
 const todos = document.querySelectorAll('li'); //Nodelist
-const todosArr1 = Array.from(todos)
+const todosArr1 = Array.from(todos);
 
 // 可以传第二参数对转化的数组进行处理(类似map方法)，回调函数
-const todosArr2 = Array.from(todos, todo => todo.textContent)
-
+const todosArr2 = Array.from(todos, todo => todo.textContent);
 
 // 字符串会被拆分为单字符数组 字符串也是可迭代的
-console.log(Array.from('KFC'))//["K", "F", "C"]
+console.log(Array.from('KFC')); //["K", "F", "C"]
 
 // 对现有数组执行浅复制
-let arr1 = [1, 2, 3, 4]
-let arr2 = Array.from(arr1)// [1,2,3,4]
-arr1 == arr2 //false
+let arr1 = [1, 2, 3, 4];
+let arr2 = Array.from(arr1); // [1,2,3,4]
+arr1 == arr2; //false
 
 // .of()  把传入值转为数组
-let of = Array.of(1, 'abc', {})
+let of = Array.of(1, 'abc', {});
 ```
 
 ## 空位
@@ -81,13 +80,13 @@ ES 6 之前的方法忽略这个空位
 ### 操作
 
 ```js
-let colors = ["red", "green", "blue", "yellow", "purple"];
+let colors = ['red', 'green', 'blue', 'yellow', 'purple'];
 ```
 
 #### 1. concat
 
 ```js
-let colors1 = colors.concat("yellow", ["black", "brown"])
+let colors1 = colors.concat('yellow', ['black', 'brown']);
 ```
 
 #### 2. slice
@@ -98,7 +97,7 @@ let colors1 = colors.concat("yellow", ["black", "brown"])
 - 返回截取的元素，类型为数组，不改变原数组
 
 ```js
-let colors2 = colors.slice(1, 4) 
+let colors2 = colors.slice(1, 4);
 ```
 
 #### 3. splice
@@ -111,21 +110,21 @@ let colors2 = colors.slice(1, 4)
 ```js
 // 参数一： 删除位置
 // 参数二： 删除数量
-colors.slice(1, 2) 
+colors.slice(1, 2);
 ```
 
 - 插入
 
 ```js
 // 插入 两个元素
-colors.slice(1, 0, "yellow", "orange")
+colors.slice(1, 0, 'yellow', 'orange');
 ```
 
 - 替代
 
 ```js
 // 删除一个，插入两个
-colors.slice(1, 1, 'orange', '#FFF') 
+colors.slice(1, 1, 'orange', '#FFF');
 ```
 
 ### 搜索
@@ -143,7 +142,7 @@ colors.slice(1, 1, 'orange', '#FFF')
 - 使用全等（===）比较
 
 ```js
-[3, 4, 5, 6].indexOf(5, 2)
+[3, 4, 5, 6].indexOf(5, 2);
 ```
 
 #### 2. lastIndexOf
@@ -162,7 +161,7 @@ colors.slice(1, 1, 'orange', '#FFF')
 ```js
 [1, 2, 3].includes(3, -1); // true
 [1, 2, NaN].includes(NaN); // true
-[1, , 3].includes(undefined) // true
+[1, , 3].includes(undefined); // true
 ```
 
 - 在非数组对象上调用 includes() 方法算
@@ -170,13 +169,13 @@ colors.slice(1, 1, 'orange', '#FFF')
 ```js
 // 读取 this 的 length 属性，然后访问每个整数索引
 const arrayLike = {
-    length: 3,
-    0: 2,
-    1: 3,
-    2: 4,
+  length: 3,
+  0: 2,
+  1: 3,
+  2: 4,
 };
-Array.prototype.includes.call(arrayLike, 2)// true
-Array.prototype.includes.call(arrayLike, 1)// false
+Array.prototype.includes.call(arrayLike, 2); // true
+Array.prototype.includes.call(arrayLike, 1); // false
 ```
 
 #### 4.find
@@ -185,11 +184,11 @@ Array.prototype.includes.call(arrayLike, 1)// false
 
 ```js
 const Find = [2, 3, 4, 5].find((element, index, array) => {
-    // element 前正在处理的元素
-    // index 正在处理的元素在数组中的索引
-    // array 调用了 find() 的数组本身
-    return element > 3
-}) // 4
+  // element 前正在处理的元素
+  // index 正在处理的元素在数组中的索引
+  // array 调用了 find() 的数组本身
+  return element > 3;
+}); // 4
 ```
 
 #### 5.findIndex
@@ -227,10 +226,10 @@ const Find = [2, 3, 4, 5].find((element, index, array) => {
 ```js
 // 归并函数 归并初始值
 [].reduce((pre, element, index, array) => {
-    // 上一个归并值、当前项、当前项的索引和数组本身 
-    return pre
-}, {})
-   ```
+  // 上一个归并值、当前项、当前项的索引和数组本身
+  return pre;
+}, {});
+```
 
 #### 2. reduceRight
 
@@ -245,15 +244,22 @@ const Find = [2, 3, 4, 5].find((element, index, array) => {
 返回新数组，新数组和原数组长度一致，不修改原数组
 
 ```js
-arr.copyWithin(target, start, end)
-// 插入位置索引 复制元素的起始位置 复制元素的结束位置(不包含该元素)
-    [1, 2, 3, 4, 5, 6].copyWithin(1, 2, 5) // [1, 3, 4, 5, 5, 6]
-//  插入位置索引
-//  从索引 0 开始复制
-    [1, 2, 3, 4, 5, 6].copyWithin(2) // [1, 2, 1, 2, 3, 4]
-// 插入位置索引 复制元素的起始位置
-// 从索引 2 开始复制，从索引 0 开始插入
-    [1, 2, 3, 4, 5, 6].copyWithin(0, 2) // [3, 4, 5, 6, 5, 6]
+arr
+  .copyWithin(target, start, end)
+  [
+    // 插入位置索引 复制元素的起始位置 复制元素的结束位置(不包含该元素)
+    (1, 2, 3, 4, 5, 6)
+  ].copyWithin(1, 2, 5) // [1, 3, 4, 5, 5, 6]
+  [
+    //  插入位置索引
+    //  从索引 0 开始复制
+    (1, 2, 3, 4, 5, 6)
+  ].copyWithin(2) // [1, 2, 1, 2, 3, 4]
+  [
+    // 插入位置索引 复制元素的起始位置
+    // 从索引 2 开始复制，从索引 0 开始插入
+    (1, 2, 3, 4, 5, 6)
+  ].copyWithin(0, 2); // [3, 4, 5, 6, 5, 6]
 ```
 
 #### 2.fill
@@ -262,11 +268,16 @@ arr.copyWithin(target, start, end)
 
 ```js
 // 填充值 起始位置 结束位置(不包含该元素)
-[1, 2, 3, 4, 5, 6].fill(1, 2, 5)// [1, 2, 1, 1, 1, 6]
-// 填充值
-    [1, 2, 3, 4, 5, 6].fill(1) // [1, 1, 1, 1, 1, 1]
-// 填充值  起始位置
-    [1, 2, 3, 4, 5, 6].fill(1, 3)
+[1, 2, 3, 4, 5, 6]
+  .fill(1, 2, 5) // [1, 2, 1, 1, 1, 6]
+  [
+    // 填充值
+    (1, 2, 3, 4, 5, 6)
+  ].fill(1) // [1, 1, 1, 1, 1, 1]
+  [
+    // 填充值  起始位置
+    (1, 2, 3, 4, 5, 6)
+  ].fill(1, 3);
 ```
 
 ### 转换
@@ -284,9 +295,9 @@ arr.copyWithin(target, start, end)
 #### 3.join
 
 ```js
-let colors = ["red", "green", "blue"]
-colors.join(",") // red,green,blue 
-colors.join("||") // red||green||blue 
+let colors = ['red', 'green', 'blue'];
+colors.join(','); // red,green,blue
+colors.join('||'); // red||green||blue
 ```
 
 ### ES 6+
@@ -307,13 +318,23 @@ colors.join("||") // red||green||blue
 
 ```js
 const poets = [
-    {name: '李白', poems: ['静夜思', '将进酒', '望庐山瀑布']},
-    {name: '杜甫', poems: ['月夜忆舍弟', '登高', '秋夜将晓出篱门迎凉有感']},
-    {name: '苏轼', poems: ['江城子·密州出猎', '赤壁赋', '水调歌头·明月几时有']}
+  { name: '李白', poems: ['静夜思', '将进酒', '望庐山瀑布'] },
+  { name: '杜甫', poems: ['月夜忆舍弟', '登高', '秋夜将晓出篱门迎凉有感'] },
+  { name: '苏轼', poems: ['江城子·密州出猎', '赤壁赋', '水调歌头·明月几时有'] },
 ];
 
 poets.flatMap(poet => poet.poems);
-['静夜思', '将进酒', '望庐山瀑布', '月夜忆舍弟', '登高', '秋夜将晓出篱门迎凉有感', '江城子·密州出猎', '赤壁赋', '水调歌头·明月几时有']
+[
+  '静夜思',
+  '将进酒',
+  '望庐山瀑布',
+  '月夜忆舍弟',
+  '登高',
+  '秋夜将晓出篱门迎凉有感',
+  '江城子·密州出猎',
+  '赤壁赋',
+  '水调歌头·明月几时有',
+];
 ```
 
 #### 3.with
@@ -326,9 +347,10 @@ poets.flatMap(poet => poet.poems);
 - 参数：替换值索引,默认 0； new value，默认值 undefined
 
 ```js
-[1, 2].with()//[undefined,2] 
-    [1, 2].with(1)//[1,undefined] 
-    [1, 2].with(1, 3)//[1,3]
+[1, 2]
+  .with() //[undefined,2]
+  [(1, 2)].with(1) //[1,undefined]
+  [(1, 2)].with(1, 3); //[1,3]
 ```
 
 #### 4.at
@@ -337,33 +359,33 @@ poets.flatMap(poet => poet.poems);
 索引的绝对值大于数组`length`，返回 `undefined`
 
 ```js
-[0, 1, 2, 3, 4].at(2) // 1
-    [0, 1, 2, 3, 4].at(-1) // 4
-    [0, 1, 2, 3, 4].at(-6) // undefined
-
+[0, 1, 2, 3, 4]
+  .at(2) // 1
+  [(0, 1, 2, 3, 4)].at(-1) // 4
+  [(0, 1, 2, 3, 4)].at(-6); // undefined
 ```
 
 ## 检测数组
 
 ```js
-typeof [] === typeof {} // true
-Object.prototype.toString.call({}).slice(8, -1) // Object
-Object.prototype.toString.call([]).slice(8, -1) // Array
-Array.isArray({}) // false
-Array.isArray([]) // true
+typeof [] === typeof {}; // true
+Object.prototype.toString.call({}).slice(8, -1); // Object
+Object.prototype.toString.call([]).slice(8, -1); // Array
+Array.isArray({}); // false
+Array.isArray([]); // true
 ```
 
 ## 清空数组
 
 ```js
-let a = [1, 2, 3]
-let b = a
+let a = [1, 2, 3];
+let b = a;
 ```
 
 1. a = []
 
-- a指向新的空数组,被清空,b指向原先的数组,没被清空.
+- a 指向新的空数组,被清空,b 指向原先的数组,没被清空.
 
 2. a.length = 0
 
-- a,b都被清空
+- a,b 都被清空

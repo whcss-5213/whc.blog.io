@@ -1,13 +1,10 @@
 import { defineConfig } from 'vitepress';
 import nav from './nav.js';
+import { postcssIsolateStyles } from 'vitepress';
 
 import sidebar from './sidebar-auto.js';
 
 const fileAndStyles = {};
-
-// import fs from 'fs';
-// fs.writeFileSync('./sidebar.json', JSON.stringify(sidebar));
-
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   base: '/blog/',
@@ -52,16 +49,7 @@ export default defineConfig({
     },
   },
   themeConfig: {
-    // https://vitepress.dev/reference/default-theme-config
     logo: '/logo.svg',
-    // lastUpdated: {
-    //   text: '最后更新时间',
-    //   formatOptions: {
-    //     dateStyle: 'short',
-    //     timeStyle: 'short',
-    //   },
-    // },
-
     search: {
       provider: 'local',
       options: {
@@ -92,17 +80,14 @@ export default defineConfig({
       label: '页面导航',
     },
     nav,
-    sidebar: {
-      ...sidebar,
-    },
-
+    sidebar,
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' },
+      // { icon: 'github', link: 'https://github.com/vuejs/vitepress' },
     ],
     markdown: {
       // 代码块风格
-      theme: 'material-theme-palenight',
-      // theme:'github-light',
+      // theme: 'material-theme-palenight',
+      theme: 'github-dark',
       // 代码块显示行数
       lineNumbers: true,
       image: {
@@ -119,6 +104,7 @@ export default defineConfig({
       copyright: 'Copyright © 2024-WHC',
     },
   },
+  plugins: [postcssIsolateStyles()],
   postRender(context) {
     const styleRegex = /<css-render-style>((.|\s)+)<\/css-render-style>/;
     const vitepressPathRegex = /<vitepress-path>(.+)<\/vitepress-path>/;

@@ -1,0 +1,50 @@
+/* ======================
+   代码块整体
+====================== */
+.vp-doc div[class*='language-'] {
+  border-radius: 10px !important;
+  margin: 1.4rem 0 !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06) !important;
+  overflow: hidden !important;
+}
+.dark .vp-doc div[class*='language-'] {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* ======================
+   代码块内边距
+====================== */
+.vp-doc pre {
+  padding: 16px 10px !important;
+  line-height: 1.6 !important;
+}
+
+/* ======================
+   代码字体、大小
+====================== */
+.vp-doc pre code {
+  font-size: 14px !important;
+  font-family: 'Fira Code', 'Consolas', monospace !important;
+  line-height: 1.6 !important;
+  padding: 0 !important;
+}
+
+/* ======================
+   代码高亮行颜色（可选）
+====================== */
+.vp-doc .highlighted {
+  background: rgba(100, 110, 255, 0.12) !important;
+  border-left: 2px solid var(--vp-c-brand-1) !important;
+}
+.dark .vp-doc .highlighted {
+  background: rgba(120, 130, 255, 0.16) !important;
+}
+
+/* ======================
+   代码顶部语言标签（可选）
+====================== */
+.vp-doc .language-label {
+  font-size: 12px !important;
+  padding: 4px 10px !important;
+  opacity: 0.8 !important;
+}

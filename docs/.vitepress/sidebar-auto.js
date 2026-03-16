@@ -92,23 +92,27 @@ function generateSidebar() {
         const subDirPath = path.join(dirPath, subDir);
         const files = getFiles(subDirPath, `${subDir}/`, subDir);
         if (files.length > 0) {
-          sidebar[`/${subDir}/`] = {
-            text: subDir,
-            collapsible: true,
-            collapsed: true,
-            items: files,
-          };
+          sidebar[`/${subDir}/`] = [
+            {
+              text: subDir,
+              collapsible: true,
+              collapsed: true,
+              items: files,
+            },
+          ];
         }
       });
     } else {
       const files = getFiles(dirPath, `${dir}/`, dir);
       if (files.length > 0) {
-        sidebar[`/${dir}/`] = {
-          text: dir,
-          collapsible: true,
-          collapsed: true,
-          items: files,
-        };
+        sidebar[`/${dir}/`] = [
+          {
+            text: dir,
+            collapsible: true,
+            collapsed: true,
+            items: files,
+          },
+        ];
       }
     }
   });

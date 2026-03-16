@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import './code.css';
+:root {
+  --vp-home-hero-name-color: transparent;
+  --vp-home-hero-name-background: -webkit-linear-gradient(
+    120deg,
+    #6dc1f7 30%,
+    #bcf2f1
+  );
+  --petal-color: #ffd1e0ff;
+}
+
+a {
+  text-decoration: none !important;
+}

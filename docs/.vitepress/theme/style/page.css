@@ -1,0 +1,23 @@
+/* 右侧目录宽度、边距 */
+.VPContent .VPAside {
+  width: 220px !important;
+  padding-top: 20px !important;
+}
+
+/* 右侧目录标题 */
+.VPAside .aside-header {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: var(--vp-c-brand-1) !important;
+  margin-bottom: 10px !important;
+}
+
+/* 目录项 */
+.VPAside .outline-item {
+  border-radius: 6px !important;
+  padding: 4px 10px !important;
+  transition: all 0.2s !important;
+}
+.VPAside .outline-item:hover {
+  background: var(--vp-c-bg-soft) !important;
+}
