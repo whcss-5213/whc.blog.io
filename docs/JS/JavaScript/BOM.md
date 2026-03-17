@@ -223,8 +223,11 @@ document.cookie = 'name=value; expires=date; path=path; domain=domain; secure';
 - partitioned：是否为分区 Cookie，默认 false。
 - path：指定 Cookie 生效的路径。默认当前路径，设为 / 可在所有路径下共享。
 - secure：仅在 HTTPS 下传输 Cookie，防止中间人攻击。
-- httpOnly：防止 JavaScript 访问 Cookie，增加安全性。
+- httpOnly：document.cookie API 无法访问，增加安全性。
 - sameSite：防止 CSRF 攻击，可选 Strict/Lax/None。
+  - Lax:大多数跨站请求（如导航到目标网站的链接、预加载请求）会发送 Cookie，但 POST 方法、第三方站点发起的请求（如 <form> 提交）等不会发送
+  - Strict 完全禁止跨站请求携带 Cookie.
+  - None：允许所有跨站请求携带 Cookie，但必须同时设置 Secure（即要求 HTTPS）。
 
 ### cookieStore
 
