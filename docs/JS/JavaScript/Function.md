@@ -45,8 +45,9 @@ King(); // Error: King must be instantiated using "new"
 3. 箭头函数指向父级作用域里的this
 
 ## call、apply和bind
-
-> call、apply都可以调用函数,改变函数this指向.但传递参数的方式不同.
+> 改变函数this指向
+> call(obj,a,b,c) apply(obj,[a,b,c])
+> const Bind = bind(obj); Bind(a,b,c)
 
 ```js
 function a(...arg) {
