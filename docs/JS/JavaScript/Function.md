@@ -5,6 +5,7 @@
 调用函数传递的参数，有**length**属性，是个类数组对象
 
 箭头函数没有 arguments：箭头函数的 arguments 会指向外层函数的 arguments（如果有的话）。
+
 ```js
 function example() {
     // arguments.length 数值代表传入参数的个数
@@ -23,54 +24,61 @@ function example(...args) {
   args.forEach(arg => console.log(arg)); // 直接使用数组方法
 }
 ```
+
 ## new.target
+
 检测函数是否使用 new 关键字调用的
 
 ```js
 function King() {
-    if (!new.target) {
-        throw 'King must be instantiated using "new"'
-    }
-    console.log('King instantiated using "new"');
+  if (!new.target) {
+    throw 'King must be instantiated using "new"';
+  }
+  console.log('King instantiated using "new"');
 }
 
-new King(); // King instantiated using "new" 
-King(); // Error: King must be instantiated using "new" 
+new King(); // King instantiated using "new"
+King(); // Error: King must be instantiated using "new"
 ```
 
 ## this
 
-1. 对象里方法里的this指向该对象,方法里面函数的this指向window或调用者
+1. 对象里方法里的 this 指向该对象,方法里面函数的 this 指向 window 或调用者
 2. 谁调用指向谁
-3. 箭头函数指向父级作用域里的this
+3. 箭头函数指向父级作用域里的 this
 
-## call、apply和bind
-> 改变函数this指向
-> call(obj,a,b,c) apply(obj,[a,b,c])
+## call apply  bind
+
+> 改变函数 this 指向  
+> 
+> call(obj,a,b,c); apply(obj,[a,b,c])
+> 
 > const Bind = bind(obj); Bind(a,b,c)
 
 ```js
 function a(...arg) {
-    console.log(this.name, arg.join(' '))
+  console.log(this.name, arg.join(' '));
 }
 ```
 
 1. call
 
 ```js
-a.call({name: 'jerry'}, '在', '逃跑')
+a.call({ name: 'jerry' }, '在', '逃跑');
 ```
 
 2. apply
 
 ```js
-a.apply({name: 'tom'}, ['在', '追击'])
+a.apply({ name: 'tom' }, ['在', '追击']);
 ```
 
-3. bind不会立即执行，会返回一个新函数
+3. bind 不会立即执行，会返回一个新函数
+
 ```js
-a.bind({name: 'Me'}, 'is ', 'Fuction')()
+a.bind({ name: 'Me' }, 'is ', 'Fuction')();
 ```
+
 ## 闭包
 
 闭包就是一个函数，这个函数能够访问其他函数的作用域中的变量。
