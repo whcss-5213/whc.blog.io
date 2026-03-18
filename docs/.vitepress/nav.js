@@ -37,7 +37,14 @@ export default [
       { text: 'node', link: '/node/' },
       { text: 'nestjs', link: '/nestjs/' },
       { text: 'express', link: '/express/' },
-      { text: 'lib', link: '/lib/' }
+    ],
+  },
+  {
+    text: 'Lib',
+    items: [
+      { text: 'Front-end', link: '/front/' },
+      { text: 'Back-end', link: '/back/' },
+      { text: 'Server', link: '/server/' },
     ],
   },
   {

@@ -22,6 +22,7 @@ export default defineConfig({
     'tools/:tool/:page': ':tool/:page',
     'JS/:js/:page': ':js/:page',
     'node/:node/:page': ':node/:page',
+    'lib/:lib/:page': ':lib/:page',
   },
   vite: {
     // plugins: [

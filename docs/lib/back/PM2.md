@@ -1,6 +1,5 @@
 # PM2 常用命令完全手册
 
-
 ## 一、基础进程管理
 
 核心用于启动、停止、重启、删除项目进程，是日常开发/部署最高频操作。
@@ -10,7 +9,7 @@
 pm2 start app.js  # 启动默认进程（ID 自增，名称默认为 app）
 pm2 start main.js --name "my-api"  # 自定义进程名称（推荐，便于后续管理）
 pm2 start app.js -i 2  # 开启 2 个进程（集群模式，适用于多核CPU）
-pm2 start app.js --watch  # 监听文件变化，自动重启（开发环境常用）
+pm2 start app.js --watch --ignore-watch="node_modules"  # 监听文件变化，自动重启（开发环境常用），忽略 node_modules 目录
 
 # 2. 重启进程
 pm2 restart 0  # 根据进程 ID 重启（ID 可通过 pm2 list 查看）
@@ -198,34 +197,34 @@ pm2 import config.json  # 从配置文件导入进程
 
 ## 八、常用命令速查（背会即可满足 99% 场景）
 
-1. pm2 start app.js --name "my-api"  # 启动并命名进程
+1. pm2 start app.js --name "my-api" # 启动并命名进程
 
-2. pm2 ls  # 查看所有进程
+2. pm2 ls # 查看所有进程
 
-3. pm2 restart 0  # 重启指定 ID 进程
+3. pm2 restart 0 # 重启指定 ID 进程
 
-4. pm2 stop 0  # 停止指定 ID 进程
+4. pm2 stop 0 # 停止指定 ID 进程
 
-5. pm2 delete 0  # 删除指定 ID 进程
+5. pm2 delete 0 # 删除指定 ID 进程
 
-6. pm2 logs  # 实时查看所有日志
+6. pm2 logs # 实时查看所有日志
 
-7. pm2 monit  # 监控进程资源
+7. pm2 monit # 监控进程资源
 
-8. pm2 save  # 保存进程快照
+8. pm2 save # 保存进程快照
 
-9. pm2 startup  # 配置开机自启
+9. pm2 startup # 配置开机自启
 
-10. pm2 reload all  # 零停机重启所有进程
+10. pm2 reload all # 零停机重启所有进程
 
 ## 九、常见问题解决
 
 - 问题：pm2 save 后，删除进程重启服务器又出现？
-解决：pm2 delete 0（删除进程） → pm2 cleardump（删除快照） → pm2 save（重新保存空快照）
+  解决：pm2 delete 0（删除进程） → pm2 cleardump（删除快照） → pm2 save（重新保存空快照）
 
 - 问题：环境变量不生效？
-解决：检查环境变量配置方式，重启进程（pm2 restart 0），通过 pm2 env 0 验证是否生效
+  解决：检查环境变量配置方式，重启进程（pm2 restart 0），通过 pm2 env 0 验证是否生效
 
 - 问题：开机自启不生效？
-解决：重新执行 pm2 startup（按提示复制命令），再执行 pm2 save
-> 
+  解决：重新执行 pm2 startup（按提示复制命令），再执行 pm2 save
+  >
