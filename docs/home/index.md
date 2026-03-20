@@ -39,7 +39,7 @@
 - **🚀 Node.js**：Express、NestJS、性能优化
   [📖 开始学习](/node/)
 - **🗄️ 数据库**：MongoDB
-  [📖 开始学习](/tools/DB/mongo.md)
+  [📖 开始学习](/tools/DB/mongo)
 
 ### 🔐 **计算机基础**
 

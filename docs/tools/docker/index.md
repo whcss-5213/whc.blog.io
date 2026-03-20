@@ -3,31 +3,6 @@
 ## 安装
 
 ```shell
-sudo yum install docker-ce docker-ce-cli containerd.io
-```
-
-docker container update --restart=always 容器名称[]
-
-cenos 8
-
-```shell
-yum install https://download.docker.com/linux/fedora/30/x86_64/stable/Packages/containerd.io-1.2.6-3.3.fc30.x86_64.rpm
-yum install -y yum-utils device-mapper-persistent-data lvm2
-yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
-yum install -y docker-ce
-```
-
-## 国内源
-
-// /etc/docker/daemon.json
-
-```json
-{
-  "registry-mirrors": ["https://docker.rainbond.cc", "https://jockerhub.com"]
-}
-```
-
-```shell
 # 重启docker
 systemctl daemon-reload
 systemctl restart docker.service
