@@ -1,7 +1,22 @@
 # mongodb
 
-## 创建数据库
+## 备份/恢复
+- 备份数据库
+```shell
+mongodump -h 127.0.0.1:27017 -u root -p admin --authenticationDatabase admin -d 数据库名称 -o /data/backup/$(date +%Y%m%d_%H%M%S)
+```
+- 恢复所有数据库
+```shell
+mongorestore -h 127.0.0.1:27017 --dir /data/mongodb_backup
+```
+- 恢复制定数据库
 
+```shell
+mongorestore -h 127.0.0.1:27017 -d news --dir /data/db/news -u root  -p admin --authenticationDatabase admin
+```
+
+## 创建数据库
+1
 ```shell
 use 数据库名称
 
