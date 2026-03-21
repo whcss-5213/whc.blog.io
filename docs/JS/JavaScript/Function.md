@@ -1,4 +1,8 @@
 # Function
+## length
+一个 Function 对象的 length 属性表示函数期望的参数个数，即形参的个数。
+
+这个数字不包括剩余参数，只包括在**第一个具有默认值的参数之前的参数**。
 
 ## arguments
 

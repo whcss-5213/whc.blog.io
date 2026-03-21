@@ -19,8 +19,6 @@ application/vnd.openxmlformats-officedocument.spreadsheetml.sheet // xlsx
 application/octet-stream // 通用二进制: MIME类型 })
 ```
 
-
-
 ## File
 代表用户本地文件，只能通过**用户交互**获取（input / 拖拽）。
 **无专属方法，全部继承 Blob**。
@@ -32,8 +30,6 @@ file.size         // 大小(字节)
 file.type         // MIME类型
 file.lastModified // 最后修改时间戳
 ```
-
-
 
 ### 常用方法
 ```js
