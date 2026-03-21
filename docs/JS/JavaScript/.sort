@@ -8,3 +8,4 @@ Object
 Promise
 RegExp
 File
+WebAssembly
