@@ -45,7 +45,9 @@ customElements.define('my-custom-component', MyComponent)
 - **封装性**：组件内部结构私有化，对外只暴露属性和事件
 
 #### 关键API
-- `element.attachShadow({ mode: 'open' | 'closed' })`：创建Shadow Root
+- `element.attachShadow({
+  mode: 'open' | 'closed'
+ })`：创建Shadow Root
   - `open`：可通过`element.shadowRoot`访问内部DOM
   - `closed`：无法外部访问，安全性更高
 - **样式相关伪类**：
