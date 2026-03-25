@@ -55,10 +55,10 @@ customElements.define('my-custom-component', MyComponent)
   - `:host(.className)`：选中带指定类名的组件
   - `::slotted(selector)`：选中外部插入的插槽内容
 
-### 3. HTML Templates<template>`：
+### 3. HTML Templates`<template>`：
 
 定义组件模板，内容不会直接渲染，通过JS克隆后使用
--<slot>`：插槽，允许外部传入内容到组件指定位置，支持**具名插槽**和**默认插槽**
+-`<slot>`：插槽，允许外部传入内容到组件指定位置，支持**具名插槽**和**默认插槽**
 
 ## 三、完整实战示例
 ### 1. 基础可复用组件（含三大核心技术）
@@ -236,4 +236,3 @@ export default defineConfig({
 3. **事件穿透**：自定义事件需设置`composed: true`，才能让事件从Shadow DOM冒泡到外部文档
 4. **性能优化**：避免频繁创建/销毁Shadow DOM，合理清理事件和定时器，减少重渲染
 5. **与框架组件区别**：Web Components是原生组件，无虚拟DOM，适合跨框架通用组件；框架组件有自身生态和优化，适合项目内业务组件
-
