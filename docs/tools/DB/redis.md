@@ -1,11 +1,11 @@
-# Redis
+edis
 
 ```bash
 pnpm install ioredis
 ```
 
 
-# 通用连接
+##  通用连接
 ```javascript
 const Redis = require('ioredis');
 const redis = new Redis({
@@ -30,28 +30,28 @@ const redis = new Redis({
 ​
 - 附近的人 → GEO
 
-# 1. String 字符串
-## 增 / 改
+##  1. String 字符串
+增 / 改
 ```javascript
 await redis.set('name', 'zhangsan');
 // 带过期 60 秒
 await redis.set('name', 'zhangsan', 'EX', 60);
 ```
 
-## 查
+查
 ```javascript
 const val = await redis.get('name');
 ```
 
-## 删
+删
 ```javascript
 await redis.del('name');
 ```
 
 
 
-# 2. Hash 哈希
-## 增 / 改
+##  2. Hash 哈希
+增 / 改
 ```javascript
 // 单个字段
 await redis.hset('user:1', 'name', 'zhangsan');
@@ -64,7 +64,7 @@ await redis.hset('user:1', {
 });
 ```
 
-## 查
+查
 ```javascript
 // 单个字段
 const name = await redis.hget('user:1', 'name');
@@ -77,7 +77,7 @@ const fields = await redis.hkeys('user:1');
 const values = await redis.hvals('user:1');
 ```
 
-## 删
+删
 ```javascript
 // 删除某个字段
 await redis.hdel('user:1', 'age');
@@ -88,8 +88,8 @@ await redis.del('user:1');
 
 
 
-# 3. List 列表
-## 增
+##  3. List 列表
+增
 ```javascript
 // 左边加
 await redis.lpush('list', 'a', 'b', 'c');
@@ -97,7 +97,7 @@ await redis.lpush('list', 'a', 'b', 'c');
 await redis.rpush('list', 1, 2, 3);
 ```
 
-## 查
+查
 ```javascript
 // 0 -1 查全部
 const list = await redis.lrange('list', 0, -1);
@@ -106,13 +106,13 @@ const list = await redis.lrange('list', 0, -1);
 const item = await redis.lindex('list', 0);
 ```
 
-## 改
+改
 ```javascript
 // 修改下标 0 的值
 await redis.lset('list', 0, 'hello');
 ```
 
-## 删
+删
 ```javascript
 // 左边弹出
 await redis.lpop('list');
@@ -128,13 +128,13 @@ await redis.del('list');
 
 
 
-# 4. Set 集合
-## 增
+##  4. Set 集合
+增
 ```javascript
 await redis.sadd('set', 'a', 'b', 'c', 'a'); // 自动去重
 ```
 
-## 查
+查
 ```javascript
 // 所有成员
 const members = await redis.smembers('set');
@@ -146,7 +146,7 @@ const isMember = await redis.sismember('set', 'a');
 const count = await redis.scard('set');
 ```
 
-## 删
+删
 ```javascript
 // 删除指定成员
 await redis.srem('set', 'a');
@@ -160,13 +160,13 @@ await redis.del('set');
 
 
 
-# 5. ZSet 有序集合
-## 增 / 改
+##  5. ZSet 有序集合
+增 / 改
 ```javascript
 await redis.zadd('rank', 90, 'user1', 80, 'user2', 70, 'user3');
 ```
 
-## 查
+查
 ```javascript
 // 正序（分数从低到高）
 const asc = await redis.zrange('rank', 0, -1, 'WITHSCORES');
@@ -181,7 +181,7 @@ const score = await redis.zscore('rank', 'user1');
 const rank = await redis.zrank('rank', 'user1');
 ```
 
-## 删
+删
 ```javascript
 // 删除成员
 await redis.zrem('rank', 'user1');
@@ -197,27 +197,28 @@ await redis.del('rank');
 ```
 对，确实少了 **Bitmap（位图）**，我给你补上 **Node.js / ioredis 版**的增删改查，和前面格式保持一致。
 
-# 6. Bitmap 位图（基于 String）
-## 增 / 改（设置某一位为 1 或 0）
+##  6. Bitmap 位图（基于 String）
+增 / 改（设置某一位为 1 或 0）
 ```js
 // 把 key=sign:20250101 的第 100 号用户位设为 1
 await redis.setbit('sign:20250101', 100, 1);
 ```
 
-## 查（查看某一位的值）
+查（查看某一位的值）
 ```js
 // 查看第 100 位是 0 还是 1
 const bit = await redis.getbit('sign:20250101', 100);
 ```
 
-## 统计（常用：统计有多少个 1）
+统计（常用：统计有多少个 1）
 ```js
 // 统计签到人数
 const count = await redis.bitcount('sign:20250101');
 ```
 
-## 删
+删
 ```js
 // 删除整个位图
 await redis.del('sign:20250101');
 ```
+
