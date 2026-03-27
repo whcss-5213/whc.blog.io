@@ -57,13 +57,21 @@ export default [
   {
     text: 'Tools',
     items: [
-      { text: 'Vim', link: '/vim' },
-      { text: 'Browser', link: '/browser/Network' },
-      { text: 'Git', link: '/git/' },
-      { text: 'Nginx', link: '/nginx/' },
-      { text: 'Docker', link: '/docker/' },
-      { text: 'Mongo', link: '/DB/mongo' },
-    ],
+      {
+        items: [{ text: 'Vim', link: '/vim' },
+        { text: 'Git', link: '/git/' },
+        { text: 'Nginx', link: '/nginx/' },
+        { text: 'Docker', link: '/docker/' },
+        { text: 'Browser', link: '/browser/Network' },
+        ]
+      },
+      {
+        items: [
+          { text: 'Mongo', link: '/DB/mongo' },
+          { text: 'Redis', link: '/DB/redis' },
+        ]
+      }
+    ]
   },
   { text: 'Code Snippet', link: '/snippet' },
 ];
