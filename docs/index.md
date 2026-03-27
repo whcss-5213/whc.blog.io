@@ -42,6 +42,12 @@ features:
     }
     link: /CSS
 
+  - title: Game
+    icon: {
+      src: "/game.svg"
+    }
+    link: /game
+
   - title: Code Snippet
     icon: {
       src: "/code-snippet.svg"
@@ -50,3 +56,4 @@ features:
 ---
 
    <Petals/>
+
