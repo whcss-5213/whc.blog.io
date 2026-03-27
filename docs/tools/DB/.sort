@@ -1,3 +1,4 @@
 mongo
 mongoose
 mongosh
+redis
