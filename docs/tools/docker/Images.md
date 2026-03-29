@@ -8,7 +8,8 @@ docker run -itd \
 -p 27017:27017 \
 -e MONGO_INITDB_ROOT_USERNAME=root \
 -e MONGO_INITDB_ROOT_PASSWORD=admin \
--v /root/mongodb/data1/db:/data/db \
+-v /root/mongodb/db:/data/db \
+-v /root/mongodb/backup:/data/backupup  \
 --restart always \
 --name mongo \
 mongo:latest
