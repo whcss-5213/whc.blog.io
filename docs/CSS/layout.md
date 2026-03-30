@@ -87,11 +87,17 @@ flex-basis 属性定义了在分配多余空间之前，项目占据的主轴空
 #### 5.flex
 
 `flex`属性是`flex-grow`, `flex-shrink` 和 `flex-basis`的简写，默认值为`0 1 auto`。
-后两个属性可选该属性有两个快捷值：`auto` (`1 1 auto`) 和 none (`0 0 auto`)。
+- `auto`: `1 1 auto`
+- `none`: `0 0 auto`
+-  1:`1 1 0%`
+
+```
 
 ```css
 .root {
   flex: auto;
+  flex:none;
+  flex:1;
 }
 ```
 

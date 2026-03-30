@@ -305,6 +305,45 @@ setCookie().then(getCookie).then(getAllCookies).then(deleteCookie);
 
 ## storage
 
-### localStorage
+| 特性 | localStorage | sessionStorage | cookie |
+||-|-|--|
+| 生命周期 | 永久保存，手动删才没 | 仅当前标签页，关闭即清除 | 可设置过期时间 |
+| 存储大小 | 约 **5MB** | 约 **5MB** | 很小，**4KB 左右** |
+| 是否随请求发后端 | ❌ 不发 | ❌ 不发 | ✅ **每次请求自动带上** |
+| 跨标签页 | ✅ 同域共享 | ❌ 不共享，每个标签独立 | ✅ 同域共享 |
+| 操作方式 | 同步 API | 同步 API | 字符串操作 / cookieStore |
+| 隐私合规 | 一般无需用户同意 | 一般无需 | ✅ 欧盟 GDPR 等要求授权 |
 
-### sessionStorage
+
+
+### 2. localStorage
+持久化本地存储，**刷新、重启浏览器都还在**。
+
+```js
+// 存
+localStorage.setItem('name', 'zhangsan')
+
+// 取
+localStorage.getItem('name')
+
+// 删
+localStorage.removeItem('name')
+
+// 清空所有
+localStorage.clear()
+```
+
+
+### 3. sessionStorage
+只在**当前标签页**有效，**关掉页面就清空**，同网站新开标签也不共享。
+
+用法和 localStorage 完全一样：
+```js
+sessionStorage.setItem('token', 'xxx')
+sessionStorage.getItem('token')
+```
+
+适用：
+- 表单临时草稿
+- 单页应用路由状态
+- 不想跨标签共享的数据
