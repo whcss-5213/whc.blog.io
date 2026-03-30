@@ -1,5 +1,5 @@
 index
 Images
-docker-file
-docker-compose
-docker-desktop
+compose
+desktop
+dockerFile
