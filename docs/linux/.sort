@@ -3,7 +3,7 @@ file
 ssh
 user
 htop
-a
+maintenance
 Shell
 ubuntu
 wsl

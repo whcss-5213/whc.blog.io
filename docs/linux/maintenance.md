@@ -2,21 +2,21 @@
 
 ## systemctl
 
-systemctl start nginx    # 启动
-systemctl stop nginx     # 停止
-systemctl restart nginx # 重启
-systemctl status nginx   # 查看状态
-systemctl enable nginx   # 开机自启
-systemctl disable nginx  # 关闭开机自启
-journalctl -u nginx      # 查看服务日志
-journalctl -f            # 实时日志
+- systemctl start nginx    # 启动
+- systemctl stop nginx     # 停止
+- systemctl restart nginx # 重启
+- systemctl status nginx   # 查看状态
+- systemctl enable nginx   # 开机自启
+- systemctl disable nginx  # 关闭开机自
+- journalctl -u nginx      # 查看服务日志
+- journalctl -f            # 实时日志
 
 ## ps 
 
 ### 1. 最常用三种写法
 ```bash
-ps aux        # 查看系统所有进程（最常用）
-ps -ef        # 全格式查看所有进程（带 PPID）
+ps aux  # 查看系统所有进程（最常用）
+ps -ef  # 全格式查看所有进程（带 PPID）
 ps aux --sort=-%cpu  # 按 CPU 降序排序
 ```
 
