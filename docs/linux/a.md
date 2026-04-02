@@ -1,4 +1,4 @@
-
+# 运维命令
 
 ## systemctl
 
@@ -11,7 +11,64 @@ systemctl disable nginx  # 关闭开机自启
 journalctl -u nginx      # 查看服务日志
 journalctl -f            # 实时日志
 
+## ps 
 
+### 1. 最常用三种写法
+```bash
+ps aux        # 查看系统所有进程（最常用）
+ps -ef        # 全格式查看所有进程（带 PPID）
+ps aux --sort=-%cpu  # 按 CPU 降序排序
+```
+
+### 2. 字段含义（`ps aux`）
+```
+USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND
+```
+- **USER**：运行用户
+- **PID**：进程ID
+- **%CPU / %MEM**：CPU、内存占用
+- **VSZ**：虚拟内存（KB）
+- **RSS**：物理内存（KB）
+- **STAT**：进程状态
+- **TIME**：占用CPU总时间
+- **COMMAND**：启动命令
+
+### 3. 进程状态 STAT（看懂就够）
+- **R**：运行中
+- **S**：休眠（可唤醒）
+- **D**：不可中断休眠（I/O 中，常见磁盘/网络）
+- **Z**：僵尸进程（zombie，父进程没回收）
+- **T**：停止/被调试
+- **s**：会话组长
+- **+**：前台进程
+- **N**：低优先级
+
+### 4. 常用过滤
+```bash
+ps aux | grep nginx    # 找某个进程
+ps aux | grep java
+ps -ef | grep mysql
+```
+
+### 5. 按资源排序
+```bash
+# 按 CPU 从高到低
+ps aux --sort=-%cpu
+
+# 按内存从高到低
+ps aux --sort=-%mem
+```
+
+### 6. 只看 PID（方便脚本）
+```bash
+pgrep nginx            # 只输出 PID
+ps aux | grep nginx | grep -v grep | awk '{print $2}'
+```
+
+### 7. `ps aux` 与 `ps -ef` 区别
+- `ps aux`：BSD 风格，**侧重资源占用（CPU、MEM）**
+- `ps -ef`：SystemV 风格，**侧重父子进程关系（PPID）**
+  
 ## lsof
 
 > **`lsof`** = **List Open Files**，是 Linux/Unix 下查看**进程打开了哪些文件、端口、设备**的神器
