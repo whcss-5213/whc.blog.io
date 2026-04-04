@@ -5,12 +5,6 @@ layout: home
 
 # 热知识 热到烫人
 
-<div class="w-full border border-solid border-black rounded p-4">
-  {{ count }}
-  <button @click="count++">click me</button>
-</div>
+## 啤酒热量
 
-<script setup lang="ts">
-import { ref } from 'vue'
-const count = ref(0)
-</script>
+原麦汁浓度 X 36.40Ｘ 4.186
