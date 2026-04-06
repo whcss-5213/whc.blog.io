@@ -4,13 +4,13 @@
 
 ## 一、Pretext.js 是什么？
 
-Pretext.js 是一个纯 JavaScript/TypeScript 的高性能文本测量与布局引擎，由前 React 核心成员、现 Midjourney 前端工程师 Cheng Lou 开发[reference:0]。它的核心目标是 **在不触达 DOM 的情况下，快速准确地计算一段文本在特定字体和宽度下的高度、行数等布局信息**，完全避免使用 `getBoundingClientRect` 或 `offsetHeight` 等会触发浏览器重排（Reflow）的昂贵操作[reference:1]。
+Pretext.js **在不触达 DOM 的情况下，快速准确地计算一段文本在特定字体和宽度下的高度、行数等布局信息**，完全避免使用 `getBoundingClientRect` 或 `offsetHeight` 等会触发浏览器重排（Reflow）的昂贵操作。
 
-官方基准测试显示，Pretext 的 `layout()` 阶段仅需约 **0.09 毫秒**，而传统 DOM 测量方式需要约 **43.50 毫秒**，在 Safari 上甚至快了超过 **1200 倍**[reference:2]。它支持的 12+ 种书写系统，包括 CJK（中日韩）、阿拉伯语、希伯来语、泰语以及混合双向文本（Bidi）等复杂场景[reference:3]。
+
 
 ## 二、核心原理：冷路径与热路径分离
 
-Pretext 的核心设计思路基于一个洞察：文本布局计算可以拆分为两个阶段，其中只有第一阶段需要"昂贵"的测量，第二阶段则可以纯算术完成[reference:4]。
+Pretext 的核心设计思路基于一个洞察：文本布局计算可以拆分为两个阶段，其中只有第一阶段需要"昂贵"的测量，第二阶段则可以纯算术完成。
 
 ```
 传统 DOM 测量：            Pretext 两阶段：
@@ -24,18 +24,18 @@ Pretext 的核心设计思路基于一个洞察：文本布局计算可以拆分
 
 `prepare()` 执行一次性的文本分析与字符测量，相对"昂贵"但只运行一次。主要工作包括：
 
-- **文本规范化**：统一处理空白字符、制表符、换行符[reference:5]
-- **分段（Segmentation）** ：使用 `Intl.Segmenter` 将文本按语义拆分成可换行的最小单元（词、字符、emoji 等），遵循 Unicode 标准中的断字规则（UAX #14），正确处理混合方向文本[reference:6][reference:7]
-- **字符测量**：调用 Canvas `measureText` API 测量每个"段"的宽度，这是整个过程中唯一一次调用浏览器原生测量能力的地方[reference:8]
-- **缓存结果**：所有测量结果打包成一个不透明的句柄（opaque handle），供后续复用[reference:9]
+- **文本规范化**：统一处理空白字符、制表符、换行符
+- **分段（Segmentation）** ：使用 `Intl.Segmenter` 将文本按语义拆分成可换行的最小单元（词、字符、emoji 等），遵循 Unicode 标准中的断字规则（UAX #14），正确处理混合方向文本
+- **字符测量**：调用 Canvas `measureText` API 测量每个"段"的宽度，这是整个过程中唯一一次调用浏览器原生测量能力的地方
+- **缓存结果**：所有测量结果打包成一个不透明的句柄（opaque handle），供后续复用
 
-`prepare()` 的性能表现优异，以 500 段文本的批处理为例，预处理时间约为 **19 毫秒**[reference:10]。
+`prepare()` 的性能表现优异，以 500 段文本的批处理为例，预处理时间约为 **19 毫秒**
 
 ### 阶段二：`layout()` —— 热路径（纯算术运算）
 
-`layout()` 接收 `prepare()` 返回的句柄，以及目标宽度和行高参数，在内存中通过纯加减乘除的算术运算模拟换行过程[reference:11]。它**完全不依赖任何浏览器 API**，因此可以做到**微秒级别**的响应速度，非常适合高频调用场景（如窗口缩放、滚动等）。
+`layout()` 接收 `prepare()` 返回的句柄，以及目标宽度和行高参数，在内存中通过纯加减乘除的算术运算模拟换行过程。它**完全不依赖任何浏览器 API**，因此可以做到**微秒级别**的响应速度，非常适合高频调用场景（如窗口缩放、滚动等）。
 
-**关键要求**：`prepare()` 传入的 `font` 字符串，必须与最终 CSS 中实际使用的字体声明**完全一致**（包括字体族名称、字重、字号等），否则测量结果会出现偏差[reference:12]。
+**关键要求**：`prepare()` 传入的 `font` 字符串，必须与最终 CSS 中实际使用的字体声明**完全一致**（包括字体族名称、字重、字号等），否则测量结果会出现偏差。
 
 ```javascript
 // ✅ 正确：CSS 和 prepare() 字体声明一致
@@ -88,7 +88,7 @@ const handle = prepare(
 
 | 属性         | 类型                                                        | 默认值     | 说明                                 |
 | ------------ | ----------------------------------------------------------- | ---------- | ------------------------------------ |
-| `whiteSpace` | `'normal' \| 'pre' \| 'pre-wrap' \| 'pre-line' \| 'nowrap'` | `'normal'` | 空白字符处理策略[reference:13]       |
+| `whiteSpace` | `'normal' \| 'pre' \| 'pre-wrap' \| 'pre-line' \| 'nowrap'` | `'normal'` | 空白字符处理策略       |
 | `language`   | `string`                                                    | 自动检测   | 指定文本语言，用于优化分段和断行规则 |
 | `rtl`        | `boolean`                                                   | `false`    | 是否为从右到左书写方向的文本         |
 
@@ -134,7 +134,7 @@ console.log(
 
 ### 4.2 `prepareWithSegments()` + `layoutWithLines()` / `layoutNextLine()`
 
-当需要**逐行渲染**（如 Canvas 绘制、SVG 文本、自定义环绕排版等）时，可以使用高级 API 获取每一行的精确内容和位置坐标[reference:14]。
+当需要**逐行渲染**（如 Canvas 绘制、SVG 文本、自定义环绕排版等）时，可以使用高级 API 获取每一行的精确内容和位置坐标。
 
 #### `prepareWithSegments(text: string, font: string, options?: PrepareOptions): PreparedSegments`
 
@@ -199,7 +199,7 @@ while (currentIndex < segments.totalLength) {
 
 ### 1. 虚拟滚动列表中的文本高度预测
 
-在虚拟滚动列表中，Pretext 可以在渲染前精确计算出每一项的高度，避免滚动条跳动，实现 60fps 的流畅滚动[reference:15]。
+在虚拟滚动列表中，Pretext 可以在渲染前精确计算出每一项的高度，避免滚动条跳动，实现 60fps 的流畅滚动。
 
 ```javascript
 // 为列表中的每条消息预计算高度
@@ -220,7 +220,7 @@ function updateItemHeights(containerWidth) {
 
 ### 2. 实时 AI 聊天界面
 
-在 AI 流式输出文本的场景中，Pretext 可以在内容完全渲染前预计算文本块的高度，防止气泡在内容流入时发生跳跃或偏移[reference:16]。
+在 AI 流式输出文本的场景中，Pretext 可以在内容完全渲染前预计算文本块的高度，防止气泡在内容流入时发生跳跃或偏移。
 
 ```javascript
 let streamHandle = null;
@@ -244,7 +244,7 @@ function onStreamChunk(chunk) {
 
 ### 3. Canvas/SVG 自定义文本渲染
 
-结合高级 API，可以将文本逐行绘制到 Canvas 上[reference:17]。
+结合高级 API，可以将文本逐行绘制到 Canvas 上。
 
 ```javascript
 import { prepareWithSegments, layoutWithLines } from '@chenglou/pretext';
