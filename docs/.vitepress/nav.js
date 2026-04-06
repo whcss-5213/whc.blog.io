@@ -42,9 +42,9 @@ export default [
   {
     text: 'Lib',
     items: [
-      { text: 'Front-end', link: '/front/' },
-      { text: 'Back-end', link: '/back/' },
-      { text: 'Server', link: '/server/' },
+      { text: '前端', link: '/front/' },
+      { text: '后端', link: '/back/' },
+      { text: '服务器', link: '/server/' },
     ],
   },
   {
@@ -58,20 +58,21 @@ export default [
     text: 'Tools',
     items: [
       {
-        items: [{ text: 'Vim', link: '/vim' },
-        { text: 'Git', link: '/git/' },
-        { text: 'Nginx', link: '/nginx/' },
-        { text: 'Docker', link: '/docker/' },
-        { text: 'Browser', link: '/browser/Network' },
-        ]
+        items: [
+          { text: 'Vim', link: '/vim' },
+          { text: 'Git', link: '/git/' },
+          { text: 'Nginx', link: '/nginx/' },
+          { text: 'Docker', link: '/docker/' },
+          { text: 'Browser', link: '/browser/Network' },
+        ],
       },
       {
         items: [
           { text: 'Mongo', link: '/DB/mongo' },
           { text: 'Redis', link: '/DB/redis' },
-        ]
-      }
-    ]
+        ],
+      },
+    ],
   },
   { text: 'Code Snippet', link: '/snippet' },
 ];
