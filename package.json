@@ -14,5 +14,8 @@
     "build": "vitepress build docs --outDir ./dist",
     "build:local": "vitepress build docs --outDir /root/www/html/blog",
     "docs:preview": "vitepress preview docs"
+  },
+  "dependencies": {
+    "@chenglou/pretext": "^0.0.4"
   }
 }
