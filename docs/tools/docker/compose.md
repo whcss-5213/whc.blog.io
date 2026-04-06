@@ -2,21 +2,22 @@
 ## Docker compose
 
 > 疑似 DockerDesktop 才能使用 host.docker.internal
+> 
 > Docker 宿主机默认ip 为 `172.17.0.1`
 
 ```bash
 # 部署启动
-docker-compose up -d --build
+docker compose up -d --build
 # 启动/停止
-docker-compose start/stop
+docker compose start/stop
 # 重启
-docker-compose restart
+docker compose restart
 # 删除容器和网络但不会删除卷和镜像资源。
-docker-compose down
+docker compose down
 # 删除数据卷
 docker volume rm 数据卷名称
 # 查看应用状态
-docker-compose ps
+docker compose ps
 ```
 
 `services`必要元素，定义一个或多个容器的运行参数

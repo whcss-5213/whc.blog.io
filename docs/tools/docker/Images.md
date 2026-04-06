@@ -70,6 +70,27 @@ processManagement:
 #auditLog:
 ```
 
+## redis
+
+```shell
+docker run -d \                                                                                                   --name redis-nest-news \
+  -p 6379:6379 \
+  -v /root/redis/redis-config/redis.conf:/usr/local/etc/redis/redis.conf \
+  -v redis-data:/data \
+  --restart always \
+  redis:alpine redis-server /usr/local/etc/redis/redis.conf
+```
+```conf
+requirepass 密码          # 设置密码（必须）
+databases 16              # 默认 16 个库，够用
+appendonly yes            # 开启 AOF 持久化（数据最安全）
+save 900 1                # RDB 快照策略  秒数 改动次数
+save 300 10
+save 60 10000
+maxmemory 128mb           # 最大内存 128MB（适合小项目）
+maxmemory-policy allkeys-lru  # 内存满后删除最久未使用的 key
+```
+
 ## browserless
 
 ```shell

@@ -1,4 +1,4 @@
-```nginx configuration
+```nginx
 $args                    #请求中的参数值
 $query_string            #同 $args
 $arg_NAME                #GET请求中NAME的值
