@@ -1,7 +1,7 @@
 ---
 titleTemplate: Miscellaneous
 ---
-# New Year
+# 新年寄语
 
 ## 2025 New Year
 

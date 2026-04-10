@@ -15,5 +15,6 @@ features:
     title: 新年寄语
     link: /miscellaneous/New_Year
   - icon: 📦
-    title: other
+    title: 杂谈
+    link: /miscellaneous/talk
 ---
