@@ -782,3 +782,20 @@ type MyPick<T, K extends keyof T> = {
 ### Parameters\<Type>
 
 从函数类型 `Type` 的参数中使用的类型构造元组类型
+
+```ts
+// 普通函数
+function fn(name: string, age: number): void {}
+
+// 提取参数类型为元组
+type FnParams = Parameters<typeof fn>; 
+// [name: string, age: number]
+
+// 取单个参数
+type FirstParam = FnParams[0]; // string
+
+```
+
+
+### Partial\<T>
+将对象类型  T  所有属性变为可选。
