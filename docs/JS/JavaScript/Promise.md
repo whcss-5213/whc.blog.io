@@ -1,4 +1,5 @@
 # Promise
+
 ## 一、三种状态（不可逆）
 - **pending**（待定）：初始状态，操作未完成
 - **fulfilled**（已兑现）：操作成功，通过 `resolve()`
@@ -60,86 +61,165 @@ fetchData()
 
 ```
 
+## MyPromise
+
 ```js
-const STATUS_PENDING = "pending";
-const STATUS_FULFILLED = "fulfilled";
-const STATUS_REJECTED = "rejected";
+class MyPromise {
+  static PENDING = 'pending';
+  static FULFILLED = 'fulfilled';
+  static REJECTED = 'rejected';
 
-class _Promise {
-    constructor(executor = () => {}) {
-        // 初始化订单默认状态：全部处于待接单
-        this.status = STATUS_PENDING;
-        // 存放配送完成的餐品结果
-        this.value = undefined;
-        // 存放订单拒收的原因备注
-        this.reason = undefined;
+  constructor(executor) {
+    this.status = MyPromise.PENDING;
+    this.value = undefined;
+    this.reason = undefined;
+    // 存储多个 then 回调
+    this.onFulfilledCbs = [];
+    this.onRejectedCbs = [];
 
-        // 骑手任务收纳篓：排队等候的配送任务/拒收善后任务
-        this.resolveQueue = [];
-        this.rejectQueue = [];
-
-        // 配送放行开关：只有待接单能改成完成，批量执行所有等候配送骑手
-        const resolve = (value) => {
-            if (this.status === STATUS_PENDING) {
-                this.status = STATUS_FULFILLED;
-                this.value = value;
-                this.resolveQueue.forEach(fn => fn(this.value));
-            }
-        };
-
-        // 订单拒收开关：只有待接单能改成取消，批量执行善后骑手任务
-        const reject = (reason) => {
-            if (this.status === STATUS_PENDING) {
-                this.status = STATUS_REJECTED;
-                this.reason = reason;
-                this.rejectQueue.forEach(fn => fn(this.reason));
-            }
-        };
-
-        // 后厨出餐容错：做饭翻车直接判订单失败，不瘫痪整个店铺
-        try {
-            executor(resolve, reject);
-        } catch (err) {
-            reject(err);
-        }
-    }
-
-    then(onFulfilled, onRejected) {
-        // 链式核心：每接一单就生成全新订单，实现骑手接力直送，完成异步时间扁平化
-        return new _Promise((nextResolve, nextReject) => {
-            // 统一封装正规配送骑手任务
-            const handleSuccess = () => {
-                // 骑手上岗核验+原值代送透传+送餐中途意外兜底
-                try {
-                    const res = typeof onFulfilled === 'function' ? onFulfilled(this.value) : this.value;
-                    nextResolve(res);
-                } catch (err) {
-                    nextReject(err);
-                }
-            };
-            // 统一封装订单善后退款骑手任务
-            const handleFail = () => {
-                // 坏单兜底核验+原因透传+善后出错应急保护
-                try {
-                    const err = typeof onRejected === 'function' ? onRejected(this.reason) : this.reason;
-                    nextResolve(err);
-                } catch (err) {
-                    nextReject(err);
-                }
-            };
-
-            // 根据订单当前状态调度骑手
-            if (this.status === STATUS_FULFILLED) {
-                handleSuccess(); // 已出餐直接派送
-            } else if (this.status === STATUS_REJECTED) {
-                handleFail(); // 已拒收直接善后
-            } else if (this.status === STATUS_PENDING) {
-                // 只收正经上岗骑手进任务篓，杂牌无效骑手直接拒收
-                typeof onFulfilled === 'function' && this.resolveQueue.push(handleSuccess);
-                typeof onRejected === 'function' && this.rejectQueue.push(handleFail);
-            }
+    const resolve = (value) => {
+      if (this.status === MyPromise.PENDING) {
+        this.status = MyPromise.FULFILLED;
+        this.value = value;
+        // 微任务批量执行回调
+        queueMicrotask(() => {
+          this.onFulfilledCbs.forEach(cb => cb());
         });
+      }
+    };
+
+    const reject = (reason) => {
+      if (this.status === MyPromise.PENDING) {
+        this.status = MyPromise.REJECTED;
+        this.reason = reason;
+        queueMicrotask(() => {
+          this.onRejectedCbs.forEach(cb => cb());
+        });
+      }
+    };
+
+    // 捕获执行器同步异常
+    try {
+      executor(resolve, reject);
+    } catch (err)
+      reject(err);
     }
+  }
+
+  // 核心：Promise/A+ 规范 resolvePromise 解析器
+  static resolvePromise(x, promise2, resolve, reject) {
+    // 1. 循环引用检测：返回自身直接报错
+    if (x === promise2) {
+      return reject(new TypeError('Chaining cycle detected for promise'));
+    }
+
+    // 标记是否已执行，防止 then 内多次调用 resolve/reject
+    let called = false;
+
+    // 2. x 是对象/函数：可能是 thenable
+    if ((typeof x === 'object' && x !== null) || typeof x === 'function') {
+      try {
+        const then = x.then;
+        // 是标准 thenable
+        if (typeof then === 'function') {
+          then.call(
+            x,
+            y => {
+              if (called) return;
+              called = true;
+              // 递归解析 y
+              MyPromise.resolvePromise(y, promise2, resolve, reject);
+            },
+            r => {
+              if (called) return;
+              called = true;
+              reject(r);
+            }
+          );
+        } else {
+          // 普通对象无 then，直接 resolve
+          resolve(x);
+        }
+      } catch (e) {
+        if (called) return;
+        called = true;
+        reject(e);
+      }
+    } else {
+      // 3. 普通基本类型值，直接决议
+      resolve(x);
+    }
+  }
+
+  then(onFulfilled, onRejected) {
+    // 规范：回调穿透兜底
+    onFulfilled = typeof onFulfilled === 'function' ? onFulfilled : val => val;
+    onRejected = typeof onRejected === 'function' ? onRejected : err => { throw err; };
+
+    // then 必须返回新 Promise2
+    const promise2 = new MyPromise((resolve, reject) => {
+      // 成功处理逻辑
+      const handleFulfilled = () => {
+        queueMicrotask(() => {
+          try {
+            const x = onFulfilled(this.value);
+            MyPromise.resolvePromise(x, promise2, resolve, reject);
+          } catch (e) {
+            reject(e);
+          }
+        });
+      };
+
+      // 失败处理逻辑
+      const handleRejected = () => {
+        queueMicrotask(() => {
+          try {
+            const x = onRejected(this.reason);
+            MyPromise.resolvePromise(x, promise2, resolve, reject);
+          } catch (e) {
+            reject(e);
+          }
+        });
+      };
+
+      // 状态分支处理
+      switch (this.status) {
+        case MyPromise.FULFILLED:
+          handleFulfilled();
+          break;
+        case MyPromise.REJECTED:
+          handleRejected();
+          break;
+        case MyPromise.PENDING:
+          this.onFulfilledCbs.push(handleFulfilled);
+          this.onRejectedCbs.push(handleRejected);
+          break;
+      }
+    });
+
+    return promise2;
+  }
+
+  catch(onRejected) {
+    return this.then(null, onRejected);
+  }
+
+  finally(callback) {
+    return this.then(
+      val => MyPromise.resolve(callback()).then(() => val),
+      err => MyPromise.resolve(callback()).then(() => { throw err; })
+    );
+  }
+
+  static resolve(value) {
+    if (value instanceof MyPromise) return value;
+    return new MyPromise(res => res(value));
+  }
+
+  static reject(reason) {
+    return new MyPromise((_, rej) => rej(reason));
+  }
 }
+
 
 ```

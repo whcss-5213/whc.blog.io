@@ -5,8 +5,10 @@ DOM
 Collections
 Function
 Object
+EventLoop
 Promise
-RegExp
 File
+RegExp
 WebAssembly
 WebComponent
+DataTransfer

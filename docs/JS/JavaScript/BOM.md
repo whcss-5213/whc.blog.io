@@ -2,9 +2,33 @@
 
 > Browser Object Model
 
-## window
+## requestAnimationFrame
 
-### 定时器
+requestAnimationFrame(callback)  浏览器提供的帧渲染调度API，用于高性能动画；
+让回调函数在下一次浏览器重绘（渲染帧）前执行，适配屏幕刷新率，替代  setTimeout  做动画。
+
+1. 浏览器渲染流水线
+ 
+JS执行 → 样式计算(Recalc Style) → 布局(Layout) → 绘制(Paint) → 合成(Composite)
+RAF 回调执行时机：布局/绘制之前，浏览器准备下一帧渲染阶段
+ 
+2. 任务优先级排序（事件循环维度）
+ 
+整体执行顺序：
+同步代码 → 微任务(Microtask) → RAF回调 → 浏览器渲染 → 下一轮宏任务
+
+```js
+// 开启帧监听，返回唯一 ID（用于取消）
+const rafId = requestAnimationFrame((timestamp) => {
+  // timestamp：浏览器自动传入高精度时间戳（ms）
+  // 逻辑 + DOM 更新
+});
+
+// 取消帧回调
+cancelAnimationFrame(rafId);
+```
+
+## 定时器
 
 ```js
 let timeout = setTimeout(() => {}, timeout);
@@ -16,7 +40,7 @@ let interval = setInterval(() => {}, interval);
 clearInterval(interval);
 ```
 
-### 对话框
+## 对话框
 
 ```js
 // 对话框
@@ -201,6 +225,8 @@ stream.getTracks().forEach(track => track.stop());
 
 ## screen
 
+> 获取整机屏幕大小，和浏览器窗口无关
+
 ```js
 screen.width;
 screen.height;
@@ -208,6 +234,13 @@ screen.availWidth;
 screen.availHeight;
 screen.colorDepth;
 screen.pixelDepth;
+```
+## inner
+
+```js
+// 可视视口宽高（包含滚动条）
+window.innerWidth
+window.innerHeight
 ```
 
 ## cookie
