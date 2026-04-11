@@ -112,3 +112,84 @@ a.href = URL.createObjectURL(blob)
 a.download = 'test.txt'
 a.click()
 ```
+
+## createImageBitmap
+
+```js
+/**
+ * @param {File|Blob} file 原图文件
+ * @param {number} maxWidth 最大宽度
+ * @param {number} maxHeight 最大高度
+ * @param {number} quality 压缩质量 0~1
+ * @returns {Promise<Blob>} 缩略图Blob
+ */
+async function createThumbnailFast(file, maxWidth = 300, maxHeight = 300, quality = 0.8) {
+  // 拦截非图片类型
+  if (!file.type.startsWith('image/')) {
+    throw new Error('仅支持图片文件');
+  }
+
+  let bitmap = null;
+  try {
+    // 1. 先获取原始尺寸计算缩放比例
+    const tempBitmap = await createImageBitmap(file);
+    let { width, height } = tempBitmap;
+    tempBitmap.close(); // 临时释放
+
+    // 计算等比缩放系数
+    const ratio = Math.min(maxWidth / width, maxHeight / height, 1);
+    const targetW = Math.round(width * ratio);
+    const targetH = Math.round(height * ratio);
+
+    // 2. 内置缩放解码（性能更优）
+    bitmap = await createImageBitmap(file, {
+      resizeWidth: targetW,
+      resizeHeight: targetH,
+      resizeQuality: 'high'
+    });
+
+    // 3. Canvas 绘制兜底导出
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = bitmap.width;
+    canvas.height = bitmap.height;
+    ctx.drawImage(bitmap, 0, 0);
+
+    // 4. 转Blob封装Promise
+    return await new Promise((resolve, reject) => {
+      canvas.toBlob(
+        blob => blob ? resolve(blob) : reject(new Error('生成缩略图失败')),
+        file.type || 'image/jpeg',
+        quality
+      );
+    });
+  } catch (err) {
+    console.error('高性能缩略图生成失败：', err);
+    throw err;
+  } finally {
+    // 确保一定释放位图，防止内存泄漏
+    if (bitmap) bitmap.close();
+  }
+}
+
+// 使用示例
+document.querySelector('input[type="file"]')
+  .addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    try {
+      const thumbBlob = await createThumbnailFast(file, 300, 300, 0.8);
+      // 预览示例（注意用完 revoke）
+      const previewUrl = URL.createObjectURL(thumbBlob);
+      document.getElementById('previewImg').src = previewUrl;
+      // 图片加载后释放
+      document.getElementById('previewImg').onload = () => {
+        URL.revokeObjectURL(previewUrl);
+      };
+      
+      // 后续可直接上传 thumbBlob
+    } catch (err) {
+      alert(err.message);
+    }
+  });
+```

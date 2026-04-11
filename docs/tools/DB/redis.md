@@ -1,4 +1,4 @@
-edis
+# Redis
 
 ```bash
 pnpm install ioredis
