@@ -197,26 +197,34 @@ const Find = [2, 3, 4, 5].find((element, index, array) => {
 - 同`find`,返回符合函数的第一个元素的值的索引.
 
 ### 迭代
+- every以 true 为兜底，没遇到反例就一直为真；
+- some以 false 为兜底，没遇到正例就一直为假。
+```js
+console.log([].every(item => item > 0)); // true 
+console.log([].some(item => item > 0)); // false
+```
 
 #### 1. every
 
 对数组每一项都运行传入的函数，如果对每一项函数都返回 true，则这个方法返回 true。
 
-#### 2. filter
+#### 2. some
+
+对数组每一项都运行传入的函数，如果有一项函数返回 true，则这个方法返回 true。
+
+#### 3. filter
 
 对数组每一项都运行传入的函数，函数返回 true 的项会组成数组之后返回。
 
-#### 3. forEach
+#### 4. forEach
 
 对数组每一项都运行传入的函数，没有返回值。
 
-#### 4. map
+#### 5. map
 
 对数组每一项都运行传入的函数，返回由每次函数调用的结果构成的数组。
 
-#### 5. some
 
-对数组每一项都运行传入的函数，如果有一项函数返回 true，则这个方法返回 true。
 
 ### 归并
 
