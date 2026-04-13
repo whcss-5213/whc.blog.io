@@ -23,6 +23,21 @@ WebSocket 是一种**基于TCP的全双工、长连接通信协议**，依托HTT
 // 1. 创建WebSocket连接
 const socket = new WebSocket('ws://localhost:3000/websocket');
 
+const ws = new WebSocket('ws://localhost:3000/ws', [token]);
+
+
+const token = localStorage.getItem('token');
+const ws = new WebSocket(`ws://localhost:3000/ws?token=${token}`);
+const ws = new WebSocket('ws://localhost:3000/ws', [token]);
+
+import { io } from 'socket.io-client';
+
+const socket = io('http://localhost:3000', {
+  auth: {
+    token: localStorage.getItem('token'),
+  },
+});
+
 // 2. 连接成功回调
 socket.onopen = () => {
   console.log('WebSocket连接建立成功');
