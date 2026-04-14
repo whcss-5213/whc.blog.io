@@ -40,6 +40,85 @@ axios.interceptors.response.use(function (response) {
   });
 
 ````
+## progressEvent
+
+回调函数接收一个进度事件对象，主要属性：
+ 
+-  loaded ：已传输字节数
+-  total ：总字节数（服务器需返回  Content-Length ）
+- total  为 0 / 无法计算进度：
+服务器没返回  Content-Length  或开启了 chunked 传输
+-  lengthComputable ：进度是否可计算（ total  是否有效）
+  
+### onUploadProgress
+```js
+import axios from 'axios';
+
+// 1. 获取文件 & 构建 FormData
+const fileInput = document.getElementById('file');
+const file = fileInput.files[0];
+const formData = new FormData();
+formData.append('file', file);
+
+// 2. 带进度监听的上传
+axios.post('/api/upload', formData, {
+  headers: {
+    'Content-Type': 'multipart/form-data'
+  },
+  // 上传进度回调
+  onUploadProgress: (progressEvent) => {
+    if (progressEvent.lengthComputable) {
+      const percent = Math.round(
+        (progressEvent.loaded * 100) / progressEvent.total
+      );
+      console.log(`上传进度：${percent}%`);
+      // 更新 UI 进度条
+      // document.getElementById('progress').value = percent;
+    }
+  }
+})
+.then(res => {
+  console.log('上传成功', res.data);
+})
+.catch(err => {
+  console.error('上传失败', err);
+});
+
+```
+### onDownloadProgress
+
+
+```js
+import axios from 'axios';
+
+axios.get('/api/download/large-file.zip', {
+  responseType: 'blob', // 关键：返回二进制数据
+  // 下载进度回调
+  onDownloadProgress: (progressEvent) => {
+    if (progressEvent.lengthComputable) {
+      const percent = Math.round(
+        (progressEvent.loaded * 100) / progressEvent.total
+      );
+      console.log(`下载进度：${percent}%`);
+      // 更新 UI 进度条
+    }
+  }
+})
+.then(res => {
+  // 下载完成：创建链接自动保存
+  const blob = new Blob([res.data]);
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'file.zip';
+  a.click();
+  URL.revokeObjectURL(url);
+})
+.catch(err => {
+  console.error('下载失败', err);
+});
+```
+
 
 ## AbortController
 
@@ -68,7 +147,7 @@ controller.abort()
 
 ```
 
-
+## 重复请求
 ```js
 import axios from 'axios'
 

@@ -380,3 +380,7 @@ sessionStorage.getItem('token')
 - 表单临时草稿
 - 单页应用路由状态
 - 不想跨标签共享的数据
+
+
+## getSelection
+

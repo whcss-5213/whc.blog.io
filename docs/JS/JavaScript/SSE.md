@@ -290,14 +290,15 @@ async function startLogStream() {
 startLogStream();
 ```
 ##  fetch-event-source
-###安装
+
+### 安装
+
 ```bash
-npm install @microsoft/fetch-event-source
-# 或
-yarn add @microsoft/fetch-event-source
+pnpm install @microsoft/fetch-event-source
 ```
 
 ###  基础用法（GET）
+
 ```javascript
 import { fetchEventSource } from '@microsoft/fetch-event-source';
 
