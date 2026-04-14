@@ -64,16 +64,20 @@
     "text": "Node",
     "items": [
       {
-        "text": "node",
-        "link": "/node/"
-      },
-      {
-        "text": "nestjs",
-        "link": "/nestjs/"
-      },
-      {
-        "text": "express",
-        "link": "/express/"
+        "items": [
+          {
+            "text": "node",
+            "link": "/node/"
+          },
+          {
+            "text": "nestjs",
+            "link": "/nestjs/"
+          },
+          {
+            "text": "express",
+            "link": "/express/"
+          }
+        ]
       }
     ]
   },
@@ -81,16 +85,28 @@
     "text": "Lib",
     "items": [
       {
-        "text": "前端",
-        "link": "/front/"
+        "items": [
+          {
+            "text": "前端",
+            "link": "/front/"
+          }
+        ]
       },
       {
-        "text": "后端",
-        "link": "/back/"
+        "items": [
+          {
+            "text": "后端",
+            "link": "/back/"
+          }
+        ]
       },
       {
-        "text": "服务器",
-        "link": "/server/"
+        "items": [
+          {
+            "text": "服务器",
+            "link": "/server/"
+          }
+        ]
       }
     ]
   },
@@ -98,12 +114,16 @@
     "text": "Linux",
     "items": [
       {
-        "text": "File",
-        "link": "/linux/file"
-      },
-      {
-        "text": "Ubuntu",
-        "link": "/linux/Ubuntu"
+        "items": [
+          {
+            "text": "File",
+            "link": "/linux/file"
+          },
+          {
+            "text": "Ubuntu",
+            "link": "/linux/Ubuntu"
+          }
+        ]
       }
     ]
   },
@@ -147,9 +167,5 @@
         ]
       }
     ]
-  },
-  {
-    "text": "Code Snippet",
-    "link": "/snippet"
   }
 ]
