@@ -311,18 +311,25 @@ function downloadCompose() {
       </n-card>
 
       <n-card title="环境变量" size="small">
-        <div class="space-y-2">
-          <div v-for="(env, index) in config.envs" :key="index" class="flex gap-2 items-center">
-            <n-input v-model:value="env.key" placeholder="KEY" class="flex-1" />
-            <n-input v-model:value="env.value" placeholder="VALUE" class="flex-1" />
-            <n-button type="error" size="small" @click="removeEnv(index)">
-              删除
-            </n-button>
-          </div>
+        <n-space vertical size="small">
+          <n-grid v-for="(env, index) in config.envs" :key="index" :cols="12" :x-gap="8" :y-gap="8"
+            :item-responsive="true" responsive="screen">
+            <n-grid-item span="12 s:5 m:5 l:5">
+              <n-input v-model:value="env.key" placeholder="KEY" />
+            </n-grid-item>
+            <n-grid-item span="12 s:5 m:5 l:5">
+              <n-input v-model:value="env.value" placeholder="VALUE" />
+            </n-grid-item>
+            <n-grid-item span="12 s:2 m:2 l:2">
+              <n-button type="error" size="small" block @click="removeEnv(index)">
+                删除
+              </n-button>
+            </n-grid-item>
+          </n-grid>
           <n-button size="small" @click="addEnv">
             + 添加环境变量
           </n-button>
-        </div>
+        </n-space>
       </n-card>
 
       <n-card title="挂载目录 (-v)" size="small">
