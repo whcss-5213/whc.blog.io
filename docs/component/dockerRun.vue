@@ -264,9 +264,9 @@ function downloadCompose() {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-50 py-8 px-4">
+  <div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4 transition-colors duration-300">
     <div class="max-w-6xl mx-auto">
-      <n-card class="shadow-lg">
+      <n-card class="shadow-lg dark:border-gray-700">
         <template #header>
           <div class="flex items-center gap-3">
             <span class="i-carbon-docker text-2xl text-blue-500"></span>
@@ -280,14 +280,14 @@ function downloadCompose() {
           </n-card>
 
           <n-card title="基础配置" size="small">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               <n-form-item label="镜像名">
                 <n-input v-model:value="config.image" placeholder="例如: mysql:8.0" />
               </n-form-item>
               <n-form-item label="容器名">
                 <n-input v-model:value="config.name" placeholder="例如: mysql8" />
               </n-form-item>
-              <n-form-item label="端口映射">
+              <n-form-item label="端口映射" class="md:col-span-2 lg:col-span-1">
                 <div class="w-full space-y-2">
                   <div v-for="(port, index) in config.ports" :key="index" class="flex gap-2">
                     <n-input v-model:value="config.ports[index]" placeholder="主机端口:容器端口" class="flex-1" />
