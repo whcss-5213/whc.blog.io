@@ -22,7 +22,13 @@ features:
     alt: "hot Vue"
   }
     title: 热知识
-    link: /hot-knowledge/
+    link: /hot-knowledge
+  - icon: {
+    src: "/util.svg",
+    alt: "util"
+  }
+    title: 工具箱
+    link: /util/docker
 
   - title: Docker
     icon: {
@@ -56,4 +62,3 @@ features:
 ---
 
    <Petals/>
-
