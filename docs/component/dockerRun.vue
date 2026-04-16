@@ -1,7 +1,7 @@
 <script setup>
-import { ref, reactive, computed, watch, onMounted } from 'vue'
+import { ref, reactive, computed, watch } from 'vue'
 import { useClipboard } from '@vueuse/core'
-import { useMessage, NButton, NSpace, NFormItem, NInput, NSelect, NCard, NConfigProvider, darkTheme } from 'naive-ui'
+import { useMessage, NButton, NSpace, NFormItem, NInput, NSelect, NCard, NGrid, NGridItem } from 'naive-ui'
 
 const message = useMessage()
 const { copy, copied } = useClipboard({ source: '' })
@@ -281,27 +281,33 @@ function downloadCompose() {
       </n-card>
 
       <n-card title="基础配置" size="small">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          <n-form-item label="镜像名">
-            <n-input v-model:value="config.image" placeholder="例如: mysql:8.0" />
-          </n-form-item>
-          <n-form-item label="容器名">
-            <n-input v-model:value="config.name" placeholder="例如: mysql8" />
-          </n-form-item>
-          <n-form-item label="端口映射" class="md:col-span-2 lg:col-span-1">
-            <div class="w-full space-y-2">
-              <div v-for="(port, index) in config.ports" :key="index" class="flex gap-2">
-                <n-input v-model:value="config.ports[index]" placeholder="主机端口:容器端口" class="flex-1" />
-                <n-button v-if="config.ports.length > 1" type="error" size="small" @click="removePort(index)">
-                  删除
+        <n-grid :cols="1" :x-gap="16" :y-gap="16" responsive="screen" :item-responsive="true">
+          <n-grid-item span="1 s:1 m:1 l:1 xl:1">
+            <n-form-item label="镜像名">
+              <n-input v-model:value="config.image" placeholder="例如: mysql:8.0" />
+            </n-form-item>
+          </n-grid-item>
+          <n-grid-item span="1 s:1 m:1 l:1 xl:1">
+            <n-form-item label="容器名">
+              <n-input v-model:value="config.name" placeholder="例如: mysql8" />
+            </n-form-item>
+          </n-grid-item>
+          <n-grid-item span="1 s:1 m:2 l:1 xl:1">
+            <n-form-item label="端口映射">
+              <div class="w-full space-y-2">
+                <div v-for="(port, index) in config.ports" :key="index" class="flex gap-2">
+                  <n-input v-model:value="config.ports[index]" placeholder="主机端口:容器端口" class="flex-1" />
+                  <n-button v-if="config.ports.length > 1" type="error" size="small" @click="removePort(index)">
+                    删除
+                  </n-button>
+                </div>
+                <n-button size="small" @click="addPort">
+                  + 添加端口映射
                 </n-button>
               </div>
-              <n-button size="small" @click="addPort">
-                + 添加端口映射
-              </n-button>
-            </div>
-          </n-form-item>
-        </div>
+            </n-form-item>
+          </n-grid-item>
+        </n-grid>
       </n-card>
 
       <n-card title="环境变量" size="small">

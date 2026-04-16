@@ -229,7 +229,7 @@ onUnmounted(() => {
     </div>
   </div>
 </template>
-<style>
+<style scoped>
 .game-2048 {
   display: flex;
   flex-direction: column;
@@ -396,4 +396,3 @@ h1 {
   color: #fff;
 }
 </style>
-
