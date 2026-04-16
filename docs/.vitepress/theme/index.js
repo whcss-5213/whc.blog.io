@@ -1,7 +1,12 @@
 import DefaultTheme from 'vitepress/theme';
-import { useRoute } from 'vitepress';
+import { useRoute, useData } from 'vitepress';
 import { setup } from '@css-render/vue3-ssr';
-import { NConfigProvider, NMessageProvider } from 'naive-ui';
+import {
+  NConfigProvider,
+  NMessageProvider,
+  darkTheme,
+  lightTheme,
+} from 'naive-ui';
 import { defineComponent, h, inject } from 'vue';
 import './style/custom.css';
 import './style/home.css';
@@ -35,10 +40,18 @@ const VitepressPath = defineComponent({
 });
 
 const NaiveUIProvider = defineComponent({
+  setup() {
+    const { isDark } = useData();
+    return { isDark };
+  },
   render() {
     return h(
       NConfigProvider,
-      { abstract: true, inlineThemeDisabled: true },
+      {
+        abstract: true,
+        inlineThemeDisabled: true,
+        theme: this.isDark ? darkTheme : lightTheme,
+      },
       {
         default: () => [
           h(NMessageProvider, null, {

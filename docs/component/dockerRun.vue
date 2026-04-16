@@ -1,7 +1,7 @@
 <script setup>
-import { ref, reactive, computed, watch } from 'vue'
+import { ref, reactive, computed, watch, onMounted } from 'vue'
 import { useClipboard } from '@vueuse/core'
-import { useMessage, NButton, NSpace, NFormItem, NInput, NSelect, NCard } from 'naive-ui'
+import { useMessage, NButton, NSpace, NFormItem, NInput, NSelect, NCard, NConfigProvider, darkTheme } from 'naive-ui'
 
 const message = useMessage()
 const { copy, copied } = useClipboard({ source: '' })
@@ -264,114 +264,110 @@ function downloadCompose() {
 </script>
 
 <template>
-  <div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-8 px-4 transition-colors duration-300">
-    <div class="max-w-6xl mx-auto">
-      <n-card class="shadow-lg dark:border-gray-700">
-        <template #header>
-          <div class="flex items-center gap-3">
-            <span class="i-carbon-docker text-2xl text-blue-500"></span>
-            <span class="text-xl font-bold">Docker Run 命令生成器</span>
-          </div>
-        </template>
+  <n-card :bordered="false" class="shadow-lg dark:bg-gray-800 ">
+    <template #header>
+      <div class="flex items-center gap-3">
+        <span class="i-carbon-docker text-2xl text-blue-500"></span>
+        <span class="text-xl font-bold">Docker Run 命令生成器</span>
+      </div>
+    </template>
 
-        <n-space vertical size="large">
-          <n-card title="容器类型选择" size="small">
-            <n-select v-model:value="selectedType" :options="containerTypes" placeholder="选择容器类型" />
-          </n-card>
-
-          <n-card title="基础配置" size="small">
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              <n-form-item label="镜像名">
-                <n-input v-model:value="config.image" placeholder="例如: mysql:8.0" />
-              </n-form-item>
-              <n-form-item label="容器名">
-                <n-input v-model:value="config.name" placeholder="例如: mysql8" />
-              </n-form-item>
-              <n-form-item label="端口映射" class="md:col-span-2 lg:col-span-1">
-                <div class="w-full space-y-2">
-                  <div v-for="(port, index) in config.ports" :key="index" class="flex gap-2">
-                    <n-input v-model:value="config.ports[index]" placeholder="主机端口:容器端口" class="flex-1" />
-                    <n-button v-if="config.ports.length > 1" type="error" size="small" @click="removePort(index)">
-                      删除
-                    </n-button>
-                  </div>
-                  <n-button size="small" @click="addPort">
-                    + 添加端口映射
-                  </n-button>
-                </div>
-              </n-form-item>
-            </div>
-          </n-card>
-
-          <n-card title="环境变量" size="small">
-            <div class="space-y-2">
-              <div v-for="(env, index) in config.envs" :key="index" class="flex gap-2 items-center">
-                <n-input v-model:value="env.key" placeholder="KEY" class="flex-1" />
-                <n-input v-model:value="env.value" placeholder="VALUE" class="flex-1" />
-                <n-button type="error" size="small" @click="removeEnv(index)">
-                  删除
-                </n-button>
-              </div>
-              <n-button size="small" @click="addEnv">
-                + 添加环境变量
-              </n-button>
-            </div>
-          </n-card>
-
-          <n-card title="挂载目录 (-v)" size="small">
-            <div class="space-y-2">
-              <div v-for="(vol, index) in config.volumes" :key="index" class="flex gap-2 items-center">
-                <n-input v-model:value="vol.host" placeholder="主机目录" class="flex-1" />
-                <n-input v-model:value="vol.container" placeholder="容器目录" class="flex-1" />
-                <n-button type="error" size="small" @click="removeVolume(index)">
-                  删除
-                </n-button>
-              </div>
-              <n-button size="small" @click="addVolume">
-                + 添加挂载目录
-              </n-button>
-            </div>
-          </n-card>
-
-          <n-card title="高级配置" size="small">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <n-form-item label="重启策略">
-                <n-select v-model:value="config.restart" :options="restartPolicies" placeholder="选择重启策略" />
-              </n-form-item>
-              <n-form-item label="网络配置">
-                <n-input v-model:value="config.network" placeholder="指定 Docker 网络（可选）" />
-              </n-form-item>
-            </div>
-          </n-card>
-
-          <n-space>
-            <n-button type="primary" size="large" @click="generateCommand">
-              生成命令
-            </n-button>
-            <n-button type="info" size="large" :disabled="!generatedCommand" @click="copyCommand">
-              复制 Docker Run 命令
-            </n-button>
-            <n-button type="success" size="large" :disabled="!dockerComposeYml" @click="copyCompose">
-              复制 docker-compose.yml
-            </n-button>
-            <n-button type="warning" size="large" :disabled="!dockerComposeYml" @click="downloadCompose">
-              下载 docker-compose.yml
-            </n-button>
-          </n-space>
-
-          <n-card v-if="generatedCommand" title="Docker Run 命令" size="small">
-            <n-input :value="generatedCommand" type="textarea" readonly :autosize="{ minRows: 5, maxRows: 15 }"
-              class="font-mono text-sm" />
-          </n-card>
-
-          <n-card v-if="dockerComposeYml" title="docker-compose.yml" size="small">
-            <n-input :value="dockerComposeYml" type="textarea" readonly :autosize="{ minRows: 10, maxRows: 25 }"
-              class="font-mono text-sm" />
-          </n-card>
-        </n-space>
+    <n-space vertical size="large">
+      <n-card title="容器类型选择" size="small">
+        <n-select v-model:value="selectedType" :options="containerTypes" placeholder="选择容器类型" />
       </n-card>
-    </div>
-  </div>
+
+      <n-card title="基础配置" size="small">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <n-form-item label="镜像名">
+            <n-input v-model:value="config.image" placeholder="例如: mysql:8.0" />
+          </n-form-item>
+          <n-form-item label="容器名">
+            <n-input v-model:value="config.name" placeholder="例如: mysql8" />
+          </n-form-item>
+          <n-form-item label="端口映射" class="md:col-span-2 lg:col-span-1">
+            <div class="w-full space-y-2">
+              <div v-for="(port, index) in config.ports" :key="index" class="flex gap-2">
+                <n-input v-model:value="config.ports[index]" placeholder="主机端口:容器端口" class="flex-1" />
+                <n-button v-if="config.ports.length > 1" type="error" size="small" @click="removePort(index)">
+                  删除
+                </n-button>
+              </div>
+              <n-button size="small" @click="addPort">
+                + 添加端口映射
+              </n-button>
+            </div>
+          </n-form-item>
+        </div>
+      </n-card>
+
+      <n-card title="环境变量" size="small">
+        <div class="space-y-2">
+          <div v-for="(env, index) in config.envs" :key="index" class="flex gap-2 items-center">
+            <n-input v-model:value="env.key" placeholder="KEY" class="flex-1" />
+            <n-input v-model:value="env.value" placeholder="VALUE" class="flex-1" />
+            <n-button type="error" size="small" @click="removeEnv(index)">
+              删除
+            </n-button>
+          </div>
+          <n-button size="small" @click="addEnv">
+            + 添加环境变量
+          </n-button>
+        </div>
+      </n-card>
+
+      <n-card title="挂载目录 (-v)" size="small">
+        <div class="space-y-2">
+          <div v-for="(vol, index) in config.volumes" :key="index" class="flex gap-2 items-center">
+            <n-input v-model:value="vol.host" placeholder="主机目录" class="flex-1" />
+            <n-input v-model:value="vol.container" placeholder="容器目录" class="flex-1" />
+            <n-button type="error" size="small" @click="removeVolume(index)">
+              删除
+            </n-button>
+          </div>
+          <n-button size="small" @click="addVolume">
+            + 添加挂载目录
+          </n-button>
+        </div>
+      </n-card>
+
+      <n-card title="高级配置" size="small">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <n-form-item label="重启策略">
+            <n-select v-model:value="config.restart" :options="restartPolicies" placeholder="选择重启策略" />
+          </n-form-item>
+          <n-form-item label="网络配置">
+            <n-input v-model:value="config.network" placeholder="指定 Docker 网络（可选）" />
+          </n-form-item>
+        </div>
+      </n-card>
+
+      <n-space>
+        <n-button type="primary" size="large" @click="generateCommand">
+          生成命令
+        </n-button>
+        <n-button type="info" size="large" :disabled="!generatedCommand" @click="copyCommand">
+          复制 Docker Run 命令
+        </n-button>
+        <n-button type="success" size="large" :disabled="!dockerComposeYml" @click="copyCompose">
+          复制 docker-compose.yml
+        </n-button>
+        <n-button type="warning" size="large" :disabled="!dockerComposeYml" @click="downloadCompose">
+          下载 docker-compose.yml
+        </n-button>
+      </n-space>
+
+      <n-card v-if="generatedCommand" title="Docker Run 命令" size="small">
+        <n-input :value="generatedCommand" type="textarea" readonly :autosize="{ minRows: 5, maxRows: 15 }"
+          class="font-mono text-sm" />
+      </n-card>
+
+      <n-card v-if="dockerComposeYml" title="docker-compose.yml" size="small">
+        <n-input :value="dockerComposeYml" type="textarea" readonly :autosize="{ minRows: 10, maxRows: 25 }"
+          class="font-mono text-sm" />
+      </n-card>
+    </n-space>
+  </n-card>
 </template>
 
 <style scoped>
