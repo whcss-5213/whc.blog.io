@@ -51,7 +51,10 @@ const containerPresets = {
     image: 'mongo:latest',
     name: 'mongodb',
     ports: ['27017:27017'],
-    envs: []
+    envs: [
+      { key: 'MONGO_INITDB_ROOT_USERNAME', value: 'root' },
+      { key: 'MONGO_INITDB_ROOT_PASSWORD', value: '123456' },
+    ]
   },
   minio: {
     image: 'minio/minio:latest',
