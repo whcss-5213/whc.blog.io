@@ -17,7 +17,46 @@
 [SSH 协议握手核心过程](https://www.bilibili.com/video/BV13P4y1o76u/)
 :::
 
+## ssh
+```bash
+# 本地执行，查看服务器支持的算法列表
+ssh -Q key
+
+# 也可以在服务器上看配置
+grep -E "PubkeyAcceptedKeyTypes|PubkeyAcceptedAlgorithms" /etc/ssh/sshd_config
+```
+
+```bash
+# 强制用 Ed25519 密钥
+ssh -i ~/.ssh/id_ed25519 user@your-server-ip
+
+# 强制用 ECDSA 密钥
+ssh -i ~/.ssh/id_ecdsa user@your-server-ip
+
+# 强制用 RSA 密钥
+ssh -i ~/.ssh/id_rsa user@your-server-ip
+
+```
+
+编辑  ~/.ssh/config ，自动匹配密钥，避免连接混乱：
+
+```conf
+# 自定义服务器配置（替换为你的信息）
+Host my-server
+  HostName 你的服务器IP
+  User root
+  # 优先使用 Ed25519 密钥
+  IdentityFile ~/.ssh/id_ed25519
+  # 仅使用指定密钥，避免加载多余密钥
+  IdentitiesOnly yes
+  # 保持连接活跃，防止断开
+  ServerAliveInterval 30
+  ServerAliveCountMax 10 
+```
+
+之后直接用  ssh my-server  连接即可。
 ## ssh-keygen
+
 
 ssh-keygen
 
@@ -42,19 +81,34 @@ ssh-keygen -t rsa
 ssh-keygen -f fileName -t rsa -C "dequan@example.com"
 ssh-keygen -t rsa -C "2889597857@qq.com"
 ```
-
-## ssh-copy-id
-
-将公钥拷贝到指定服务器的 **~/.ssh/authorized_keys** 文件中
-
-```shell
-ssh-copy-id [-i [identity_file]] [user@]hostname
+### 1. Ed25519（推荐首选）
+```bash
+ssh-keygen -t ed25519 -C "your_email@example.com"
 ```
+- 生成文件：`~/.ssh/id_ed25519`（私钥）、`~/.ssh/id_ed25519.pub`（公钥）
+- 优势：速度快、安全高、密钥短、抗侧信道攻击。
 
-- -i [identity_file]：指定要使用的公钥文件。如果不指定，默认使用 ~/.ssh/id_rsa.pub 或 ~/.ssh/id_dsa.pub 等。
-- [user@]hostname：指定远程服务器的用户名和地址。如果不指定用户名，则默认使用当前用户名。
+### 2. ECDSA P-384
+```bash
+ssh-keygen -t ecdsa -b 384 -C "your_email@example.com"
+```
+- 生成文件：`~/.ssh/id_ecdsa` / `id_ecdsa.pub`
 
-`ssh-keygen` 是一个用于生成、管理和转换认证密钥的工具，主要用于 SSH（Secure Shell）协议的安全认证。SSH 是一种网络协议，用于加密两台计算机之间的通信，保证数据的安全传输。`ssh-keygen`生成的密钥对包括一个公钥和一个私钥，公钥可以安全地分享给任何你希望与之进行 SSH 连接的服务器或设备，而私钥则必须保密，用于解密从服务器接收到的加密信息。
+
+### 3. RSA 4096
+```bash
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
+- 生成文件：`~/.ssh/id_rsa` / `id_rsa.pub`
+- 说明：兼容性最好，但速度慢、密钥长。
+
+> 提示：运行时会提示你输入保存路径和密码，默认回车即可；建议给私钥设置密码，防止泄露。
+
+
+
+`ssh-keygen` 是一个用于生成、管理和转换认证密钥的工具，主要用于 SSH（Secure Shell）协议的安全认证。SSH 是一种网络协议，用于加密两台计算机之间的通信，保证数据的安全传输。
+
+`ssh-keygen`生成的密钥对包括一个公钥和一个私钥，公钥可以安全地分享给任何你希望与之进行 SSH 连接的服务器或设备，而私钥则必须保密，用于解密从服务器接收到的加密信息。
 
 以下是`ssh-keygen`的一些常用选项和功能：
 
@@ -112,3 +166,14 @@ ssh-copy-id [-i [identity_file]] [user@]hostname
    这个命令会从`known_hosts`文件中移除与`hostname`相关联的所有密钥。
 
 `ssh-keygen`是 SSH 安全认证机制的核心工具之一，掌握它的基本用法对于维护 SSH 连接的安全性至关重要。
+
+## ssh-copy-id
+
+将公钥拷贝到指定服务器的 **~/.ssh/authorized_keys** 文件中
+
+```shell
+ssh-copy-id [-i [identity_file]] [user@]hostname
+```
+
+- -i [identity_file]：指定要使用的公钥文件。如果不指定，默认使用 ~/.ssh/id_rsa.pub 或 ~/.ssh/id_dsa.pub 等。
+- [user@]hostname：指定远程服务器的用户名和地址。如果不指定用户名，则默认使用当前用户名。
