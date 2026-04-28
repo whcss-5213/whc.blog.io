@@ -12,7 +12,7 @@
 7. 客户端使用`host公钥`对**交换哈希值(签名)** 解密,得到`交换哈希值`,校验服务端的`交换哈希值`是否相同.
 8. 校验成功后,双方各生成新的 6 个密钥,两个数据加密密钥,两个数据完整性密钥,两个加强密钥.
 
-![img](/ssh握手.png)
+![img](https://whcss.xyz/blog/static/linux/ssh握手.png)
 ::: tip 参考
 [SSH 协议握手核心过程](https://www.bilibili.com/video/BV13P4y1o76u/)
 :::

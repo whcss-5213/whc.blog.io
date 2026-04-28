@@ -6,7 +6,7 @@
 >
 > [Linux 命令搜索](https://wangchujiang.com/linux-command/list.html)
 
-![file](/file-1.jpg)
+![file](https://whcss.xyz/blog/static/linux/file-1.jpg)
 
 ### 链接
 

@@ -14,17 +14,17 @@ hero:
       text: Miscellaneous
       link: /miscellaneous
   image:
-    src: /logo.svg
+    src: https://whcss.xyz/blog/static/index/logo.svg
     alt: Hello world
 features:
   - icon: {
-    src: "/hot.svg",
+    src: https://whcss.xyz/blog/static/index/hot.svg,
     alt: "hot Vue"
   }
     title: 热知识
     link: /hot-knowledge
   - icon: {
-    src: "/util.svg",
+    src: https://whcss.xyz/blog/static/index/util.svg,
     alt: "util"
   }
     title: 工具箱
@@ -32,31 +32,31 @@ features:
 
   - title: Docker
     icon: {
-      src: "/docker-icon.svg"
+      src: https://whcss.xyz/blog/static/index/docker-icon.svg
     }
     link: /docker/
 
   - title: Linux
     icon: {
-      src: "/linux-icon.svg"
+      src: https://whcss.xyz/blog/static/index/linux-icon.svg
     }
     link: /linux
 
   - title: CSS
     icon: {
-      src: "/CSS.svg"
+      src: https://whcss.xyz/blog/static/index/CSS.svg
     }
     link: /CSS
 
   - title: Game
     icon: {
-      src: "/game.svg"
+      src: https://whcss.xyz/blog/static/index/game.svg
     }
     link: /game
 
   - title: Code Snippet
     icon: {
-      src: "/code-snippet.svg"
+      src: https://whcss.xyz/blog/static/index/code-snippet.svg
     }
     link: /snippet
 ---

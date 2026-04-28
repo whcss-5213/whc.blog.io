@@ -9,7 +9,7 @@
 用户个性化的 Vim 配置位于~/.vimrc
 
 ## **命令模式（Command mode）**
-![](/vim/vim-2.png)
+![](https://whcss.xyz/blog/static/vim/vim-2.png)
 
 - **i** 切换到输入模式，以输入字符。
   

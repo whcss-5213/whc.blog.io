@@ -9,7 +9,7 @@ systemctl restart docker.service
 systemctl restart docker
 ```
 
-![a](/docker.jpg)
+![a](https://whcss.xyz/blog/static/tools/docker/docker.jpg)
 
 ## 镜像
 

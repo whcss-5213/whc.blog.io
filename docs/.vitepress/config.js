@@ -10,7 +10,7 @@ export default defineConfig({
   title: 'Note',
   description: 'Study Node',
   lang: 'zh-CH',
-  head: [['link', { rel: 'icon', href: '/blog/logo.svg' }]],
+  head: [['link', { rel: 'icon', href: 'https://whcss.xyz/blog/static/index/logo.svg' }]],
   cleanUrls: true,
   markdown: {
     lineNumbers: true,
@@ -25,20 +25,6 @@ export default defineConfig({
     'lib/:lib/:page': ':lib/:page',
   },
   vite: {
-    // plugins: [
-    //   SearchPlugin({
-    //     // 搜索框提示文字
-    //     placeholder: '搜索文档',
-    //     // 最大显示结果数
-    //     maxResults: 10,
-    //     // 是否区分大小写
-    //     ignoreCase: true,
-    //     // 中文搜索必须开启！
-    //     encode: false,
-    //     // 同时搜索标题 + 内容
-    //     previewLength: 80,
-    //   }),
-    // ],
     logLevel: 'error',
     build: {
       rollupOptions: {
@@ -63,7 +49,7 @@ export default defineConfig({
     },
   },
   themeConfig: {
-    logo: '/logo.svg',
+    logo: 'https://whcss.xyz/blog/static/index/logo.svg',
     search: {
       provider: 'local',
       options: {

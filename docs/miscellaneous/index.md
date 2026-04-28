@@ -13,8 +13,8 @@ features:
       src: /miscellaneous/new_year.svg
     }
     title: 新年寄语
-    link: /miscellaneous/新年寄语
+    link: "/miscellaneous/new year"
   - icon: 📦
     title: 杂谈
-    link: /miscellaneous/杂谈
+    link: /miscellaneous/talk
 ---
