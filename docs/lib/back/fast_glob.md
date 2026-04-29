@@ -40,7 +40,25 @@ const files = fg.sync('**/*.js');
 - `{a,b}` 多后缀匹配
 - `?` 匹配单个字符
 
-## 5 常用示例
+
+## 5 高级匹配模式
+
+```javascript
+// 取并集与交集
+// fast-glob 默认返回所有匹配的并集，排除规则优先
+const files = await fg(['src/**/*.js', '!src/**/*.test.js']);
+
+// 使用 `{a,b}` 匹配多后缀或前缀
+const files = await fg(['*.{js,ts,json}']);
+
+// 使用 `?` 匹配单个字符
+const files = await fg('file?.txt'); // file1.txt, fileA.txt
+
+// 转义特殊字符（用 `\\` 或 `[.]`）
+const files = await fg('**/\\*.js');      // 匹配字面量 *.js
+const files = await fg('**/[.]js');       // 同上
+
+## 6 常用示例
 
 ```javascript
 // 匹配所有 js/ts 文件
