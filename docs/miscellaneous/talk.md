@@ -28,7 +28,7 @@
 
 ## IMSB
 
-![](/de691960-e591-450e-8cbf-39283cc10178.jpg)
+![](https://whcss.xyz/blog/static/miscellaneous/talk/de691960-e591-450e-8cbf-39283cc10178.jpg)
 
 
 ## 常态
