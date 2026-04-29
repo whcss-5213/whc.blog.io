@@ -375,14 +375,3 @@ await fs.chmod('file.txt', 0o755);
 | move | 跨分区移动时会自动降级为“复制+删除原文件”。 |
 | pathExists | 比原生 exists 更可靠（原生 exists 已废弃，推荐使用 access）。 |
 | stat | 返回的 Stats 对象还有 ctime、birthtime、mode 等属性，可进一步获取。 |
-
-
-## 10 获取匹配详情
-
-```javascript
-// 返回对象数组：path, depth, dirent
-const entries = await fg('**/*.js', { onlyFiles: false, stats: false });
-// 启用 stats 可获得文件状态（性能稍降）
-const withStats = await fg('**/*.js', { stats: true });
-console.log(withStats[0].stats.size);
-```
