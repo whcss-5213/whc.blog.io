@@ -5,12 +5,12 @@ hero:
   name: Miscellaneous Talks
   tagline: 记录一些杂七杂八的感想
   image:
-    src: /miscellaneous/talk.svg
+    src: https://whcss.xyz/blog/static/miscellaneous/talk.svg
     alt: Miscellaneous
   
 features:
   - icon: {
-      src: /miscellaneous/new_year.svg
+      src:https://whcss.xyz/blog/static/miscellaneous/new_year.svg
     }
     title: 新年寄语
     link: "/miscellaneous/new year"
