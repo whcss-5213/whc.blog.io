@@ -7,14 +7,12 @@ hero:
   image:
     src: https://whcss.xyz/blog/static/miscellaneous/talk.svg
     alt: Miscellaneous
-  
 features:
-  - icon: {
-      src:https://whcss.xyz/blog/static/miscellaneous/new_year.svg
-    }
-    title: 新年寄语
-    link: "/miscellaneous/new year"
-  - icon: 📦
-    title: 杂谈
-    link: /miscellaneous/talk
+  - title: 新年寄语
+    icon: { src: https://whcss.xyz/blog/static/miscellaneous/new_year.svg }
+    link: /miscellaneous/new year
+
+  - title: 杂谈
+    icon: { src: https://whcss.xyz/blog/static/miscellaneous/zt.svg }
+    link: /miscellaneous/new year
 ---
