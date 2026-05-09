@@ -16,7 +16,7 @@
 | `async` | 异步加载脚本，加载完成后立即执行（不保证执行顺序） | `<script src="analytics.js" async></script>` |
 | `defer` | 脚本延迟到 HTML 解析完成后执行（按引入顺序执行） | `<script src="utils.js" defer></script>` |
 | `integrity` | 子资源完整性校验（SRI），验证脚本未被篡改 | `<script src="app.js" integrity="sha384-xxx" crossorigin="anonymous"></script>` |
-| `crossorigin` | 跨域脚本请求配置，用于 CORS 和 SRI 校验 | `<script src="https://cdn.com/app.js" crossorigin="anonymous"></script>` |
+| `crossorigin` | 跨域脚本请求配置，用于 CORS 和 SRI 校验 | `https://cdn.com/app.js</a>" crossorigin="anonymous">` |
 
 ---
 
@@ -54,8 +54,6 @@
 <!-- 旧浏览器加载降级脚本 -->
 <script nomodule src="legacy-app.js"></script>
 ```
-
----
 
 ### 四、安全与其他常用属性
 | 属性 | 说明 | 示例 |
