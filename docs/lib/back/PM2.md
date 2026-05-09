@@ -133,23 +133,65 @@ pm2 start app.js
 # 1. 项目根目录创建 ecosystem.config.js 配置文件
 module.exports = {
   apps: [{
-    name: "my-api",          // 进程名称
-    script: "./app.js",      // 入口文件路径
-    instances: "max",        // 开启最大进程数（多核CPU最优）
-    exec_mode: "cluster",    // 集群模式（提升性能）
+    // 基础配置
+    name: "my-api",                  // 进程名称
+    script: "./app.js",              // 入口文件路径
+    cwd: "./",                       // 项目运行根目录
+    interpreter: "node",             // 指定解释器
+    
+    // 集群/实例配置
+    instances: "max",                // 开启CPU核心最大进程数
+    exec_mode: "cluster",            // 集群模式
+    max_memory_restart: "1G",        // 内存超过1G自动重启
+    node_args: "--max-old-space-size=1024",
+
+    
+    // 日志配置
+    log_date_format: "YYYY-MM-DD HH:mm:ss", // 日志时间格式
+    out_file: "./logs/out.log",      // 正常输出日志
+    error_file: "./logs/error.log",  // 错误日志
+    merge_logs: true,                // 合并多实例日志
+    
+    // 重启与监听配置
+    watch: false,                    // 是否开启文件监听自动重启(生产关闭)
+    ignore_watch: [                  // 忽略监听的文件夹/文件
+      "node_modules",
+      "logs",
+      "tmp",
+      ".git"
+    ],
+    autorestart: true,               // 程序崩溃自动重启
+    restart_delay: 1000,             // 崩溃后延迟1秒重启
+    max_restarts: 10,                // 最大异常重启次数
+    
+    // 进程行为
+    kill_timeout: 3000,             // 优雅退出超时时间
+    wait_ready: true,                // 等待应用就绪再标记启动成功
+    
     // 开发环境变量
     env: {
       NODE_ENV: "development",
-      PORT: 3000
+      PORT: 3000,
+      LOG_LEVEL: "debug"
     },
-    // 生产环境变量（--env production 启动时生效）
+
+    // 生产环境变量（pm2 start ecosystem.config.js --env production）
     env_production: {
       NODE_ENV: "production",
-      PORT: 8080
+      PORT: 8080,
+      LOG_LEVEL: "info"
+    },
+
+    // 测试环境（可选）
+    env_test: {
+      NODE_ENV: "test",
+      PORT: 3001,
+      LOG_LEVEL: "warn"
     }
   }]
 }
-
+```
+```bash
 # 2. 启动命令
 pm2 start ecosystem.config.js  # 启动开发环境
 pm2 start ecosystem.config.js --env production  # 启动生产环境

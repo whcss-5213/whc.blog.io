@@ -28,10 +28,66 @@ wget -b https://example.com/bigfile.zip
 wget https://a.com/1.zip https://a.com/2.zip
 ```
 
-### 6. 递归下载整个网站（慎用）
+### 6. 递归下载整个网站
+- --recursive
+- 默认递归深度：5 层
 ```bash
 wget -r https://example.com
 ```
+
+### --mirror
+
+镜像模式核心作用：整站递归下载+增量更新+保留目录结构，适合离线浏览与备份**。
+
+#### 一、镜像模式等价参数
+`--mirror`（简写`-m`）等价于：
+- -r（递归） 
+- -N（时间戳增量） 
+- -l inf（无限深度） 
+- --no-remove-listing
+
+
+#### 二、常用组合参数（必记）
+```bash
+wget -m -p -k -E -np URL
+```
+- `-m`：镜像模式（递归+增量）
+- `-p`/`--page-requisites`：下载页面所有资源（CSS/JS/图片）
+- `-k`/`--convert-links`：链接转本地相对路径（离线可用）
+- `-E`/`--adjust-extension`：自动补`.html`后缀
+- `-np`/`--no-parent`：不爬上级目录（限制范围）
+
+#### 三、常用示例
+1. **整站镜像（离线浏览）**
+```bash
+wget -m -p -k -E -np https://example.com/
+```
+
+2. **镜像到指定目录**
+```bash
+wget -m -p -k -E -np -P ./mirror https://example.com/
+```
+
+3. **忽略robots.txt（慎用）**
+```bash
+wget -m -p -k -E -np -e robots=off https://example.com/
+```
+
+4. **限制带宽与间隔（友好爬虫）**
+```bash
+wget -m -p -k -E -np -w 2 --limit-rate=500k https://example.com/
+```
+
+#### 四、目录结构控制
+- `-nH`：不创建主机名目录（如`example.com/`）
+- `--cut-dirs=N`：跳过N层远程目录
+```bash
+# 去掉example.com/一层目录
+wget -m -nH --cut-dirs=1 https://example.com/
+```
+
+#### 五、增量更新
+直接重复执行相同镜像命令，**仅下载更新文件**（依赖`-N`时间戳）。
 
 ### 7. 限速下载（不占满带宽）
 ```bash
