@@ -29,7 +29,9 @@ jobs:
           cache: true
 
       - name: Build
-        run: pnpm install && pnpm build
+        run: pnpm install --frozen-lockfile && pnpm build
+        env:
+          pnpm_config_strict_dep_builds: "false"
 
       - name: 清理服务器文件（只保留图片目录）
         uses: appleboy/ssh-action@master
